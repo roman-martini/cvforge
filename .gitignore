@@ -1,0 +1,70 @@
+# ---------------------------------------------------------------------------
+# Dependencias y artefactos de build
+# ---------------------------------------------------------------------------
+node_modules/
+dist/
+.cache/
+*.tsbuildinfo
+
+# ---------------------------------------------------------------------------
+# Salidas generadas — los CVs se regeneran desde los datos, no se versionan.
+# La única fuente de verdad es `people/`. Si necesitás archivar un CV enviado,
+# usá el comando `cv archive` (guarda en applications/ con su metadata).
+# ---------------------------------------------------------------------------
+build/
+out/
+*.pdf
+*.docx
+!docs/**/*.pdf
+
+# ---------------------------------------------------------------------------
+# DATOS PERSONALES — protección por defecto.
+#
+# Este repositorio distingue dos clases de datos:
+#   - people/_example/  → datos ficticios, SÍ se versionan (sirven de plantilla
+#                         y de fixture para los tests).
+#   - people/<persona>/ → datos reales de personas. NO se versionan salvo que
+#                         se habiliten explícitamente (ver abajo).
+#
+# Si este repo es PRIVADO y querés versionar tus datos reales para tener
+# historial de cambios de tu CV, comentá la línea `people/*` y descomentá
+# la excepción de tu carpeta. Nunca lo hagas en un repo público.
+# ---------------------------------------------------------------------------
+people/*
+!people/_example/
+!people/.gitkeep
+
+# Vacantes: pueden contener información no pública de procesos de selección.
+applications/*
+!applications/_example/
+!applications/.gitkeep
+
+# ---------------------------------------------------------------------------
+# Secretos y configuración local
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.local.yaml
+*.local.yml
+*.local.json
+
+# ---------------------------------------------------------------------------
+# Sistema operativo y editores
+# ---------------------------------------------------------------------------
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# ---------------------------------------------------------------------------
+# Temporales de tests
+# ---------------------------------------------------------------------------
+coverage/
+.tmp/
+__snapshots__/*.tmp
