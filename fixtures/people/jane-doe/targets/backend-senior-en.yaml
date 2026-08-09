@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../../../../schemas/generated/target.schema.json
+
+# Un TARGET es un arquetipo reutilizable: "backend senior, en inglés, mercado
+# estadounidense". Acá se hace el 80% del trabajo de adaptación, UNA vez, y se
+# reusa en las N vacantes que caen en ese arquetipo. El overlay de cada
+# postulación queda entonces reducido a un diff mínimo y auditable.
+#
+# Sin esta capa intermedia, cada postulación rehace el matching desde cero: el
+# sistema deja de escalar justo cuando empieza a servir.
+
+id: backend-senior-en
+
+locale: en
+
+# Claves de config/. Deciden papel, presupuesto de páginas, campos prohibidos,
+# etiquetas de sección y patrón de fecha. Se componen en este orden:
+#   region → industry → seniority → este archivo.
+region: us
+industry: tech
+seniority: senior
+
+theme: ats-classic
+
+# Alimenta basics.label cuando el overlay no lo pisa. No cambia ningún hecho:
+# es cómo se nombra a sí misma la persona para este tipo de puesto.
+titleTarget: "Senior Backend Engineer"
+
+# Semilla del matcher. Son los términos canónicos del arquetipo; el matcher los
+# resuelve contra los aliases de skills.yaml y de config/taxonomy/skills.yaml.
+keywords:
+  - Go
+  - Kubernetes
+  - gRPC
+  - PostgreSQL
+  - AWS
+  - "CI/CD"
+  - "distributed systems"
+  - observability
+  - "payment systems"
+
+# El orden importa más de lo que parece: el reclutador escanea de arriba hacia
+# abajo durante 6-7 segundos. En tech con seniority alta, skills va antes que
+# experiencia porque es lo que se busca con una consulta booleana.
+sectionOrder: [contact, summary, skills, work, education, certificates, projects]
+
+budget:
+  maxPages: 2
+  # Bullets por rol según antigüedad. Lo reciente pesa más: nadie te contrata
+  # por lo que hacías en 2016.
+  bulletsPerRole:
+    recent: 5
+    mid: 3
+    old: 2
+
+# Placeholders disponibles: {First} {Last} {Role} {Company} {ext}.
+# Nunca incluir el identificador de la variante: el nombre del archivo viaja con
+# el CV y "jane-doe-v3-tailored.pdf" le cuenta al reclutador cómo se hizo.
+fileNameTemplate: "{First}-{Last}-{Role}-Resume.{ext}"
+
+# PDF para el portal, DOCX porque muchos formularios lo piden explícitamente y
+# TXT porque es el ground truth contra el que el linter compara la extracción.
+formats: [pdf, docx, txt]

@@ -1,0 +1,276 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:cv-workspace:schema:work",
+  "title": "Experiencia laboral (work.yaml)",
+  "description": "Una entrada por empleador, con posiciones múltiples para modelar promociones y bullets en formato XYZ.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:[-.][a-z0-9]+)*$"
+      },
+      "company": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "industry": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "location": {
+        "type": "object",
+        "properties": {
+          "city": {
+            "type": "string"
+          },
+          "countryCode": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "remote": {
+            "type": "string",
+            "enum": [
+              "remote",
+              "hybrid",
+              "onsite"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "positions": {
+        "minItems": 1,
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:[-.][a-z0-9]+)*$"
+            },
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "startDate": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+                },
+                {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+                }
+              ]
+            },
+            "endDate": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+                },
+                {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+                }
+              ]
+            },
+            "current": {
+              "default": false,
+              "type": "boolean"
+            },
+            "seniority": {
+              "type": "string",
+              "enum": [
+                "student",
+                "entry",
+                "junior",
+                "mid",
+                "senior",
+                "staff",
+                "exec"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "title",
+            "startDate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "summary": {
+        "type": "string"
+      },
+      "bullets": {
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:[-.][a-z0-9]+)*$"
+            },
+            "outcome": {
+              "type": "string",
+              "minLength": 1
+            },
+            "metric": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "delta_pct",
+                    "absolute",
+                    "scope",
+                    "frequency",
+                    "scale",
+                    "selectivity",
+                    "duration",
+                    "proxy_qualitative"
+                  ]
+                },
+                "confidence": {
+                  "type": "string",
+                  "enum": [
+                    "measured",
+                    "estimated",
+                    "self_reported"
+                  ]
+                }
+              },
+              "required": [
+                "value",
+                "type",
+                "confidence"
+              ],
+              "additionalProperties": false
+            },
+            "method": {
+              "type": "string"
+            },
+            "tags": {
+              "default": [],
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "priority": {
+              "default": 50,
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "variants": {
+              "type": "object",
+              "properties": {
+                "short": {
+                  "type": "string"
+                },
+                "long": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "provenance": {
+              "default": {
+                "source": "human"
+              },
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "enum": [
+                    "human",
+                    "llm_draft",
+                    "llm_approved"
+                  ]
+                },
+                "derivedFrom": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:[-.][a-z0-9]+)*$"
+                },
+                "approvedBy": {
+                  "type": "string"
+                },
+                "approvedAt": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+                }
+              },
+              "required": [
+                "source"
+              ],
+              "additionalProperties": false
+            },
+            "verified": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "id",
+            "outcome"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "tags": {
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "priority": {
+        "default": 50,
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "visibility": {
+        "default": "public",
+        "type": "string",
+        "enum": [
+          "public",
+          "private"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "company",
+      "positions"
+    ],
+    "additionalProperties": false
+  }
+}

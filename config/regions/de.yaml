@@ -1,0 +1,71 @@
+# Perfil regional: Alemania.
+# El único de los diez donde foto y fecha de nacimiento son costumbre viva y no un error.
+# La AGG (2006) las volvió NO obligatorias y prohibió exigirlas, pero no las prohibió:
+# omitirlas es legítimo, incluirlas también. Por eso van en customaryFields y no en
+# forbiddenFields — el sistema no puede decidir por el candidato en este mercado.
+
+id: de
+label: Alemania
+documentType: Lebenslauf
+paper: A4
+locale: de-DE
+
+pageBudget:
+  min: 1
+  max: 2
+
+# Ninguno prohibido: la AGG limita lo que el empleador puede EXIGIR y cómo puede usar el
+# dato, no lo que el candidato puede ofrecer. Prohibirlos acá rompería CVs correctos.
+forbiddenFields: []
+
+customaryFields:
+  - basics.photo
+  - basics.birthDate
+  - basics.location.city
+  - basics.nationality
+  - signature
+
+referencesPolicy: omit
+
+# 03/2022. El mes numérico con cero a la izquierda es la forma dominante en el Lebenslauf
+# tabular; el nombre del mes en letras aparece casi sólo en el Anschreiben.
+datePattern: MM/yyyy
+
+sectionLabels:
+  contact: Persönliche Daten
+  summary: Kurzprofil
+  skills: Kenntnisse
+  work: Berufserfahrung
+  education: Ausbildung
+  certificates: Zertifikate
+  projects: Projekte
+  awards: Auszeichnungen
+  languages: Sprachen
+  publications: Veröffentlichungen
+  references: Referenzen
+  interests: Interessen
+
+sectionOrder:
+  - contact
+  - summary
+  - work
+  - education
+  - certificates
+  - skills
+  - languages
+  - projects
+  - publications
+  - awards
+  - interests
+  - references
+
+notes: >-
+  El Lebenslauf no se envía solo: forma parte de un paquete (Bewerbungsunterlagen) que
+  incluye el Anschreiben — carta de motivación, obligatoria de hecho —, opcionalmente un
+  Deckblatt con la foto, y el Anlagenverzeichnis con los certificados de trabajo y títulos
+  escaneados. Un Lebenslauf suelto se lee como candidatura incompleta.
+  Cierre convencional del documento: lugar, fecha y firma en una línea propia al pie
+  (Ort, Datum, Unterschrift). Se emite como texto plano, nunca como imagen escaneada: una
+  firma rasterizada es una imagen sin capa de texto y cae en ATS-039.
+  El formato "amerikanisch" (antichronologisch, lo más reciente primero) es hoy el
+  esperado; el orden cronológico ascendente sobrevive sólo en el sector público.

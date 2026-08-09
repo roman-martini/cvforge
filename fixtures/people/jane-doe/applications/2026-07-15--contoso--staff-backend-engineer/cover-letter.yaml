@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../../../../schemas/generated/cover-letter.schema.json
+
+# Cuatro bloques: Hook / Achievement / Fit / CTA. Entre 250 y 400 palabras.
+# El texto va en el locale del overlay (acá, en), igual que el CV: una carta en
+# español acompañando un resume en inglés es la señal más barata de descuido.
+#
+# `companyContext` es OBLIGATORIO y se escribe a mano: el build falla si está
+# vacío o si quedó un placeholder sin reemplazar. No es burocracia. Lo que un
+# reclutador detecta y descarta no es que la carta sea generada, es que sea
+# genérica —y lo único que una máquina no puede inventar sin mentir es por qué
+# ESTA empresa. Si no podés escribir dos frases verdaderas sobre ellos, la
+# respuesta correcta no es escribir la carta igual.
+
+companyContext: >-
+  Contoso publishes the error budget for its authorization path in a public
+  changelog and reviews it every quarter, including the quarters where the budget
+  ran out. Very few payment companies make it visible how badly they broke. The
+  posting says it wants a pager that stays quiet, and the changelog is evidence
+  that the sentence is not decoration.
+
+hook: >-
+  For the last three years I have owned the authorization path of a platform that
+  clears 40 million transactions a month, and the part of that work I am proudest
+  of is the part nobody sees: the pager stopped going off at night.
+
+# ids de bullets YA scoreados contra los requisitos de esta vacante. La carta no
+# escribe logros nuevos: reusa los mismos hechos que el CV, con otra selección.
+# Si un logro no está en el perfil, tampoco puede estar acá.
+achievements:
+  - work.acme-2023.b1
+  - work.acme-2023.b7
+
+fit: >-
+  The posting asks for production Go, Kubernetes you can debug at three in the
+  morning, and PostgreSQL at scale. Those are the three things I have worked on
+  every day since 2019: p99 authorization latency down from 480 ms to 190 ms
+  after moving from REST to gRPC, twenty-three services moved onto Kubernetes
+  without a user-visible maintenance window, and a partitioning redesign that
+  held six consecutive quarters without a severity-1 incident. What I would add
+  beyond the requirements is the line at the end of your posting that usually
+  ends up unowned: bringing the team along so the critical path does not depend
+  on one person. Six engineers at Acme now carry the rotation without me, which
+  is the only proof I know of that the work was done properly.
+
+cta: >-
+  I would like to walk you through how we automated and rehearsed cross-region
+  failover until recovery went from forty minutes to under five, and to hear how
+  you are handling multi-region settlement today. Happy to talk whenever it suits
+  your team.

@@ -1,0 +1,47 @@
+/* ==========================================================================
+ * ats-classic — vista de pantalla
+ *
+ * Se carga DESPUÉS de print.css y todo su contenido vive dentro de
+ * @media screen: así el mismo documento sirve para previsualizar en el browser
+ * sin que una sola de estas reglas pueda filtrarse al PDF.
+ *
+ * Simula la hoja porque el @page no existe en pantalla: los márgenes que en
+ * impresión pone el papel acá los pone el padding del body.
+ *
+ * Mismas prohibiciones que print.css (float, position, opacity, transform…):
+ * el linter de CSS recorre todos los archivos del tema sin distinguir medio,
+ * y así una regla movida de un archivo a otro nunca sorprende.
+ * ========================================================================== */
+
+@media screen {
+  html {
+    background: #e9ebee;
+  }
+
+  body {
+    width: var(--page-w);
+    min-height: var(--page-h);
+    margin: 8mm auto;
+    padding: var(--page-margin-y) var(--page-margin-x);
+    background: #ffffff;
+    border: 1px solid #c9cdd3;
+  }
+
+  /* En pantalla el link sí se subraya: acá el gesto es clickear, no leer una
+     impresión en blanco y negro. */
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  /* Por debajo del ancho de la hoja la simulación estorba: se abandona el
+     papel y se lee como una página común. */
+  @media (max-width: 226mm) {
+    body {
+      width: auto;
+      min-height: 0;
+      margin: 0;
+      border: none;
+    }
+  }
+}

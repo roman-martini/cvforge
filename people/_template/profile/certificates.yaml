@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../../schemas/generated/certificates.schema.json
+
+# Sección opcional. Array vacío = no tenés, y está bien.
+#
+# `expiresAt` no es decorativo: alimenta las preguntas eliminatorias del
+# formulario ("¿tenés la certificación vigente al momento de ingresar?"). Una
+# certificación vencida declarada como vigente es una discrepancia que se detecta
+# en screening, y las discrepancias detectadas cuestan la oferta.
+#
+# Si la certificación no vence, simplemente no pongas `expiresAt`. La ausencia de
+# la clave es la forma de decirlo; no inventes un `expiresAt: never`.
+
+[]
+
+# - id: cert.ejemplo
+#   name: "Nombre oficial de la certificación (con su acrónimo)"
+#   issuer: "Entidad que la emite"
+#   date: "2025-04"
+#   expiresAt: "2028-04"
+#   url: "https://verificacion.example"
+#   credentialId: "ID-DE-CREDENCIAL"
+#   tags: [tag-uno]
+#   priority: 70
+#   visibility: public

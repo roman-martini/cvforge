@@ -1,0 +1,31 @@
+# Perfil de industria: general.
+# Fallback para sectores sin convención de formato propia y verificable: retail,
+# logística, administración, educación no universitaria, ONG, sector público.
+# Igual que tech, NO declara sectionOrder: deja mandar a la convención regional, que es la
+# única señal fuerte cuando la industria no aporta ninguna.
+
+id: general
+label: General
+
+pageBudget:
+  min: 1
+  max: 2
+
+# Acento sobrio: se permite un color de énfasis en encabezados y filetes, nunca en el
+# cuerpo del texto ni como único portador de información.
+colorPolicy: accent
+
+formats:
+  - pdf
+  - docx
+  - txt
+
+notes: >-
+  Usar este perfil cuando no haya evidencia institucional de una convención distinta. La
+  tentación es crear un perfil de industria por cada sector; cada uno que se agrega sin una
+  fuente citable detrás es una regla inventada que después nadie puede discutir, y la
+  matriz de perfiles se vuelve folclore.
+  Criterio para promover un sector a perfil propio: existe una instrucción pública y
+  verificable de empleadores relevantes (como el "one-page, business style" de BCG) o un
+  formulario estructurado que impone la forma (como ERAS). Preferencias observadas en
+  blogs de reclutamiento no alcanzan.

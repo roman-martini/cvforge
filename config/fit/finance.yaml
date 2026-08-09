@@ -1,0 +1,9 @@
+# Banca de inversión: una página hasta VP. Se conservan los premios porque en
+# este mercado señalan selectividad (rankings, distinciones académicas), que es
+# justo lo que se evalúa en el screening.
+maxBulletsPerRole:
+  recent: 3
+  mid: 2
+  old: 1
+experienceCutoffYears: 10
+dropSections: [interests, languages, publications, projects]

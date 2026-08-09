@@ -1,0 +1,89 @@
+# Perfil regional: Polonia.
+# El caso interesante de los diez: la cláusula de consentimiento NO es un adorno ritual
+# como en España, pero tampoco es incondicional como repiten las plantillas locales.
+# El art. 22-1 del Kodeks pracy enumera taxativamente los datos que el empleador puede
+# EXIGIR (nombre, fecha de nacimiento, datos de contacto, estudios, cualificaciones y
+# trayectoria laboral). Esos no necesitan consentimiento: su base es el art. 6.1.b RGPD.
+# Todo lo que el candidato aporte POR ENCIMA de esa lista — foto, estado civil, aficiones,
+# número de documento — sí se trata sobre la base del consentimiento del art. 6.1.a, y
+# ahí la cláusula deja de ser folclore y pasa a ser necesaria.
+# Regla codificada: consentClause.requiredIf enumera los disparadores.
+
+id: pl
+label: Polonia
+documentType: CV
+paper: A4
+locale: pl-PL
+
+pageBudget:
+  min: 1
+  max: 2
+
+# Vacío a propósito: en este mercado la fecha de nacimiento es un dato que el empleador
+# puede exigir por ley. Prohibirla replicaría la convención anglosajona sobre un marco
+# que dice lo contrario.
+forbiddenFields: []
+
+customaryFields:
+  - basics.birthDate
+  - basics.location.city
+  - basics.profiles
+  - languages
+
+referencesPolicy: omit
+
+# 03/2022
+datePattern: MM/yyyy
+
+sectionLabels:
+  contact: Dane kontaktowe
+  summary: Profil zawodowy
+  skills: Umiejętności
+  work: Doświadczenie zawodowe
+  education: Wykształcenie
+  certificates: Certyfikaty
+  projects: Projekty
+  awards: Nagrody
+  languages: Języki
+  publications: Publikacje
+  references: Referencje
+  interests: Zainteresowania
+
+sectionOrder:
+  - contact
+  - summary
+  - skills
+  - work
+  - education
+  - certificates
+  - projects
+  - awards
+  - publications
+  - languages
+  - interests
+  - references
+
+consentClause:
+  required: false
+  requiredIf:
+    - basics.photo
+    - basics.maritalStatus
+    - basics.nationalId
+    - basics.nationality
+    - interests
+    - futureRecruitment
+  text: >-
+    Wyrażam zgodę na przetwarzanie moich danych osobowych zawartych w dokumentach
+    aplikacyjnych w zakresie wykraczającym poza art. 22-1 Kodeksu pracy przez {Company}
+    w celu przeprowadzenia postępowania rekrutacyjnego na stanowisko, na które aplikuję.
+
+notes: >-
+  El disparador futureRecruitment no es un campo del perfil sino una decisión de la
+  postulación: si el candidato quiere que la empresa conserve el CV para procesos
+  posteriores, hace falta una segunda cláusula de consentimiento explícita y separada de la
+  primera. El texto declarado acá cubre sólo el proceso en curso.
+  El placeholder {Company} lo resuelve el renderer contra job.company.name; si la
+  postulación no tiene job.yaml asociado, se emite la forma genérica sin destinatario.
+  Advertencia sobre plantillas locales: casi todas incluyen la cláusula siempre y muchas
+  siguen citando la ley de protección de datos de 1997, derogada en 2018. Una cláusula que
+  cita norma derogada es peor que ninguna.

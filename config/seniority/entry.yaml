@@ -1,0 +1,44 @@
+# Perfil de seniority: primer empleo / hasta ~3 años.
+# Education sigue arriba pero cede el segundo lugar a Work: ya hay trayectoria que mostrar
+# y la credencial académica deja de ser el único argumento.
+# Una página, sin excepciones de mercado: ningún perfil de los diez espera dos páginas de
+# alguien con tres años de recorrido.
+
+id: entry
+label: Primer empleo
+
+pageBudget:
+  min: 1
+  max: 1
+
+sectionOrder:
+  - contact
+  - summary
+  - education
+  - skills
+  - work
+  - projects
+  - certificates
+  - awards
+  - languages
+  - publications
+  - interests
+  - references
+
+budget:
+  maxPages: 1
+  bulletsPerRole:
+    recent: 4
+    mid: 3
+    old: 2
+  maxWords: 750
+
+notes: >-
+  El punto de inflexión donde Education baja por debajo de Work es aproximadamente el
+  tercer año, o antes si el título no es la credencial relevante para el puesto. Se resuelve
+  pasando al perfil mid, no editando este.
+  El summary sube al segundo lugar porque en este tramo es donde más trabajo hace: sin
+  historia larga que hable sola, dos frases que digan qué construiste y hacia dónde vas
+  orientan la lectura del resto.
+  Cuatro bullets en el rol actual es techo, no objetivo. Si el rol da para cuatro bullets
+  con dato concreto, van cuatro; si da para dos, van dos y la página se cierra antes.

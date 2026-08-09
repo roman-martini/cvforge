@@ -1,0 +1,100 @@
+# Perfil regional: España.
+# Punto no negociable de este perfil: NO lleva cláusula RGPD.
+# La cláusula de consentimiento al pie del CV es un mito extendidísimo — la sigue
+# recomendando media internet y la incluyen plantillas de portales de empleo — pero la
+# AEPD sostiene que la base legal del tratamiento de una candidatura espontánea o a una
+# oferta es la aplicación de medidas precontractuales a petición del interesado
+# (art. 6.1.b RGPD), no el consentimiento (art. 6.1.a). Enviar un consentimiento que nadie
+# necesita no protege nada y da a entender que el tratamiento es revocable cuando no lo es.
+
+id: es
+label: España
+documentType: CV
+paper: A4
+locale: es-ES
+
+pageBudget:
+  min: 1
+  max: 2
+
+forbiddenFields:
+  - field: basics.birthDate
+    reason: >-
+      La edad es causa de discriminación nominada en el Estatuto de los Trabajadores y el
+      dato no guarda relación con la aptitud para el puesto: es tratamiento excesivo por
+      el principio de minimización.
+    source: >-
+      Estatuto de los Trabajadores, art. 17.1 (RDL 2/2015); RGPD art. 5.1.c; AEPD — Guía
+      sobre protección de datos en las relaciones laborales
+  - field: basics.maritalStatus
+    reason: >-
+      Estado civil y cargas familiares son proxy directo de sexo y maternidad, y no tienen
+      relación alguna con el desempeño del puesto.
+    source: >-
+      Ley Orgánica 3/2007 para la igualdad efectiva de mujeres y hombres, art. 5;
+      Estatuto de los Trabajadores, art. 17.1
+  - field: basics.nationalId
+    reason: >-
+      El DNI o NIE no es necesario para valorar una candidatura: se aporta al firmar el
+      contrato. En un CV que circula por portales es identificador directo reutilizable
+      para fraude, y su tratamiento no supera el test de minimización.
+    source: >-
+      RGPD art. 5.1.c (minimización); AEPD — Informe jurídico sobre tratamiento de datos
+      en procesos de selección
+  - field: basics.gender
+    reason: >-
+      Dato protegido que no aporta información laboral. La LO 3/2007 obliga además al
+      empleador a no usarlo como criterio de selección.
+    source: Ley Orgánica 3/2007, art. 5; Estatuto de los Trabajadores, art. 17.1
+
+customaryFields:
+  - basics.location.city
+  - basics.profiles
+  - languages
+
+referencesPolicy: omit
+
+# marzo 2022
+datePattern: MMMM yyyy
+
+sectionLabels:
+  contact: Contacto
+  summary: Perfil profesional
+  skills: Competencias
+  work: Experiencia profesional
+  education: Formación académica
+  certificates: Certificaciones
+  projects: Proyectos
+  awards: Premios y reconocimientos
+  languages: Idiomas
+  publications: Publicaciones
+  references: Referencias
+  interests: Intereses
+
+sectionOrder:
+  - contact
+  - summary
+  - skills
+  - work
+  - education
+  - certificates
+  - projects
+  - awards
+  - publications
+  - languages
+  - interests
+  - references
+
+# Declarado explícitamente en falso, y no omitido, para que quede como decisión tomada:
+# si alguien vuelve a plantear la cláusula RGPD, esta entrada y su nota son la respuesta.
+consentClause:
+  required: false
+  requiredIf: []
+
+notes: >-
+  La foto no está prohibida por ninguna norma española, pero está desaconsejada y por eso
+  no figura ni en forbiddenFields ni en customaryFields: el sistema no la bloquea ni la
+  sugiere. Introduce sesgo medible en la criba y, salvo puestos donde la imagen sea
+  requisito acreditable, no aporta información evaluable.
+  Los idiomas con nivel del Marco Común Europeo son una sección esperada en este mercado,
+  no un extra: un CV español sin bloque de idiomas se lee incompleto.

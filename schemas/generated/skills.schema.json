@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:cv-workspace:schema:skills",
+  "title": "Habilidades (skills.yaml)",
+  "description": "Forma canónica más alias. El renderer emite el alias que usa la vacante cuando corresponde.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:[-.][a-z0-9]+)*$"
+      },
+      "canonical": {
+        "type": "string",
+        "minLength": 1
+      },
+      "aliases": {
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "category": {
+        "type": "string",
+        "minLength": 1
+      },
+      "level": {
+        "type": "string",
+        "enum": [
+          "beginner",
+          "intermediate",
+          "advanced",
+          "expert"
+        ]
+      },
+      "yearsOfExperience": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 60
+      },
+      "keywords": {
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "tags": {
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "priority": {
+        "default": 50,
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "visibility": {
+        "default": "public",
+        "type": "string",
+        "enum": [
+          "public",
+          "private"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "canonical",
+      "category"
+    ],
+    "additionalProperties": false
+  }
+}

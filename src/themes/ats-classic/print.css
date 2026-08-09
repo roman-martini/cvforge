@@ -1,0 +1,297 @@
+/* ==========================================================================
+ * ats-classic — hoja de impresión (la que produce el PDF)
+ *
+ * Lista de propiedades prohibidas en TODO este archivo, cada una verificada
+ * como causa de reordenamiento o pérdida de texto en el content stream:
+ *   float · position != static (incluido relative) · opacity < 1 · transform
+ *   filter · mix-blend-mode · clip-path · column-count · order · *-reverse
+ *   text-align: justify · display: table* · content: con texto en ::before/::after
+ *
+ * La causa raíz es CSS 2.1 Apéndice E: Chrome emite el texto en orden de
+ * PINTADO, no de DOM. Todo lo que crea un stacking context cambia ese orden.
+ * ========================================================================== */
+
+@page {
+  size: var(--page-w) var(--page-h);
+  margin: var(--page-margin-y) var(--page-margin-x);
+
+  /* SIN margin-boxes, a propósito, ni siquiera para numerar las páginas.
+
+     El texto de un margin-box queda fuera del árbol de estructura del PDF, y
+     además se emite ANTES que el cuerpo en el content stream. Se verificó
+     extrayendo el texto de este mismo CV: la primera línea que ve un parser
+     pasaba a ser "1 / 2" en lugar del nombre. Un ATS que toma la primera línea
+     como el nombre del candidato registra a la persona como "1 / 2".
+
+     El beneficio —numerar dos páginas que van grapadas o en un mismo archivo—
+     no compensa ese riesgo. Si alguna vez se agrega un margin-box, jamás debe
+     llevar email, teléfono ni URL: falló en 6 de 8 ATS probados y el candidato
+     terminaría aplicando sin dirección de contacto. */
+}
+
+/* --------------------------------------------------------------------------
+ * Base
+ * -------------------------------------------------------------------------- */
+
+/* Selector universal a propósito y primero de todo: fija el piso del que las
+   reglas de abajo se desvían de forma explícita y localizada. `hyphens:
+   manual` evita guiones automáticos, que insertan U+00AD en el texto extraído. */
+* {
+  box-sizing: border-box;
+  text-align: left;
+  hyphens: manual;
+  letter-spacing: var(--tracking-body);
+  word-spacing: normal;
+  writing-mode: horizontal-tb;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink);
+  background: #ffffff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-weight: var(--fw-body);
+  /* Chrome honra ambos: nunca una línea suelta arriba o abajo de una página. */
+  orphans: 3;
+  widows: 3;
+}
+
+p {
+  margin: 0 0 var(--space-para);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* Sin subrayado ni color distinto: en escala de grises el subrayado ensucia y
+   el reclutador lee la URL completa igual, porque el texto visible ES la URL. */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Reemplaza a &nbsp;, que sobrevive a la extracción como U+00A0 y rompe
+   cualquier comparación exacta de tokens. */
+.nowrap {
+  white-space: nowrap;
+}
+
+/* Cifras de caja alta y ancho fijo: EB Garamond y Georgia usan old-style por
+   defecto, con avances que varían de 17.20 a 24.56 pt. Con tabular-nums la
+   columna de fechas se alinea sin ningún hack de layout. */
+.date,
+.metric {
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: 'lnum' 1, 'tnum' 1;
+}
+
+/* --------------------------------------------------------------------------
+ * Encabezado del documento
+ * -------------------------------------------------------------------------- */
+
+.doc-head {
+  padding-bottom: var(--space-section-after);
+  border-bottom: var(--rule-width) solid var(--rule);
+}
+
+.name {
+  margin: 0 0 var(--space-hairline);
+  font-size: var(--fs-name);
+  font-weight: var(--fw-name);
+  line-height: var(--lh-name);
+  /* Tracking negativo sólo a partir de 18pt, donde el espaciado por defecto
+     se ve suelto. */
+  letter-spacing: var(--tracking-name);
+  color: var(--accent);
+}
+
+.headline {
+  margin: 0 0 var(--space-hairline);
+  font-size: var(--fs-role);
+  font-weight: var(--fw-label);
+  line-height: var(--lh-heading);
+  color: var(--ink-muted);
+}
+
+.contact,
+.links {
+  margin: 0;
+  font-size: var(--fs-meta);
+  line-height: var(--lh-heading);
+  color: var(--ink-muted);
+}
+
+.links {
+  margin-top: var(--space-hairline);
+}
+
+/* --------------------------------------------------------------------------
+ * Secciones
+ * -------------------------------------------------------------------------- */
+
+.section {
+  margin: 0;
+}
+
+/* Versalitas en vez de mayúsculas: `font-variant: all-small-caps` conserva la
+   capitalización original en el texto extraído, así que el ATS lee el label
+   canónico ("Work Experience"); `text-transform: uppercase` sí lo altera. */
+.section-heading {
+  margin: var(--space-section-before) 0 var(--space-section-after);
+  padding-bottom: var(--space-hairline);
+  border-bottom: var(--rule-width) solid var(--rule);
+  font-size: var(--fs-section);
+  font-weight: var(--fw-section);
+  line-height: var(--lh-heading);
+  font-variant: all-small-caps;
+  letter-spacing: var(--tracking-heading);
+  color: var(--accent);
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+/* --------------------------------------------------------------------------
+ * Entradas (experiencia, educación, proyectos, certificados)
+ * -------------------------------------------------------------------------- */
+
+.entry {
+  margin: 0 0 var(--space-entry);
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+/* Grid con el TÍTULO PRIMERO EN EL DOM. Verificado: float:right adelanta la
+   fecha al principio del texto extraído de la página y position:relative
+   empuja la experiencia entera al final del documento. Grid conserva el orden
+   del DOM incluso con grid-column explícito.
+   El break-inside:avoid vale para este bloque (título + fecha + empresa), no
+   para .entry completa: eso empujaría el bloque entero a la página siguiente
+   dejando ~120mm en blanco. */
+.entry-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  column-gap: var(--entry-gap-x);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.entry-title {
+  margin: 0;
+  font-size: var(--fs-role);
+  font-weight: var(--fw-role);
+  line-height: var(--lh-heading);
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+.entry-date {
+  grid-column: 2;
+  text-align: right;
+  font-size: var(--fs-meta);
+  line-height: var(--lh-heading);
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+/* El separador es un carácter real del DOM, no un gap: un gap de CSS no
+   genera ningún carácter y las dos cajas se extraen pegadas ("EngineerApr"). */
+.sep {
+  color: var(--ink-muted);
+}
+
+.entry-subtitle {
+  grid-column: 1 / -1;
+  margin: var(--space-hairline) 0 0;
+  font-size: var(--fs-body);
+  line-height: var(--lh-heading);
+  color: var(--ink);
+}
+
+/* Promociones dentro de la misma empresa: misma estructura que la cabecera
+   principal, un escalón más liviana. */
+.entry-head--extra {
+  margin-top: var(--space-hairline);
+}
+
+.entry-head--extra .entry-title {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-label);
+}
+
+.entry-summary {
+  margin: var(--space-para) 0 0;
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+ * Bullets
+ *
+ * <ul><li> nativo: Chrome dibuja los marcadores como paths vectoriales, no
+ * como texto, así que el ATS nunca ve un "•" espurio. Consecuencia directa:
+ * el TXT no puede derivarse de la extracción del PDF y cv.txt tampoco debe
+ * emitir "• ", o el comparador de recall falla por una diferencia cosmética.
+ * -------------------------------------------------------------------------- */
+
+.bullets {
+  margin: var(--space-para) 0 0;
+  padding-left: var(--bullet-indent);
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.bullets li {
+  margin: 0 0 var(--space-bullet);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.bullets li:last-child {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+ * Skills y listas en línea
+ * -------------------------------------------------------------------------- */
+
+.skill-group {
+  margin: 0 0 var(--space-bullet);
+}
+
+.skill-group:last-child {
+  margin-bottom: 0;
+}
+
+.skill-label {
+  font-weight: var(--fw-label);
+}
+
+.inline-list {
+  margin: 0;
+}
+
+.section-text {
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+ * Cláusula de consentimiento (sólo donde el mercado la exige)
+ * -------------------------------------------------------------------------- */
+
+.consent {
+  margin: var(--space-section-before) 0 0;
+  padding-top: var(--space-hairline);
+  border-top: var(--rule-width) solid var(--rule);
+  font-size: var(--fs-meta);
+  line-height: var(--lh-heading);
+  color: var(--ink-muted);
+}

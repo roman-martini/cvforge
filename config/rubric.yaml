@@ -1,0 +1,458 @@
+# Umbrales del linter.
+#
+# Viven acá y no hardcodeados porque su calidad de evidencia es desigual: algunos son
+# medición propia reproducible, otros son documentación de un producto sobre sí mismo, y
+# otros son heurística de este workspace. Anotar fuente y confianza en cada uno evita que
+# un número de blog se convierta en dogma del sistema por el sólo hecho de estar escrito
+# en un archivo de configuración.
+#
+# confidence:
+#   alta  → medición propia reproducible, norma técnica o fuente institucional primaria
+#   media → documentación de un producto sobre su propio comportamiento, o convergencia
+#           de varias guías independientes sin estudio detrás
+#   baja  → heurística propia sin validación externa, o cifra de vendor con conflicto de
+#           interés. Un umbral con confianza baja no puede ser causa de error duro sin
+#           que alguien lo discuta primero.
+#
+# El bloque `myth.*` del final registra cifras que circulan como hechos y NO lo son. Están
+# acá con value:false para que quede constancia de que se evaluaron y se descartaron: sin
+# ese registro, la primera búsqueda que haga alguien las vuelve a meter en el repo.
+
+thresholds:
+  # ---------------------------------------------------------------- CSS de impresión
+  css.letterSpacing.maxEm:
+    value: 0.12
+    source: >-
+      Medición propia reproducible: Chromium 151 headless + pdfjs-dist 6.2. A partir de
+      0.15em Chrome emite una operación de texto por glifo y la extracción devuelve las
+      palabras separadas carácter por carácter.
+    confidence: alta
+    note: >-
+      Es el umbral que rompe más templates bonitos. E X P E R I E N C E no matchea ningún
+      heading canónico y encima destruye lo que el parser usa para segmentar el documento.
+      Para dar aire a los encabezados se usan versalitas, no tracking.
+
+  css.bodyFontSize.minPt:
+    value: 9
+    source: >-
+      Convergencia de guías de impresión accesible (RNIB Clear Print recomienda 12pt como
+      cómodo) con la práctica editorial de documento A4 a una columna.
+    confidence: media
+    note: >-
+      9pt es el piso, no el objetivo. El cuerpo del tema por defecto es 10,5pt y el
+      fit-loop sólo llega a 9pt en el escalón ultra, que ya es una señal de que sobra
+      contenido.
+
+  css.fontSize.fraudFloorPt:
+    value: 6
+    source: Regla propia del workspace (ATS-015), derivada del criterio de intención.
+    confidence: alta
+    note: >-
+      No es un umbral de legibilidad sino de intención. Texto por debajo de 6pt no está
+      dirigido a un lector humano: sólo puede estar dirigido al parser. Se trata como
+      fraude y no como error de estilo.
+
+  css.hyphens.expected:
+    value: manual
+    source: Regla propia del workspace (ATS-010).
+    confidence: alta
+    note: >-
+      Explícito y no heredado: la partición automática inserta U+00AD (soft hyphen) que
+      sobrevive a la extracción y parte palabras clave por la mitad.
+
+  css.writingMode.expected:
+    value: horizontal-tb
+    source: Regla propia del workspace (ATS-017).
+    confidence: alta
+
+  css.textAlign.forbidden:
+    value: justify
+    source: >-
+      Medición propia: con text-align:justify Chrome emite una operación de texto por
+      palabra para repartir el espacio, y la extracción devuelve una palabra por línea.
+    confidence: alta
+
+  # ---------------------------------------------------------------------------- PDF
+  pdf.maxBytes:
+    value: 2621440
+    source: >-
+      Límite de tamaño de adjunto documentado por Greenhouse para el parseo de CVs
+      (2,5 MB).
+    confidence: media
+    note: >-
+      Es el más bajo entre los ATS que publican el dato. Se adopta el mínimo porque el
+      mismo archivo se envía a todos. Un CV sin foto y con fuentes subsetteadas pesa entre
+      80 y 200 KB: si se acerca al límite, hay una imagen que no debería estar ahí.
+
+  pdf.paper.a4.widthPt:
+    value: 595
+    source: ISO 216, convertido a puntos PostScript (210mm = 595,28pt).
+    confidence: alta
+
+  pdf.paper.a4.heightPt:
+    value: 842
+    source: ISO 216, convertido a puntos PostScript (297mm = 841,89pt).
+    confidence: alta
+
+  pdf.paper.letter.widthPt:
+    value: 612
+    source: ANSI Y14.1 / US Letter 8,5 × 11 in a 72 pt/in.
+    confidence: alta
+
+  pdf.paper.letter.heightPt:
+    value: 792
+    source: ANSI Y14.1 / US Letter 8,5 × 11 in a 72 pt/in.
+    confidence: alta
+
+  pdf.mediaBox.tolerancePt:
+    value: 1
+    source: >-
+      Medición propia: Chromium emite el MediaBox de A4 como 594.96 × 841.92, no como
+      595 × 842, por el redondeo de mm a puntos.
+    confidence: alta
+    note: >-
+      Sin esta tolerancia la comparación exacta del papel falla siempre. Un punto alcanza:
+      la diferencia entre A4 y Letter es de 17 puntos de ancho.
+
+  pdf.structure.minH1:
+    value: 1
+    source: Heurística propia sobre el árbol de estructura que emite Chromium.
+    confidence: baja
+    note: El nombre de la persona es el H1 y es el único.
+
+  pdf.structure.minH2:
+    value: 3
+    source: Heurística propia.
+    confidence: baja
+    note: >-
+      Un CV tiene al menos Experiencia, Formación y Habilidades. Menos de tres H2 en el
+      árbol de estructura significa que los encabezados se emitieron como texto suelto y
+      el parser no puede segmentar el documento.
+
+  pdf.structure.nonStructMaxRatio:
+    value: 0.2
+    source: Heurística propia calibrada contra los temas del workspace.
+    confidence: baja
+    note: >-
+      No hay fuente institucional que fije un histograma de tags aceptable. Si un tema
+      legítimo lo supera se recalibra este número con la evidencia a la vista, no se
+      desactiva la regla.
+
+  pdf.maxEmbeddedImages:
+    value: 1
+    source: Derivado de los perfiles regionales (una imagen = la foto, donde es costumbre).
+    confidence: alta
+    note: >-
+      En los perfiles us, ca, uk, nl y au el máximo efectivo es 0, porque la foto está
+      prohibida. Cualquier otra imagen —logo, icono, barra de nivel— es contenido sin capa
+      de texto y no aporta nada evaluable.
+
+  pdf.title.forbiddenPattern:
+    value: (?i)(tailored|draft|final|v\d+|salary|confidential)
+    source: Regla propia del workspace (ATS-038).
+    confidence: alta
+    note: >-
+      Chrome copia literalmente el <title> del HTML a /Title del PDF, y el reclutador lo ve
+      en la pestaña del visor. Es la fuga más probable de un workspace de tailoring: el
+      nombre de la empresa objetivo o la palabra "v3" en los metadatos del archivo enviado
+      a otra empresa.
+
+  # -------------------------------------------------------------- Texto extraído
+  text.recall.min:
+    value: 1
+    source: ADR-006 — extracción dual del PDF, regla ATS-050.
+    confidence: alta
+    note: >-
+      Recall estricto, sin margen. Todo token normalizado de cv.txt tiene que aparecer en
+      la extracción del PDF. Es el gate estructural que cubre a la vez los layouts que
+      reordenan el content stream y el texto oculto de cualquier tipo, sin necesidad de
+      enumerar las técnicas.
+
+  text.proximity.windowLines:
+    value: 6
+    source: Heurística propia calibrada contra los temas del workspace (ATS-052).
+    confidence: baja
+    note: >-
+      Título, empresa y fecha de una misma entrada tienen que caer dentro de esta ventana
+      en la extracción por content stream. Es la única regla que detecta el desprendimiento
+      causado por position:relative o float: el orden de secciones sigue correcto y el PDF
+      se ve impecable.
+
+  text.contact.maxLineIndex:
+    value: 5
+    source: >-
+      Convención transversal a los ATS que documentan su parseo (Greenhouse, Workday):
+      el bloque de contacto se busca en el encabezado del documento.
+    confidence: media
+
+  text.datePatterns.max:
+    value: 1
+    source: Regla propia del workspace (ATS-061).
+    confidence: alta
+    note: >-
+      Un solo patrón de fecha en todo el documento. Mezclar "March 2022" con "03/2022"
+      hace que el parser interprete mal la mitad de las fechas y calcule mal la antigüedad.
+
+  text.minContrastRatio:
+    value: 1.5
+    source: Regla propia del workspace (ATS-063).
+    confidence: alta
+    note: >-
+      No es un umbral de accesibilidad —WCAG pide 4,5:1 para texto normal— sino de
+      detección de texto deliberadamente oculto. Por debajo de 1,5:1 el texto es invisible
+      para el humano y perfectamente legible para el parser.
+
+  text.invisibleCodepoints:
+    value: U+00A0,U+00AD,U+200B,U+200C,U+200D,U+2060,U+FEFF
+    source: Regla propia del workspace (ATS-054).
+    confidence: alta
+    note: >-
+      El más frecuente por lejos es U+00A0, que entra por un &nbsp; puesto para que
+      "March 2022" no parta de línea. Sobrevive a la extracción, no matchea "March 2022"
+      y no sobrevive a un split por espacio.
+
+  text.privateUseAreaStart:
+    value: U+E000
+    source: Unicode Standard — Private Use Area (U+E000-U+F8FF).
+    confidence: alta
+    note: >-
+      Rango de las icon fonts. Un icono de teléfono renderizado como glifo PUA se extrae
+      como carácter basura pegado al número.
+
+  # --------------------------------------------------------------------------- DOCX
+  docx.maxAltChunk:
+    value: 0
+    source: >-
+      Medición propia: un DOCX generado con altChunk se abre perfecto en Word y devuelve
+      cero caracteres en todo parser headless, porque el contenido queda como HTML
+      embebido sin convertir.
+    confidence: alta
+
+  docx.minTextRuns:
+    value: 1
+    source: Regla propia del workspace (ATS-071).
+    confidence: alta
+    note: >-
+      Dos líneas de inspección del zip que atrapan el modo de falla más catastrófico y más
+      silencioso del pipeline.
+
+  docx.maxTables:
+    value: 0
+    source: >-
+      Convergencia de la documentación de parseo de los ATS mayoritarios: el orden de
+      lectura de una tabla depende del extractor.
+    confidence: media
+
+  # ------------------------------------------------------- Modelo de datos y contenido
+  content.bulletsPerRole.min:
+    value: 3
+    source: >-
+      Convergencia de guías de career services universitarios (Yale OCS, Harvard OCS) con
+      el presupuesto de contenido del dossier §7.4.
+    confidence: media
+
+  content.bulletsPerRole.max:
+    value: 6
+    source: Ídem content.bulletsPerRole.min.
+    confidence: media
+    note: >-
+      Techo y no objetivo. El reclutador rara vez pasa del tercer bullet de cada rol, así
+      que los bullets cuatro a seis existen para el matcher y para la lectura profunda del
+      finalista, no para la criba.
+
+  content.wordsPerBullet.min:
+    value: 15
+    source: Presupuesto de contenido del dossier §7.4.
+    confidence: media
+    note: Menos de 15 palabras rara vez alcanza para resultado, medida y método.
+
+  content.wordsPerBullet.max:
+    value: 30
+    source: Presupuesto de contenido del dossier §7.4.
+    confidence: media
+    note: >-
+      30 palabras son dos líneas en A4 con márgenes de 18mm. La tercera línea de un bullet
+      es donde el lector abandona.
+
+  content.totalWords.min:
+    value: 400
+    source: Presupuesto de contenido del dossier §7.4.
+    confidence: media
+
+  content.totalWords.max:
+    value: 1600
+    source: Presupuesto de contenido del dossier §7.4.
+    confidence: media
+
+  content.quantifiedAnchors.min:
+    value: 2
+    source: Regla de moderación del dossier §7.3.
+    confidence: media
+    note: >-
+      Warning y no error, deliberadamente. Exigir métrica en cada bullet empuja a inventar
+      números, que es exactamente lo que se cae en la entrevista. Dos a cuatro anclas bien
+      elegidas en todo el CV alcanzan; un bullet claro y verdadero sin número le gana a uno
+      con un número forzado.
+
+  content.summarySentences.min:
+    value: 2
+    source: Convención transversal de guías de redacción de CV.
+    confidence: media
+
+  content.summarySentences.max:
+    value: 4
+    source: Convención transversal de guías de redacción de CV.
+    confidence: media
+
+  content.coverLetter.words.min:
+    value: 250
+    source: >-
+      Convergencia de guías de career services; estructura de cuatro párrafos
+      Hook / Achievement / Fit / CTA.
+    confidence: media
+
+  content.coverLetter.words.max:
+    value: 400
+    source: Ídem content.coverLetter.words.min.
+    confidence: media
+
+  content.recruiterScanSeconds:
+    value: 7
+    source: >-
+      Ladders Inc. (2018), estudio de eye-tracking con n=30 encargado por el propio vendor
+      de servicios de empleo, sin revisión por pares.
+    confidence: baja
+    note: >-
+      Se usa como principio de diseño —lo más relevante arriba, el bullet más pertinente
+      primero— y jamás como métrica de validación. El tamaño de muestra y el conflicto de
+      interés no dan para más que eso.
+
+  content.jobTitle.forbiddenAbbreviations:
+    value: Sr.,Jr.,SW,Eng,Mgr,Dir,VP,Assoc.,Asst.
+    source: Regla propia del workspace (ATS-085).
+    confidence: media
+    note: >-
+      El matcher de la vacante compara contra el título escrito completo. "Sr. SW Eng" no
+      matchea "Senior Software Engineer" en ningún ATS léxico.
+
+  content.company.legalSuffixes:
+    value: Inc.,LLC,Ltd,Ltd.,GmbH,S.A.,S.L.,S.R.L.,B.V.,Pty Ltd,S.p.A.,AB,Oy,A/S
+    source: Regla propia del workspace (ATS-086).
+    confidence: media
+    note: >-
+      Varios ATS desambiguan la empresa contra su base de datos usando el sufijo legal.
+      Es warning y no error: hay empresas que no lo usan en su marca.
+
+  data.provenance.allowedInRender:
+    value: human,llm_approved
+    source: ADR-011 — honestidad como control de proceso (ATS-090).
+    confidence: alta
+    note: >-
+      Una variante llm_draft que llega a un CV renderizado es error duro. El modo de falla
+      más probable de un generador automático no es la mentira deliberada sino el drift
+      semántico al refrasear: "colaboré en" convertido en "lideré".
+
+  # -------------------------------------------------------------------- Tipografía
+  typography.charsPerLine.max:
+    value: 90
+    source: Matthew Butterick, Practical Typography — rango cómodo de 45 a 90 caracteres.
+    confidence: media
+    note: >-
+      El CV vive estructuralmente por encima de este rango: A4 con márgenes de 18mm y
+      cuerpo de 10,5pt da entre 99 y 106 caracteres por línea. La mitigación es el
+      indentado de las viñetas y mantenerlas en una o dos líneas, no bajar el cuerpo por
+      debajo de css.bodyFontSize.minPt.
+
+  typography.emPerCharacter:
+    value: 0.4493
+    source: >-
+      Medición propia sobre Source Sans 3 estática en Chromium 151 headless, promediada
+      sobre texto de CV real.
+    confidence: alta
+    note: >-
+      Constante que usa el fit-loop para estimar cuántas líneas va a ocupar un bloque
+      antes de renderizar, y así saltar escalones de densidad sin pagar un render entero.
+
+  fit.experienceCutoffYears:
+    value: 12
+    source: Heurística propia del workspace.
+    confidence: baja
+    note: >-
+      Los roles anteriores a este corte colapsan en una línea de experiencia previa.
+      Borrarlos abriría un hueco temporal que el reclutador lee como omisión deliberada.
+
+  # ------------------------------------------------------------ Ética y verificación
+  ethics.promptInjection.prevalence:
+    value: 0.01
+    source: >-
+      Estudio conjunto de Duke, UNC, ASU y Berkeley con hireEZ sobre aproximadamente
+      200.000 CVs reales; publicado en USENIX Security, agosto de 2026.
+    confidence: media
+    note: >-
+      Se cita como orden de magnitud del fenómeno, no como umbral operativo: la regla
+      ATS-062 no tiene tolerancia. Más del 90 % de las inyecciones reales no usa
+      instrucciones explícitas, así que el gate efectivo es el recall estricto de
+      text.recall.min y no el diccionario de patrones.
+
+  # ------------------------------------------------------------------------- Mitos
+  # Registradas con value:false porque son cifras que circulan como hechos, se evaluaron y
+  # se descartaron. Ninguna es umbral del sistema; están acá para que no vuelvan a entrar.
+  myth.atsAutoRejectRate75:
+    value: false
+    source: >-
+      Cifra atribuida a Preptel (2012). La empresa cerró en 2013 y nunca publicó dataset,
+      muestra ni metodología.
+    confidence: baja
+    note: >-
+      "El 75 % de los CVs son rechazados automáticamente por el ATS" es marketing, no
+      evidencia. Los ATS mayoritarios no auto-rechazan por parseo: filtran por las
+      knockout questions del formulario, que sí son eliminatorias y sí están modeladas en
+      eligibility.yaml. Citar este número en la documentación del repo estaría propagando
+      exactamente el mito que justifica el mercado de optimizadores de CV.
+
+  myth.docxVsPdfParseAccuracy:
+    value: false
+    source: >-
+      Blog de un vendor de optimización de CVs; sin metodología, sin muestra y sin
+      identificar los parsers comparados.
+    confidence: baja
+    note: >-
+      "DOCX parsea al 97 % y PDF al 72 %" no tiene respaldo verificable. El workspace emite
+      ambos formatos porque hay formularios que sólo aceptan uno u otro, no por una
+      diferencia de precisión que nadie midió. La calidad del parseo la determina cómo se
+      construyó el archivo —altChunk, tablas, columnas, texto desprendido— y eso sí se
+      verifica, archivo por archivo, con las reglas ATS-050 y ATS-070 a ATS-075.
+
+  myth.callbackLift:
+    value: false
+    source: >-
+      Proveedores de servicios de adaptación de CV que admiten explícitamente no realizar
+      investigación primaria.
+    confidence: baja
+    note: >-
+      Los aumentos de 50 % a 200 % en tasa de respuesta atribuidos al tailoring no tienen
+      estudio detrás. La única señal confiable sobre la efectividad de un arquetipo es la
+      propia: a partir de unas 30 postulaciones registradas, el funnel de meta.yaml da una
+      tasa de respuesta por target que vale más que cualquier benchmark de vendor.
+
+  myth.pdfRenderBenchmark:
+    value: false
+    source: >-
+      Benchmark publicado en el blog de un vendor de renderizado; macOS Apple Silicon,
+      browser ya caliente, sin control de la carga de fuentes.
+    confidence: baja
+    note: >-
+      Los 13 ms por página no son reproducibles en un entorno de CI. Chromium se eligió
+      por arquitectura —fidelidad de paginación, árbol de estructura, control de @page—,
+      nunca por esa cifra.
+
+  myth.resumeGoPageLength:
+    value: false
+    source: >-
+      ResumeGo (2018): investigación producida por el propio vendor de redacción de CVs,
+      sin revisión por pares y anterior al screening asistido por modelos de lenguaje.
+    confidence: baja
+    note: >-
+      Los presupuestos de páginas de este workspace se derivan de fuentes institucionales
+      por jurisdicción —SEEK para Australia, National Careers Service para el Reino Unido,
+      las instrucciones de postulación de BCG para consultoría—, no de este estudio.

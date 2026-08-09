@@ -1,0 +1,59 @@
+# Narrativa en inglés, indexada por el mismo `id` de profile/.
+#
+# Este archivo no lleva `$schema`: su forma es un espejo de los ids de tu perfil,
+# no una sección con estructura fija. Validarlo contra un schema obligaría a
+# regenerar el schema cada vez que agregás un bullet.
+#
+# Acordate de declarar `en` en `locales` de meta.yaml. Si no está ahí, este
+# archivo no se carga.
+#
+# Qué se traduce:
+#   SÍ  → basics.label, basics.summary, summary de cada empresa, títulos de
+#         puesto, outcome/method/variants de cada bullet, area y studyType de
+#         educación, categorías de skills, nombres y descripciones de proyectos,
+#         títulos y resúmenes de premios, idiomas, roles de referencias.
+#   NO  → nombres de empresa e institución, fechas, URLs, ids, nombres propios de
+#         certificaciones, títulos de publicaciones, keywords que son nombres de
+#         producto (Go, PostgreSQL, Kubernetes).
+#
+# Los bullets en inglés NO son traducción literal de los de español: son el mismo
+# hecho contado con la convención del mercado destino. El hecho es lo que no
+# puede cambiar.
+#
+# No hay fallback silencioso: si un id incluido en un CV en inglés no tiene su
+# entrada acá, el build falla diciendo qué id y qué campo faltan. Un CV mitad en
+# inglés y mitad en español es peor que ninguno.
+
+basics:
+  label: "Target job title"
+  summary: >-
+    Two to four sentences. Same facts as the Spanish version, written the way the
+    target market writes them.
+
+work.empresa-2024:
+  summary: "One line of context: what product, at what scale."
+  positions:
+    work.empresa-2024.senior: { title: "Current job title" }
+    work.empresa-2024.ssr: { title: "Previous job title at the same company" }
+  bullets:
+    work.empresa-2024.b1:
+      outcome: "Past-tense action verb + the concrete result, with the number inside the sentence"
+      method: "how you did it"
+      variants:
+        short: "The one-line version, for when it does not fit."
+        long: "The version with technical detail, for when this role is the one being read."
+    work.empresa-2024.b2:
+      outcome: "An achievement that has no number but can still be verified"
+      method: "how you did it"
+
+education.institucion-2018:
+  area: "Field of study"
+  # Ojo: el equivalente correcto depende del país destino, no del idioma.
+  studyType: "Bachelor's degree"
+  courses:
+    - "Course relevant to the role"
+
+skill.ejemplo:
+  category: "Category"
+
+lang.es: { language: "Spanish" }

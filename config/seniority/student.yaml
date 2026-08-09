@@ -1,0 +1,45 @@
+# Perfil de seniority: estudiante.
+# Education encabeza el documento: es la credencial primaria y lo único que el reclutador
+# de campus busca en los primeros dos segundos.
+# Este perfil se compone DESPUÉS de la región y de la industria, así que su sectionOrder
+# reemplaza el de ambas — es lo que hace que un CV francés o de consultoría junior invierta
+# Formation y Expérience sin necesidad de perfiles cruzados.
+
+id: student
+label: Estudiante
+
+pageBudget:
+  min: 1
+  max: 1
+
+sectionOrder:
+  - contact
+  - education
+  - summary
+  - skills
+  - projects
+  - work
+  - awards
+  - certificates
+  - languages
+  - publications
+  - interests
+  - references
+
+budget:
+  maxPages: 1
+  bulletsPerRole:
+    recent: 3
+    mid: 2
+    old: 1
+  maxWords: 500
+
+notes: >-
+  Projects va antes que Work: para un estudiante, el trabajo de cátedra, el proyecto
+  personal publicado o la participación en una competencia son evidencia más específica
+  que tres meses de atención al público. Ninguno de los dos se omite.
+  Presupuesto de bullets deliberadamente corto. Con poca experiencia la tentación es
+  estirar cada ítem a cinco viñetas de responsabilidades genéricas; tres bullets concretos
+  con un dato verificable cada uno pesan más y dejan la página respirando.
+  Las prácticas, voluntariados y roles en centros de estudiantes son experiencia y van en
+  work con su fecha real, no en una sección aparte de segunda categoría.

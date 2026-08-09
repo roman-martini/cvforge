@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../../schemas/generated/eligibility.schema.json
+
+# Este bloque importa tanto como los bullets, y ninguna herramienta comercial lo
+# tiene.
+#
+# El auto-rechazo masivo y real del proceso no es el parseo del PDF: son las
+# preguntas eliminatorias del formulario ("¿necesitás patrocinio de visa?",
+# "¿podés empezar en 30 días?"). Contestarlas de memoria a las 23:40 y distinto
+# en dos postulaciones de la misma empresa es una discrepancia detectable.
+#
+# Acá vive la verdad. Cada respuesta enviada se registra en
+# applications/<...>/questions.yaml y se valida contra este archivo.
+
+workAuthorization:
+  - countryCode: "AR"
+    # citizen | permanent_resident | work_permit | student_visa | none
+    status: citizen
+    # El campo que decide si la postulación tiene sentido antes de escribir nada.
+    sponsorshipRequired: false
+  # - countryCode: "ES"
+  #   status: work_permit
+  #   sponsorshipRequired: false
+  #   expiresAt: "2030-01-31"     # fecha completa: un permiso vence un día concreto
+
+residence:
+  city: "Ciudad"
+  countryCode: "AR"
+  timezone: "America/Argentina/Buenos_Aires"
+
+# remote | hybrid | onsite
+workModes: [remote, hybrid]
+
+relocation:
+  willing: false
+  regions: []
+
+noticePeriod:
+  value: 30
+  unit: days                       # days | weeks | months
+
+# Privado por default, y conviene dejarlo así. Que un dato sea privado no
+# significa que no se use: sirve para descartar una vacante fuera de rango antes
+# de escribir la carta, y para contestar el campo de pretensión sin improvisar.
+compensation:
+  currency: "USD"                  # exactamente tres letras, ISO-4217
+  min: 0
+  max: 0
+  # gross_annual | net_annual | gross_monthly | net_monthly | hourly
+  basis: gross_annual
+  visibility: private
+
+availableFrom: "2026-01-01"

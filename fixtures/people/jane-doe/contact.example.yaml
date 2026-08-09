@@ -1,0 +1,31 @@
+# Plantilla commiteada de `contact.private.yaml`, que está gitignored.
+#
+# Este archivo no es una sección del perfil sino un parche plano sobre `basics`:
+# el cargador lo aplica encima de profile/basics.yaml antes de validar, y coloca
+# `address` y `postalCode` dentro de `basics.location` por vos.
+#
+# Para qué existe: git no olvida. Una dirección postal o un documento que entró
+# en un commit sigue ahí después de borrarlo del archivo, en cada clon y en cada
+# fork. Manteniéndolos fuera del árbol versionado, el pipeline sigue siendo
+# reproducible por cualquiera —copiás este archivo a contact.private.yaml y lo
+# completás— sin que nadie quede expuesto.
+#
+#   cp contact.example.yaml contact.private.yaml
+#
+# En esta fixture los valores son ficticios y por eso están completos. En una
+# persona real, `contact.example.yaml` lleva placeholders y nada más.
+
+# Entre comillas SIEMPRE: sin ellas se parsea como número y pierde el "+".
+phone: "+54 9 11 5555 0000"
+
+# Dato sensible. No va en profile/basics.yaml ni en la proyección publicable.
+address: "Av. Siempreviva 742, piso 3"
+
+# Entre comillas: `01425` sin comillas se convierte en 1425 y el código postal
+# deja de ser el que es.
+postalCode: "C1425"
+
+# Documento de identidad. Sólo tiene sentido en perfiles ar/latam con opt-in
+# explícito y para concursos que lo exigen; en us/uk/ca/nl/au su presencia
+# rompe el build (ATS-084). Descomentar sólo si tu mercado lo pide.
+# nationalId: "00.000.000"

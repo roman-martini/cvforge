@@ -1,0 +1,73 @@
+# yaml-language-server: $schema=../../../../../schemas/generated/job.schema.json
+
+# La vacante atomizada a mano desde job.raw.md. El parseo asistido de `cv capture`
+# deja un borrador; esto es después de la revisión humana, que no es opcional:
+# un requisito mal clasificado como `must` distorsiona todo el match-report.
+
+source:
+  url: "https://boards.example/contoso/jobs/1042"
+  capturedAt: "2026-07-13"
+  board: greenhouse
+
+company:
+  name: "Contoso Payments Inc."
+  industry: "Fintech"
+  size: "500-1000"
+
+title: "Staff Backend Engineer"
+type: full-time
+
+# Enum del job-schema oficial de JSON Resume: Full | Hybrid | None, capitalizado.
+# NO confundir con `location.remote` de work.yaml, que usa remote|hybrid|onsite
+# en minúsculas. Son dos vocabularios distintos que describen cosas parecidas.
+remote: Full
+
+location:
+  city: "Seattle"
+  countryCode: "US"
+
+# `kind: must` no cubierto es un hueco real y aparece en MISSING (must) del
+# match-report. `nice` es oportunidad: no descalifica, pero desempata.
+# `weight` (1-10) pondera el score; no todos los must pesan igual.
+requirements:
+  - { id: r1, text: "7+ years of backend engineering experience", kind: must, category: experience, weight: 10 }
+  - { id: r2, text: "Production Go", kind: must, category: hard, weight: 10 }
+  - { id: r3, text: "Kubernetes in production", kind: must, category: hard, weight: 9 }
+  - { id: r4, text: "Designing and operating gRPC services", kind: must, category: hard, weight: 8 }
+  - { id: r5, text: "PostgreSQL at scale: partitioning, query plans, replication", kind: must, category: hard, weight: 8 }
+  - { id: r6, text: "Owning service level objectives and carrying the pager", kind: must, category: soft, weight: 7 }
+  - { id: r7, text: "Professional written English", kind: must, category: language, weight: 7 }
+  - { id: r8, text: "Payments, ledgers or regulated fintech background", kind: nice, category: domain, weight: 6 }
+  - { id: r9, text: "Terraform or another infrastructure-as-code toolchain", kind: nice, category: hard, weight: 5 }
+  - { id: r10, text: "Track record of mentoring engineers", kind: nice, category: soft, weight: 5 }
+
+# Las preguntas eliminatorias del formulario. Son el único auto-rechazo masivo y
+# real del proceso —no el parseo del PDF—, y por eso se transcriben literales:
+# la redacción exacta cambia la respuesta correcta.
+knockouts:
+  - id: k1
+    question: "Are you legally authorized to work in your country of residence without sponsorship from Contoso?"
+    expects: "yes"
+  - id: k2
+    question: "Can you overlap at least four hours daily with 09:00-18:00 America/Los_Angeles?"
+    expects: "yes"
+  - id: k3
+    question: "Do you hold a currently valid Kubernetes administration certification?"
+    expects: "yes"
+  - id: k4
+    question: "What is your expected annual gross compensation in USD?"
+    expects: "a number within the posted band"
+  - id: k5
+    question: "Can you start within 45 days of an offer?"
+    expects: "yes"
+
+# Misma forma que resume.skills, para que el matcher compare estructura contra
+# estructura y no texto contra texto.
+skills:
+  - { name: Go, level: expert, keywords: [grpc, goroutines, profiling] }
+  - { name: Kubernetes, level: advanced, keywords: [operators, hpa, debugging] }
+  - { name: PostgreSQL, level: advanced, keywords: [partitioning, replication, "query plans"] }
+  - { name: gRPC, level: advanced, keywords: [protobuf, streaming] }
+  - { name: Terraform, level: intermediate, keywords: [modules, state] }
+
+workModes: [remote]

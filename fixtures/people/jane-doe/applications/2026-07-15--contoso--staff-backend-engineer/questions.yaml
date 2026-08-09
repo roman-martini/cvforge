@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../../../../schemas/generated/questions.schema.json
+
+# Las respuestas EXACTAS que se enviaron en el formulario, no las que se
+# recuerdan. Se validan contra profile/eligibility.yaml (ATS-092): si la
+# respuesta contradice el perfil, el build falla antes de que la contradicción
+# llegue a la entrevista o a una segunda postulación en la misma empresa.
+#
+# `derivedFrom` apunta al campo de eligibility del que sale la respuesta. Cuando
+# ese campo cambie —un permiso que vence, un preaviso que se acorta— el sistema
+# sabe qué respuestas quedaron desactualizadas.
+
+answers:
+  - id: k1
+    question: "Are you legally authorized to work in your country of residence without sponsorship from Contoso?"
+    answer: "Yes. Argentine citizen, resident in Buenos Aires, no sponsorship required."
+    derivedFrom: eligibility.workAuthorization[AR]
+
+  - id: k2
+    question: "Can you overlap at least four hours daily with 09:00-18:00 America/Los_Angeles?"
+    answer: "Yes. Based in America/Argentina/Buenos_Aires (UTC-3), which gives a five-hour overlap from 09:00 Pacific."
+    derivedFrom: eligibility.residence.timezone
+
+  - id: k3
+    question: "Do you hold a currently valid Kubernetes administration certification?"
+    answer: "Yes. Certified Kubernetes Administrator (CKA), credential LF-EXAMPLE-000001, valid through May 2027."
+    derivedFrom: certificates[cert.cka]
+
+  - id: k4
+    question: "What is your expected annual gross compensation in USD?"
+    # Sale de eligibility.compensation, que es `visibility: private` y por lo
+    # tanto NUNCA aparece en el CV. Que un dato sea privado no significa que no
+    # se use: significa que no se imprime.
+    answer: "USD 105,000 gross annual, with flexibility within the 90,000-120,000 range."
+    derivedFrom: eligibility.compensation
+
+  - id: k5
+    question: "Can you start within 45 days of an offer?"
+    answer: "Yes. Thirty days' notice at my current employer; available from 15 September 2026."
+    derivedFrom: eligibility.noticePeriod

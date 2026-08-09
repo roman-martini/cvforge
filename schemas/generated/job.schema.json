@@ -1,0 +1,211 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:cv-workspace:schema:job",
+  "title": "Vacante atomizada (applications/*/job.yaml)",
+  "description": "Requisitos ponderados por tipo y peso, más las preguntas eliminatorias del formulario.",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "capturedAt": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+        },
+        "board": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "capturedAt"
+      ],
+      "additionalProperties": false
+    },
+    "company": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "industry": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "full-time",
+        "part-time",
+        "contract",
+        "internship",
+        "temporary"
+      ]
+    },
+    "remote": {
+      "type": "string",
+      "enum": [
+        "Full",
+        "Hybrid",
+        "None"
+      ]
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "requirements": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:[-.][a-z0-9]+)*$"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "must",
+              "nice"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "hard",
+              "soft",
+              "cert",
+              "domain",
+              "experience",
+              "education",
+              "language"
+            ]
+          },
+          "weight": {
+            "default": 5,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "kind",
+          "category"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "knockouts": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:[-.][a-z0-9]+)*$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1
+          },
+          "expects": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "question",
+          "expects"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "skills": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "beginner",
+              "intermediate",
+              "advanced",
+              "expert"
+            ]
+          },
+          "keywords": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "workModes": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "remote",
+          "hybrid",
+          "onsite"
+        ]
+      }
+    }
+  },
+  "required": [
+    "source",
+    "company",
+    "title"
+  ],
+  "additionalProperties": false
+}

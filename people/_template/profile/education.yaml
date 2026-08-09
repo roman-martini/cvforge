@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../../schemas/generated/education.schema.json
+
+# `area` y `studyType` son narrativos y se traducen. Ojo con `studyType`: el
+# equivalente correcto depende del país destino, no del idioma —"Licenciatura"
+# no siempre es "Bachelor's degree"—, y por eso conviene decidirlo en i18n/ y no
+# a ojo en el momento.
+
+- id: education.institucion-2018
+  institution: "Nombre de la institución"
+  url: "https://institucion.example"
+  area: "Carrera o área de estudio"
+  studyType: "Título de grado"
+  startDate: "2018-03"
+  endDate: "2023-12"
+  # ENTRE COMILLAS: `4.0` sin comillas se parsea como número y se imprime "4".
+  # Poné el promedio sólo si te favorece y si tu mercado lo espera.
+  score: "8.5 / 10"
+  courses:
+    - "Materia relevante para el puesto"
+  tags: [education]
+  priority: 70
+  visibility: public
+
+# Si estás cursando, `current: true` en lugar de dejar `endDate` vacío.
+# - id: education.posgrado-2025
+#   institution: "..."
+#   area: "..."
+#   studyType: "Especialización"
+#   startDate: "2025-03"
+#   current: true
+#   priority: 60

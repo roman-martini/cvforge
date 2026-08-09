@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    // Node 24 ejecuta .ts nativamente (type stripping Stable desde 24.12).
+    // TypeScript acá NO compila: sólo verifica tipos. De ahí noEmit.
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "es2024",
+    "lib": ["es2024", "dom"],
+
+    "noEmit": true,
+    // Falla en `tsc` ante sintaxis que Node no puede borrar (enum, parameter
+    // properties, namespaces con valores). Sin esto el error aparece recién en
+    // runtime y con un mensaje que no menciona TypeScript.
+    "erasableSyntaxOnly": true,
+    // Los imports llevan extensión .ts explícita, como exige Node.
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": false,
+
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Templates JSX con Preact (sin DOM, render a string).
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts"],
+  "exclude": ["node_modules", "out", "dist"]
+}

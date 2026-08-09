@@ -1,0 +1,40 @@
+{
+  // Estos globs OVERRIDEAN el auto-binding de SchemaStore, que mapea
+  // **/resume.yaml y **/resume.json al JSON Resume v1.0.0 (draft-04, archivado,
+  // con additionalProperties:false en raíz) y marcaría como error todo campo
+  // propio del modelo. Los schemas apuntados los genera `npm run schema`.
+  "yaml.schemas": {
+    "./schemas/generated/basics.schema.json": ["**/profile/basics.yaml"],
+    "./schemas/generated/work.schema.json": ["**/profile/work.yaml"],
+    "./schemas/generated/education.schema.json": ["**/profile/education.yaml"],
+    "./schemas/generated/skills.schema.json": ["**/profile/skills.yaml"],
+    "./schemas/generated/projects.schema.json": ["**/profile/projects.yaml"],
+    "./schemas/generated/certificates.schema.json": ["**/profile/certificates.yaml"],
+    "./schemas/generated/awards.schema.json": ["**/profile/awards.yaml"],
+    "./schemas/generated/languages.schema.json": ["**/profile/languages.yaml"],
+    "./schemas/generated/publications.schema.json": ["**/profile/publications.yaml"],
+    "./schemas/generated/references.schema.json": ["**/profile/references.yaml"],
+    "./schemas/generated/eligibility.schema.json": ["**/profile/eligibility.yaml"],
+    "./schemas/generated/person-meta.schema.json": ["**/people/*/meta.yaml"],
+    "./schemas/generated/target.schema.json": ["**/targets/*.yaml"],
+    "./schemas/generated/job.schema.json": ["**/applications/*/job.yaml"],
+    "./schemas/generated/overlay.schema.json": ["**/applications/*/overlay.yaml"],
+    "./schemas/generated/application-meta.schema.json": ["**/applications/*/meta.yaml"]
+  },
+  "yaml.format.singleQuote": false,
+  "files.eol": "\n",
+  "editor.formatOnSave": true,
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "search.exclude": {
+    "out/**": true,
+    "node_modules/**": true
+  }
+}

@@ -1,0 +1,49 @@
+# Perfil de industria: medicina (residencias y fellowships en EE. UU.).
+# Caso distinto a todos los demás: ERAS no recibe un PDF libre, recibe un formulario
+# estructurado con campos acotados. El entregable real es la proyección de campos planos,
+# y el PDF queda como documento secundario para postulaciones fuera del match.
+# Por eso jsonresume encabeza la lista de formatos: es la salida que alimenta la carga en
+# el portal sin retipeo y sin perder estructura.
+
+id: medicine
+label: Medicina (ERAS / residencias)
+
+pageBudget:
+  min: 1
+  max: 20
+
+sectionOrder:
+  - contact
+  - summary
+  - education
+  - work
+  - certificates
+  - publications
+  - awards
+  - projects
+  - skills
+  - languages
+  - interests
+  - references
+
+colorPolicy: none
+
+formats:
+  - jsonresume
+  - txt
+  - pdf
+
+citationStyle: vancouver
+
+notes: >-
+  El presupuesto de páginas es nominal: ERAS pagina por sí mismo y no respeta el layout de
+  origen. Perseguir una cantidad de páginas acá es optimizar un artefacto que el comité no
+  va a ver.
+  Los campos que ERAS trata como obligatorios y estructurados — institución, fechas exactas
+  de cada rotación, tipo de programa, certificaciones vigentes con fecha de vencimiento,
+  publicaciones en Vancouver — tienen que existir en los datos con esa granularidad. Un
+  certificate sin expiresAt bloquea la carga.
+  Vancouver es el estilo de cita del sector biomédico y el que ERAS espera; no se conmuta
+  salvo para convocatorias europeas.
+  Este perfil no aplica a la industria farmacéutica ni a medtech: para esas se usa general
+  o tech según el rol.

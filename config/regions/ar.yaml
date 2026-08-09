@@ -1,0 +1,85 @@
+# Perfil regional: Argentina y LATAM.
+# El mercado convive con dos convenciones: la tradicional, heredada del legajo — foto
+# carnet, DNI, fecha de nacimiento, estado civil — y la moderna, alineada con la práctica
+# internacional. Este perfil toma la moderna como default y deja la tradicional disponible
+# en customaryFields, porque hay concursos públicos y postulaciones a organismos que
+# todavía exigen los campos completos y bloquearlos rompería casos legítimos.
+
+id: ar
+label: Argentina / LATAM
+documentType: CV
+paper: A4
+locale: es-AR
+
+pageBudget:
+  min: 1
+  max: 2
+
+forbiddenFields:
+  - field: basics.maritalStatus
+    reason: >-
+      Estado civil y cantidad de hijos son datos históricamente usados para descartar
+      mujeres en edad reproductiva. No tienen relación con la aptitud para el puesto y
+      son criterio explícito de discriminación laboral.
+    source: >-
+      Ley 23.592 (actos discriminatorios); Ley 26.485 de protección integral a las
+      mujeres, art. 6.c (violencia laboral); INADI — Guía de buenas prácticas en selección
+  - field: basics.gender
+    reason: >-
+      Dato protegido sin valor evaluable. La ley de identidad de género refuerza además
+      que no puede condicionar el acceso al empleo.
+    source: Ley 23.592; Ley 26.743 de identidad de género; Ley 27.636 (cupo laboral travesti trans)
+
+customaryFields:
+  - basics.photo
+  - basics.birthDate
+  - basics.nationalId
+  - basics.location.city
+  - basics.profiles
+  - languages
+
+referencesPolicy: omit
+
+# marzo 2022
+datePattern: MMMM yyyy
+
+sectionLabels:
+  contact: Contacto
+  summary: Perfil profesional
+  skills: Habilidades
+  work: Experiencia laboral
+  education: Formación académica
+  certificates: Certificaciones
+  projects: Proyectos
+  awards: Premios y distinciones
+  languages: Idiomas
+  publications: Publicaciones
+  references: Referencias
+  interests: Intereses
+
+sectionOrder:
+  - contact
+  - summary
+  - skills
+  - work
+  - education
+  - certificates
+  - projects
+  - awards
+  - publications
+  - languages
+  - interests
+  - references
+
+notes: >-
+  Foto, DNI y fecha de nacimiento están DISPONIBLES pero DESACTIVADOS por defecto: figuran
+  en customaryFields, así que el linter no los bloquea, pero el target tiene que incluirlos
+  explícitamente para que el renderer los emita. Ese es el punto exacto de este perfil —
+  la decisión es del candidato y queda escrita en el target, no enterrada en un template.
+  Activar el DNI tiene un costo real: el CV circula por bolsas de trabajo y buzones
+  compartidos, y el número de documento es identificador reutilizable para fraude. Sólo
+  vale la pena cuando el formulario del concurso lo exige.
+  El nombre "Hoja de vida" domina en Colombia, Perú y parte de Centroamérica; "CV" en el
+  Cono Sur. Se cambia con documentType en un target derivado, sin tocar este perfil.
+  El teléfono se emite en formato internacional (+54 9 11 ...) siempre, incluso para
+  búsquedas locales: la mitad de los reclutadores escribe desde WhatsApp Web.

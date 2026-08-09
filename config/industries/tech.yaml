@@ -1,0 +1,32 @@
+# Perfil de industria: tecnología. Es el default del workspace.
+#
+# Deliberadamente NO declara sectionOrder. La composición es región → industria →
+# seniority, así que declararlo acá pisaría las convenciones regionales que sí son
+# vinculantes (Education antes que Experience en au, Berufserfahrung primero en de) con
+# un orden que en tecnología es apenas una preferencia. Las industrias que sí tienen orden
+# propio y obligatorio — consulting, finance, academia, design, medicine — lo declaran.
+
+id: tech
+label: Tecnología
+
+pageBudget:
+  min: 1
+  max: 2
+
+colorPolicy: accent
+
+formats:
+  - pdf
+  - docx
+  - txt
+
+notes: >-
+  Skills va alto en el documento porque en esta industria es la sección que el reclutador
+  técnico usa para decidir si sigue leyendo, y porque es donde el matcher léxico concentra
+  los términos de la vacante. Eso no autoriza a inflarla: una lista de cuarenta
+  tecnologías sin ninguna anclada en un bullet de experiencia se lee como keyword stuffing
+  y es exactamente lo que un reclutador técnico detecta en la primera pregunta.
+  El TXT no es un formato de cortesía: es el artefacto contra el que se verifica el recall
+  de la extracción del PDF (ATS-050). Se genera siempre, aunque no se envíe.
+  Proyectos propios y open source cuentan como experiencia verificable en esta industria y
+  van con URL completa visible, nunca detrás de la palabra "GitHub" (ATS-060).

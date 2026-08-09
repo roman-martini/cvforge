@@ -1,0 +1,103 @@
+# Perfil regional: Canadá.
+# Hereda de `us` la forma del documento (papel, patrón de fecha, política de referencias)
+# y reescribe los campos prohibidos con la fuente canadiense: el fundamento no es el mismo
+# aunque la conclusión coincida, y el mensaje de error tiene que citar la norma aplicable.
+#
+# `extends` sólo sirve para los escalares: los arrays REEMPLAZAN al mergear (ADR-007),
+# así que `forbiddenFields` se declara completo acá.
+
+id: ca
+extends: us
+label: Canadá
+documentType: Resume
+paper: Letter
+locale: en-CA
+
+pageBudget:
+  min: 1
+  max: 2
+
+forbiddenFields:
+  - field: basics.photo
+    reason: >-
+      Los formularios de empleo y los CVs no pueden requerir información vinculada a
+      motivos protegidos antes de la contratación. Una foto los expone todos a la vez.
+    source: >-
+      Ontario Human Rights Commission — Human Rights Code, R.S.O. 1990, c. H.19, s. 23(2)
+      (avisos y solicitudes de empleo); Canadian Human Rights Act, R.S.C. 1985, c. H-6
+  - field: basics.birthDate
+    reason: >-
+      La edad es motivo prohibido de discriminación en todas las jurisdicciones
+      canadienses; la fecha de nacimiento la revela sin aportar dato laboral alguno.
+    source: >-
+      Canadian Human Rights Act, R.S.C. 1985, c. H-6, s. 3(1); Ontario Human Rights Code,
+      s. 5(1)
+  - field: basics.maritalStatus
+    reason: >-
+      El estado civil y la situación familiar son motivos prohibidos explícitos en el
+      Código canadiense, no una lectura extensiva del sexo como en EE. UU.
+    source: Canadian Human Rights Act, R.S.C. 1985, c. H-6, s. 3(1) — marital and family status
+  - field: basics.nationality
+    reason: >-
+      Origen nacional o étnico y ciudadanía son motivos prohibidos. Lo que el empleador
+      necesita saber es la elegibilidad para trabajar, y eso se declara como tal.
+    source: >-
+      Canadian Human Rights Act, s. 3(1); Ontario Human Rights Commission — Policy on
+      removing the Canadian experience barrier (2013)
+  - field: basics.gender
+    reason: Motivo prohibido, incluidas identidad y expresión de género desde 2017.
+    source: Canadian Human Rights Act, s. 3(1), modificado por S.C. 2017, c. 13
+  - field: basics.nationalId
+    reason: >-
+      El Social Insurance Number sólo se entrega una vez contratado y para fines
+      fiscales. Pedirlo o exhibirlo antes es un riesgo de fraude, no un requisito.
+    source: >-
+      Government of Canada — Social Insurance Number: protect your SIN; Office of the
+      Privacy Commissioner of Canada
+
+customaryFields:
+  - basics.location.city
+  - basics.location.region
+  - basics.profiles
+  - eligibility.workAuthorization
+
+referencesPolicy: omit
+
+datePattern: MMMM yyyy
+
+sectionLabels:
+  contact: Contact
+  summary: Summary
+  skills: Skills
+  work: Experience
+  education: Education
+  certificates: Certifications
+  projects: Projects
+  awards: Awards
+  languages: Languages
+  publications: Publications
+  references: References
+  interests: Interests
+
+sectionOrder:
+  - contact
+  - summary
+  - skills
+  - work
+  - education
+  - certificates
+  - projects
+  - awards
+  - publications
+  - languages
+  - interests
+  - references
+
+notes: >-
+  Diferencia operativa con el perfil us: el CV canadiense incluye una línea explícita de
+  elegibilidad laboral junto al bloque de contacto — "Eligible to work in Canada" — porque
+  el empleador no puede preguntar por ciudadanía pero sí necesita saber si hay que
+  patrocinar un permiso. Se emite desde eligibility.workAuthorization cuando hay una
+  entrada con countryCode "CA" y sponsorshipRequired false; nunca se escribe a mano.
+  Quebec: la Charte de la langue française obliga a postular en francés salvo que el aviso
+  justifique el requisito de otro idioma; para ese mercado se usa el target con locale fr.

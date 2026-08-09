@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../../schemas/generated/basics.schema.json
+
+name: "Nombre Apellido"
+
+# Narrativo y traducible: cómo te presentás para el tipo de puesto que buscás.
+# Si un target define `titleTarget`, éste es el que se pisa.
+label: "Puesto al que apuntás"
+
+# 2-4 frases. Qué sos, hace cuánto, sobre qué stack y qué te distingue de los
+# otros doce currículums de la pila. Nada de "profesional proactivo".
+summary: >-
+  Escribí acá dos a cuatro frases. La primera dice qué hacés y hace cuánto. La
+  última es la que se recuerda.
+
+email: "nombre.apellido@example.com"
+
+# ENTRE COMILLAS SIEMPRE. Sin comillas, YAML parsea el teléfono como número, el
+# "+" desaparece y el CV sale con un número que nadie puede marcar. El CV se
+# renderiza igual de bien: es un fallo silencioso.
+phone: "+54 9 11 0000 0000"
+
+# url: "https://tu-sitio.example"
+
+location:
+  city: "Ciudad"
+  region: "Provincia o estado"
+  # ENTRE COMILLAS OBLIGATORIAMENTE. Es ISO-3166-1 alpha-2 y hay códigos que
+  # YAML resolvería como otro tipo: "NO" (Noruega) sin comillas es el booleano
+  # false, y el CV termina diciendo que vivís en `false`.
+  countryCode: "AR"
+  # `address` y `postalCode` NO van acá: son sensibles y viven en
+  # contact.private.yaml, que está gitignored. Ver contact.example.yaml.
+
+profiles:
+  - id: profile.linkedin
+    network: "LinkedIn"
+    username: "tu-usuario"
+    # El renderer imprime la URL completa como texto visible, nunca la palabra
+    # "LinkedIn": el extractor del ATS necesita el string entero y el reclutador
+    # que imprime el PDF también.
+    url: "https://www.linkedin.com/in/tu-usuario"
+  # - id: profile.github
+  #   network: "GitHub"
+  #   username: "tu-usuario"
+  #   url: "https://github.com/tu-usuario"
+
+# `photo`, `birthDate` y `nationalId` existen en el schema pero están
+# deliberadamente ausentes acá. Los perfiles regionales us/uk/ca/nl/au los
+# prohíben y su sola presencia rompe el build citando la norma. Agregalos sólo
+# si tu mercado destino los pide (Lebenslauf alemán, concursos públicos en AR).

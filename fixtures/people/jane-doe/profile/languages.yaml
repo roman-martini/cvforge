@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../../../schemas/generated/languages.schema.json
+
+# `fluency` usa el Marco Común Europeo (A1..C2) más `native`, y NO texto libre:
+# "avanzado", "fluido" y "profesional" significan cosas distintas para cada
+# persona, mientras que B2 significa lo mismo en todos lados. El renderer lo
+# traduce a la convención del mercado destino ("Professional working proficiency"
+# en un resume de US, "C1" en un CV europeo).
+#
+# El nombre del idioma sí es narrativo y se traduce: "Inglés" / "English".
+
+- id: lang.es
+  language: "Español"
+  fluency: native
+  tags: [language]
+  priority: 90
+  visibility: public
+
+- id: lang.en
+  language: "Inglés"
+  fluency: C1
+  certification: "IELTS Academic 7.5 (2023)"
+  tags: [language]
+  priority: 85
+  visibility: public
+
+- id: lang.de
+  language: "Alemán"
+  fluency: B1
+  tags: [language]
+  priority: 40
+  visibility: public

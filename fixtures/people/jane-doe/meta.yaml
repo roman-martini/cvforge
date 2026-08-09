@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../../schemas/generated/person-meta.schema.json
+
+# Persona ficticia. Existe para dos cosas: ser el ejemplo que se lee al abrir el
+# repo y ser la fixture contra la que corre todo el CI (nunca people/, ver ADR-010).
+
+slug: jane-doe
+
+# Idioma en el que están redactados los campos narrativos de profile/.
+# Todo lo que NO esté en este idioma vive en i18n/<locale>.yaml indexado por id.
+primaryLocale: es
+
+# Locales adicionales disponibles. Pedir un CV en un locale que no esté acá
+# —o que le falte la traducción de un id incluido— rompe el build: no hay
+# fallback silencioso al primario (ADR-008).
+locales: [en]
+
+# SemVer del modelo de datos con el que se escribieron estos YAML. Cuando el
+# schema cambie de forma incompatible, migrations/ sabe desde dónde migrar.
+modelVersion: "1.0.0"
+
+consent:
+  grantedBy: "Jane Doe"
+  # Entre comillas: la fecha es un string ISO, no un objeto Date.
+  grantedAt: "2026-01-15"
+  purpose: "Generación de CVs para postulaciones propias"

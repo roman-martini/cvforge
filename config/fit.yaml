@@ -1,0 +1,36 @@
+# Política de ajuste al presupuesto de páginas — valores por defecto.
+#
+# Se sobrescribe por eje en config/fit/<id>.yaml, en el mismo orden que el resto
+# de la composición: región → industria → seniority.
+#
+# Por qué existe este archivo: un presupuesto de páginas sin política de ajuste
+# es un assert que te bloquea y te empuja a editar el CV a mano —bajar la
+# tipografía, borrar un bullet— reintroduciendo justo el acoplamiento entre
+# datos y presentación que este workspace existe para evitar.
+#
+# El orden de los campos es el orden de sacrificio, de menos a más destructivo.
+
+# 1. Densidad tipográfica. No se pierde información, sólo aire.
+#    El cuerpo nunca baja de 10pt.
+densitySteps: [comfortable, normal, dense, ultra]
+
+# 2. Bullets por rol. Se pierde detalle, se conservan todos los empleos.
+#    El reclutador escanea en 6-7 segundos y rara vez pasa del tercer bullet,
+#    así que recortar la cola de los roles viejos cuesta poco.
+maxBulletsPerRole:
+  recent: 5
+  mid: 3
+  old: 2
+
+# 3. Roles anteriores a este corte pierden sus bullets y quedan en una línea.
+#    Se conserva la entrada —empresa, cargo, fechas— porque borrarla abriría un
+#    hueco temporal que un reclutador lee como señal de alarma.
+experienceCutoffYears: 12
+
+# 4. Secciones enteras, sólo estas y en este orden. Lo último que se sacrifica.
+dropSections: [interests, awards, languages, publications]
+
+# 5. Si aun así no entra, fallar con un diagnóstico en vez de recortar en
+#    silencio: un CV al que le falta algo sin que el autor se entere es peor
+#    que un build que no pasa.
+failIfStillOverflows: true

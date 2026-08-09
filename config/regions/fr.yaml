@@ -1,0 +1,84 @@
+# Perfil regional: Francia.
+# Una página es la norma dura, incluso en perfiles con recorrido: el CV francés es un
+# documento de síntesis y la segunda página se lee como falta de criterio.
+# La foto sigue siendo consuetudinaria: la ley de 2006 que impuso el CV anónimo nunca
+# tuvo decreto de aplicación y fue derogada en 2015 sin haberse aplicado jamás.
+
+id: fr
+label: Francia
+documentType: CV
+paper: A4
+locale: fr-FR
+
+pageBudget:
+  min: 1
+  max: 1
+
+forbiddenFields:
+  - field: basics.maritalStatus
+    reason: >-
+      La situación familiar es criterio de discriminación nominado en el Código de
+      Trabajo. Era costumbre declararla hasta los años 2000 y hoy es exactamente el dato
+      que el Défenseur des droits señala como innecesario en una candidatura.
+    source: >-
+      Code du travail, art. L1132-1 (situation de famille, grossesse); Défenseur des
+      droits — Guide sur le recrutement et les discriminations
+  - field: basics.nationalId
+    reason: >-
+      El número de seguridad social codifica sexo, año y lugar de nacimiento en su
+      estructura: revela tres criterios protegidos en trece dígitos.
+    source: >-
+      Code du travail, art. L1221-6 (les informations demandées doivent présenter un lien
+      direct et nécessaire avec l'emploi proposé); CNIL — Recrutement et gestion du personnel
+
+customaryFields:
+  - basics.photo
+  - basics.location.city
+  - basics.nationality
+  - languages
+  - interests
+
+referencesPolicy: omit
+
+# mars 2022
+datePattern: MMMM yyyy
+
+sectionLabels:
+  contact: Contact
+  summary: Profil
+  skills: Compétences
+  work: Expérience professionnelle
+  education: Formation
+  certificates: Certifications
+  projects: Projets
+  awards: Distinctions
+  languages: Langues
+  publications: Publications
+  references: Références
+  interests: Centres d'intérêt
+
+sectionOrder:
+  - contact
+  - summary
+  - skills
+  - work
+  - education
+  - certificates
+  - projects
+  - languages
+  - awards
+  - publications
+  - interests
+  - references
+
+notes: >-
+  El orden por defecto pone la experiencia antes que la formación, pero en perfiles junior
+  (estudiante, primer empleo, hasta unos tres años) la convención se invierte: la Formation
+  encabeza el documento porque la escuela o la grande école es la señal que el reclutador
+  busca primero. Esa inversión no se declara acá: la resuelven los perfiles de seniority
+  student y entry, que se aplican después de la región y reemplazan sectionOrder completo.
+  La foto es costumbre viva, no obligación. El CV anonyme fue impuesto por la ley de
+  igualdad de oportunidades de 2006, jamás recibió decreto de aplicación y fue derogado en
+  2015: citar esa ley como prohibición vigente es un error frecuente.
+  Los Centres d'intérêt no son relleno en este mercado: se leen como señal de sociabilidad
+  y se esperan en una línea corta al pie.

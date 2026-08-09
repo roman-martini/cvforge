@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:cv-workspace:schema:education",
+  "title": "Formación (education.yaml)",
+  "description": "Títulos y estudios en curso. `area` y `studyType` son campos traducibles.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:[-.][a-z0-9]+)*$"
+      },
+      "institution": {
+        "type": "string",
+        "minLength": 1
+      },
+      "url": {
+        "type": "string",
+        "format": "uri"
+      },
+      "area": {
+        "type": "string",
+        "minLength": 1
+      },
+      "studyType": {
+        "type": "string",
+        "minLength": 1
+      },
+      "startDate": {
+        "anyOf": [
+          {
+            "type": "string",
+            "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+          },
+          {
+            "type": "string",
+            "format": "date",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+          }
+        ]
+      },
+      "endDate": {
+        "anyOf": [
+          {
+            "type": "string",
+            "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+          },
+          {
+            "type": "string",
+            "format": "date",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+          }
+        ]
+      },
+      "current": {
+        "default": false,
+        "type": "boolean"
+      },
+      "score": {
+        "type": "string"
+      },
+      "courses": {
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "tags": {
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "priority": {
+        "default": 50,
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "visibility": {
+        "default": "public",
+        "type": "string",
+        "enum": [
+          "public",
+          "private"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "institution",
+      "area",
+      "studyType"
+    ],
+    "additionalProperties": false
+  }
+}

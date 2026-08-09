@@ -1,0 +1,32 @@
+# Perfil de seniority: dirección y C-level.
+# Tres páginas de máximo y, contra la intuición, MENOS bullets por rol que un senior: en
+# este nivel el CV no enumera lo que se hizo sino el resultado del área a cargo, y cada
+# viñeta cubre un año de trabajo de un equipo entero.
+# Sin sectionOrder propio: manda la convención regional.
+
+id: exec
+label: Dirección / C-level
+
+pageBudget:
+  min: 2
+  max: 3
+
+budget:
+  maxPages: 3
+  bulletsPerRole:
+    recent: 5
+    mid: 3
+    old: 1
+  maxWords: 1600
+
+notes: >-
+  El summary deja de ser opcional y pasa a ser la pieza más leída del documento: en
+  búsquedas ejecutivas lo primero que se evalúa es el encaje de mandato, no el detalle de
+  la trayectoria.
+  Las métricas cambian de unidad respecto de senior: P&L gestionado, headcount total,
+  crecimiento de ingresos, resultado de una integración, rotación del equipo directivo.
+  Un bullet ejecutivo sin cifra de negocio no dice nada evaluable.
+  Un solo bullet para roles antiguos: a este nivel la trayectoria temprana aporta contexto
+  de progresión, no evidencia. Se conserva la línea con empresa, título y años.
+  Tres páginas es techo real y sólo con veinte años de recorrido. El CV ejecutivo largo no
+  es señal de trayectoria, es señal de que nadie editó.

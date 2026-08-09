@@ -1,0 +1,48 @@
+# Perfil de industria: consultoría estratégica.
+# Una página ESTRICTA y sin color. No es preferencia estética: BCG pide explícitamente
+# "one-page, business style" en sus instrucciones de postulación, y el filtro de formato
+# es real y previo al de contenido. Un CV de consultoría de dos páginas se descarta antes
+# de leerse.
+
+id: consulting
+label: Consultoría estratégica
+
+pageBudget:
+  min: 1
+  max: 1
+
+# El fit-loop no tiene margen acá: con maxPages 1 y sin color, lo que sobra se recorta
+# por contenido, no por densidad tipográfica.
+sectionOrder:
+  - contact
+  - summary
+  - work
+  - education
+  - skills
+  - awards
+  - languages
+  - certificates
+  - projects
+  - publications
+  - interests
+  - references
+
+colorPolicy: none
+
+# DOCX no es opcional en esta industria: McKinsey y Bain aceptan o piden Word en varios de
+# sus formularios regionales, y el candidato que sólo tiene PDF llega tarde.
+formats:
+  - pdf
+  - docx
+
+notes: >-
+  El orden declarado es el de perfil con experiencia. Estudiantes y recién graduados
+  invierten Education y Work — es el patrón de reclutamiento de campus de las tres firmas
+  grandes — y esa inversión la aplican los perfiles de seniority student y entry, que se
+  componen después de la industria.
+  Cada bullet tiene que cerrar con impacto cuantificado en unidades de negocio: ahorro,
+  ingreso, tiempo de ciclo, tamaño de equipo, alcance geográfico. La sección Awards pesa
+  acá más que en cualquier otra industria porque las firmas leen premios, becas
+  competitivas y rankings académicos como señal de selectividad.
+  Sin color, sin iconos, sin barras de progreso, sin fotos. El "business style" que piden
+  es literalmente eso: tinta negra sobre blanco, una sola familia tipográfica.

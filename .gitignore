@@ -1,47 +1,64 @@
-# ---------------------------------------------------------------------------
-# Dependencias y artefactos de build
-# ---------------------------------------------------------------------------
+# ===========================================================================
+# Dependencias y artefactos
+# ===========================================================================
 node_modules/
+out/
 dist/
 .cache/
 *.tsbuildinfo
+coverage/
+.tmp/
 
-# ---------------------------------------------------------------------------
-# Salidas generadas — los CVs se regeneran desde los datos, no se versionan.
-# La única fuente de verdad es `people/`. Si necesitás archivar un CV enviado,
-# usá el comando `cv archive` (guarda en applications/ con su metadata).
-# ---------------------------------------------------------------------------
-build/
-out/
+# ===========================================================================
+# DATOS PERSONALES (ADR-010)
+#
+# Este repo aplica una separación deliberada:
+#
+#   profile/*.yaml        → SÍ se versiona. Es tu CV; querés su historial en git.
+#                           No contiene teléfono, dirección ni documento.
+#   contact.private.yaml  → NUNCA se versiona. Ahí viven teléfono, dirección
+#                           postal y documento de identidad.
+#   contact.example.yaml  → SÍ se versiona, con placeholders, para que el
+#                           pipeline sea reproducible por un tercero.
+#
+# Git no olvida: un dato personal commiteado queda en el historial aunque
+# después lo borres. Por eso la PII se aísla en un archivo, no en un campo.
+#
+# Este repositorio debe ser PRIVADO si contiene datos reales de personas.
+# ===========================================================================
+contact.private.yaml
+*.private.yaml
+*.private.yml
+
+# Job descriptions crudas capturadas: pueden tener información no pública
+# de procesos de selección en curso.
+people/*/jds/
+
+# Los binarios efectivamente enviados a una empresa. En meta.yaml queda su
+# SHA-256, que es lo que hace falta para trazabilidad; el blob no.
+people/*/applications/*/sent/
+
+# Adjuntos escaneados (títulos, certificados, documentos de identidad).
+# Se referencian por ruta local fuera del repo, nunca se commitean.
+attachments/
+*.scan.pdf
+
+# El reporte de match se regenera con `cv match` y cambia con cada ajuste del
+# scorer: versionarlo llena el historial de ruido derivado.
+match-report.md
+
+# ===========================================================================
+# Salidas generadas — se regeneran desde los datos con `npm run build`
+# ===========================================================================
 *.pdf
 *.docx
 !docs/**/*.pdf
+!tests/golden/**/*.pdf
+!tests/golden/**/*.docx
 
-# ---------------------------------------------------------------------------
-# DATOS PERSONALES — protección por defecto.
-#
-# Este repositorio distingue dos clases de datos:
-#   - people/_example/  → datos ficticios, SÍ se versionan (sirven de plantilla
-#                         y de fixture para los tests).
-#   - people/<persona>/ → datos reales de personas. NO se versionan salvo que
-#                         se habiliten explícitamente (ver abajo).
-#
-# Si este repo es PRIVADO y querés versionar tus datos reales para tener
-# historial de cambios de tu CV, comentá la línea `people/*` y descomentá
-# la excepción de tu carpeta. Nunca lo hagas en un repo público.
-# ---------------------------------------------------------------------------
-people/*
-!people/_example/
-!people/.gitkeep
-
-# Vacantes: pueden contener información no pública de procesos de selección.
-applications/*
-!applications/_example/
-!applications/.gitkeep
-
-# ---------------------------------------------------------------------------
+# ===========================================================================
 # Secretos y configuración local
-# ---------------------------------------------------------------------------
+# ===========================================================================
 .env
 .env.*
 !.env.example
@@ -49,9 +66,9 @@ applications/*
 *.local.yml
 *.local.json
 
-# ---------------------------------------------------------------------------
+# ===========================================================================
 # Sistema operativo y editores
-# ---------------------------------------------------------------------------
+# ===========================================================================
 Thumbs.db
 Desktop.ini
 .DS_Store
@@ -61,10 +78,3 @@ Desktop.ini
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
-
-# ---------------------------------------------------------------------------
-# Temporales de tests
-# ---------------------------------------------------------------------------
-coverage/
-.tmp/
-__snapshots__/*.tmp

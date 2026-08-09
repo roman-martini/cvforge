@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:cv-workspace:schema:publications",
+  "title": "Publicaciones (publications.yaml)",
+  "description": "CSL-JSON: la cita se guarda estructurada para que el estilo (APA, IEEE…) lo decida el renderer.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:[-.][a-z0-9]+)*$"
+      },
+      "type": {
+        "type": "string",
+        "minLength": 1
+      },
+      "title": {
+        "type": "string",
+        "minLength": 1
+      },
+      "author": {
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "family": {
+              "type": "string"
+            },
+            "given": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "family"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "container-title": {
+        "type": "string"
+      },
+      "issued": {
+        "type": "object",
+        "properties": {
+          "date-parts": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            }
+          }
+        },
+        "required": [
+          "date-parts"
+        ],
+        "additionalProperties": false
+      },
+      "DOI": {
+        "type": "string"
+      },
+      "URL": {
+        "type": "string",
+        "format": "uri"
+      },
+      "tags": {
+        "default": [],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "priority": {
+        "default": 50,
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "visibility": {
+        "default": "public",
+        "type": "string",
+        "enum": [
+          "public",
+          "private"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "type",
+      "title"
+    ],
+    "additionalProperties": false
+  }
+}

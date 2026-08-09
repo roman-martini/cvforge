@@ -1,0 +1,261 @@
+# Narrativa en inglés. El locale primario es `es` (ver meta.yaml), así que acá va
+# ÚNICAMENTE lo que cambia al traducir, indexado por el mismo `id` de profile/.
+#
+# Este archivo no tiene `$schema` porque su forma es un espejo de los ids del
+# perfil, no una sección con estructura propia; validarlo contra un schema fijo
+# obligaría a regenerarlo cada vez que agregás un bullet.
+#
+# Qué se traduce y qué no:
+#   SÍ  → basics.label, basics.summary, summary de cada empresa, títulos de
+#         puesto, outcome/method/variants de cada bullet, area y studyType de
+#         educación, categorías y nombres descriptivos de skills, nombres y
+#         descripciones de proyectos, títulos y resúmenes de premios, idiomas,
+#         roles de referencias.
+#   NO  → nombres de empresa e institución, fechas, URLs, ids, nombres propios de
+#         certificaciones, títulos de publicaciones, keywords técnicas que son
+#         nombres de producto (Go, PostgreSQL, Kubernetes).
+#
+# No hay fallback silencioso: si un id seleccionado para un CV en inglés no tiene
+# su entrada acá, el build falla diciendo qué id y qué campo faltan. Eso es
+# deliberado — un CV mitad en inglés y mitad en español es peor que ninguno.
+
+basics:
+  label: "Senior Backend Engineer"
+  summary: >-
+    Backend engineer with ten years building high-volume payment platforms on Go,
+    Kubernetes and PostgreSQL. Works where tail latency, infrastructure cost and
+    reliability meet, and would rather delete a service than add a layer to it.
+    Mentored six engineers who now carry the on-call rotation without her.
+
+# ── work ────────────────────────────────────────────────────────────────────
+
+work.acme-2023:
+  summary: "B2B payments platform processing 40 million transactions a month across three regions."
+  positions:
+    work.acme-2023.staff: { title: "Staff Software Engineer" }
+    work.acme-2023.senior: { title: "Senior Backend Engineer" }
+  bullets:
+    work.acme-2023.b1:
+      outcome: "Cut p99 latency of the payment authorization API from 480 ms to 190 ms"
+      method: "by migrating the service from REST to gRPC and introducing connection pooling"
+      variants:
+        short: "Cut authorization p99 latency from 480 ms to 190 ms by moving from REST to gRPC."
+        long: >-
+          Cut p99 latency of the payment authorization API from 480 ms to 190 ms by migrating
+          the service from REST to gRPC, introducing connection pooling and moving card
+          validation to a local cache with event-driven invalidation.
+    work.acme-2023.b2:
+      outcome: "Sustained 40 million monthly transactions with zero severity-1 incidents across six consecutive quarters"
+      method: "by redesigning PostgreSQL partitioning and isolating month-end settlement spikes per merchant"
+    work.acme-2023.b3:
+      outcome: "Cut USD 84,000 a year from Kubernetes spend without degrading service level objectives (SLOs)"
+      method: "by right-sizing requests and limits from real profiling data"
+      variants:
+        short: "Cut USD 84,000 a year from Kubernetes spend by right-sizing requests and limits."
+        long: >-
+          Cut USD 84,000 a year from Kubernetes spend without degrading service level
+          objectives (SLOs), right-sizing requests and limits from real profiling data and
+          switching autoscaling from a fixed schedule to actual load.
+    work.acme-2023.b4:
+      outcome: "Mentored six engineers who now carry the on-call rotation independently"
+      method: "by documenting per-service runbooks and running blameless incident reviews"
+    work.acme-2023.b5:
+      outcome: "Took production deployments from one a week to thirty-five a week"
+      method: "by building a continuous integration and delivery (CI/CD) pipeline with automated contract tests"
+      variants:
+        short: "Took production deployments from one a week to thirty-five with a CI/CD pipeline."
+        long: >-
+          Took production deployments from one a week to thirty-five a week by building a
+          continuous integration and delivery (CI/CD) pipeline with automated contract tests
+          and rollback on error rate within the first ten minutes.
+    work.acme-2023.b6:
+      outcome: "Redesigned the accounting reconciliation model so the monthly close no longer needs manual intervention"
+      method: "by agreeing with Finance on a single data contract between the ledger and the ERP"
+    work.acme-2023.b7:
+      outcome: "Cut recovery time from a full region outage from forty minutes to under five"
+      method: "by automating cluster failover and rehearsing it one Friday a month"
+      variants:
+        short: "Cut regional recovery time from forty minutes to under five."
+        long: >-
+          Cut recovery time from a full region outage from forty minutes to under five by
+          automating cluster failover, rehearsing it one Friday a month and publishing the
+          result of every rehearsal to the team.
+
+work.globex-2019:
+  summary: "Seller platform of a regional marketplace with 2,000 active merchants."
+  positions:
+    work.globex-2019.platform: { title: "Platform Engineer" }
+  bullets:
+    work.globex-2019.b1:
+      outcome: "Cut mean time to resolution for critical tickets from fourteen hours to three"
+      method: "by implementing tiered triage and alerts tied to symptoms the user actually sees"
+    work.globex-2019.b2:
+      outcome: "Migrated twenty-three services from virtual machines to Kubernetes with no user-visible maintenance windows"
+      method: "by deploying in parallel with traffic mirroring and automatic rollback on error rate"
+    work.globex-2019.b3:
+      outcome: "Raised the seller portal Net Promoter Score (NPS) from 22 to 41"
+      method: "by prioritizing the three frictions sellers named most often in interviews"
+    work.globex-2019.b4:
+      outcome: "Cut product catalog storage cost by 35%"
+      method: "by normalizing the PostgreSQL schema and cold-archiving historical versions"
+
+work.initech-2017:
+  positions:
+    work.initech-2017.dev: { title: "Software Developer" }
+  bullets:
+    work.initech-2017.b1:
+      outcome: "Automated the nightly load of three million billing records that used to run by hand"
+      method: "by writing an idempotent Python pipeline with retries and integrity checks"
+    work.initech-2017.b2:
+      outcome: "Eliminated duplicate invoice emission caused by a race condition in the numbering sequence"
+      method: "by introducing optimistic locking and a regression test that reproduces the failure"
+    work.initech-2017.b3:
+      outcome: "Selected out of twenty engineers to lead the migration of the billing engine to an event-driven model"
+      method: "on the strength of a delivery record and the quality of code reviews"
+
+work.vandelay-2016:
+  positions:
+    work.vandelay-2016.junior: { title: "Junior Backend Developer" }
+  bullets:
+    work.vandelay-2016.b1:
+      outcome: "Halved the time to onboard a new client onto the self-service portal"
+      method: "by replacing a four-step form with a single one validated inline"
+    work.vandelay-2016.b2:
+      outcome: "Wrote the team's first automated test suite and left it running on every commit"
+      method: "by agreeing on a coverage threshold with the team that would not block delivery"
+    work.vandelay-2016.b3:
+      outcome: "Automated the weekly billing report three people used to assemble by hand every Monday"
+      method: "by generating it from the database on a scheduled job with email delivery"
+
+# ── education ───────────────────────────────────────────────────────────────
+# `studyType` es el campo donde más se pierde información al traducir: el
+# equivalente correcto depende del país destino, no del idioma.
+
+education.unex-2013:
+  area: "Information Systems Engineering"
+  studyType: "Bachelor's degree"
+  courses:
+    - "Operating Systems"
+    - "Distributed Databases"
+    - "Theory of Computation"
+    - "Software Engineering"
+
+education.itex-2024:
+  area: "Distributed Systems"
+  studyType: "Postgraduate specialization"
+  courses:
+    - "Consensus and replication"
+    - "Event and queue-based systems"
+
+# ── skills ──────────────────────────────────────────────────────────────────
+# Sólo `category`, y `canonical`/`aliases`/`keywords` cuando la forma en español
+# no sirve en inglés. "Go" y "PostgreSQL" se escriben igual en los dos idiomas.
+
+skill.go: { category: "Languages" }
+skill.python: { category: "Languages" }
+skill.typescript: { category: "Languages" }
+skill.k8s: { category: "Infrastructure and cloud" }
+skill.aws: { category: "Infrastructure and cloud" }
+skill.terraform:
+  category: "Infrastructure and cloud"
+  aliases: ["HashiCorp Terraform", "Infrastructure as Code (IaC)"]
+skill.grpc: { category: "Architecture and integration" }
+skill.postgres:
+  category: "Data"
+  keywords: [partitioning, indexing, "explain analyze", replication]
+skill.kafka:
+  category: "Data"
+  keywords: [partitions, consumer groups, "exactly-once"]
+skill.cicd:
+  canonical: "Continuous Integration and Delivery (CI/CD)"
+  aliases: ["CI/CD", "Continuous Integration/Continuous Delivery"]
+  category: "Practices"
+  keywords: ["github actions", "contract testing", "canary deployment"]
+skill.observability:
+  canonical: "Observability"
+  aliases: ["OpenTelemetry", "Instrumentation"]
+  category: "Practices"
+  keywords: [opentelemetry, prometheus, tracing, slo]
+skill.sre:
+  canonical: "Site Reliability Engineering (SRE)"
+  aliases: ["SRE"]
+  category: "Practices"
+  keywords: [slo, error budget, on-call, postmortem]
+
+# ── projects ────────────────────────────────────────────────────────────────
+
+project.flowledger:
+  description: "Open-source double-entry accounting library for Go."
+  roles: ["Author", "Maintainer"]
+  entity: "Personal project"
+  type: "open-source"
+  highlights:
+    project.flowledger.h1:
+      outcome: "Maintains a double-entry accounting library with 12,000 monthly downloads"
+      method: "by reviewing community contributions and keeping backward compatibility in every minor release"
+    project.flowledger.h2:
+      outcome: "Documented every design decision of the library in public records that answer the recurring questions"
+      method: "by writing one ADR per contract change before opening the discussion"
+
+project.guia-pagos:
+  name: "Open guide to payment provider integration in LATAM"
+  description: "Comparative documentation of seven regional payment providers, with runnable examples."
+  roles: ["Author"]
+  type: "documentation"
+  highlights:
+    project.guia-pagos.h1:
+      outcome: "Wrote an open guide to payment provider integration covering seven countries in the region"
+      method: "by checking each provider's documentation against real calls in sandbox"
+
+project.taller-observabilidad:
+  name: "Observability workshop for backend teams"
+  description: "Hands-on OpenTelemetry instrumentation workshop, taught at meetups and in-house."
+  roles: ["Instructor"]
+  type: "teaching"
+  highlights:
+    project.taller-observabilidad.h1:
+      outcome: "Taught an observability workshop to 120 engineers from nine companies in the local community"
+      method: "by building a reproducible lab with OpenTelemetry on local containers"
+
+# ── certificates ────────────────────────────────────────────────────────────
+# CKA y AWS SAA son nombres propios: no aparecen acá porque no se traducen.
+
+cert.seguridad-aplicaciones:
+  name: "Application Security Fundamentals"
+  issuer: "Example Institute of Cybersecurity"
+
+# ── awards ──────────────────────────────────────────────────────────────────
+
+award.hackathon-2022:
+  title: "First place — Globex internal hackathon"
+  summary: "First out of 34 teams, with a fraud detection prototype that later shipped to production."
+
+award.beca-2015:
+  title: "Academic excellence scholarship"
+  summary: "Awarded to 12 of 340 students in the cohort based on grade average and research involvement."
+
+# ── languages ───────────────────────────────────────────────────────────────
+# `fluency` no se traduce: es un enum (A1..C2, native) y el renderer lo convierte
+# a la convención del mercado destino.
+
+lang.es: { language: "Spanish" }
+lang.en: { language: "English" }
+lang.de: { language: "German" }
+
+# ── references ──────────────────────────────────────────────────────────────
+
+ref.jm:
+  role: "Director of Engineering"
+  relationship: "Reported to her for three years"
+
+ref.rp:
+  role: "Tech Lead"
+  relationship: "Peer on the platform team"
+
+# ── eligibility ─────────────────────────────────────────────────────────────
+# Casi todo son enums y códigos ISO. Lo único narrativo son las regiones a las
+# que la persona se mudaría.
+
+eligibility:
+  relocation:
+    regions: ["EU", "LATAM"]

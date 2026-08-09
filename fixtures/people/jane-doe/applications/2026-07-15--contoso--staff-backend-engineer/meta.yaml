@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../../../../schemas/generated/application-meta.schema.json
+
+# Trazabilidad y funnel. Es lo que convierte una carpeta de postulaciones en
+# datos propios: a partir de ~30 postulaciones, tu tasa de respuesta por
+# arquetipo vale más que cualquier benchmark publicado por un vendor.
+
+state: screening
+channel: portal
+
+timeline:
+  - { state: draft, at: "2026-07-13T18:20:00Z", note: "Aviso capturado y atomizado" }
+  - { state: sent, at: "2026-07-15T09:40:00Z" }
+  - { state: ack, at: "2026-07-15T09:43:00Z", note: "Acuse automático del portal" }
+  - { state: screening, at: "2026-07-22T14:00:00Z", note: "Llamada de 30 min con la recruiter" }
+
+# `null` explícito, no ausente: distingue "todavía no me rechazaron" de "no
+# sabemos en qué etapa fue". El reporte del funnel necesita esa diferencia.
+rejectedStage: null
+
+# Se guarda el HASH de lo enviado, no el binario. Alcanza para probar qué archivo
+# exacto viajó —y para detectar que se envió una versión que no era— sin dejar
+# un PDF con datos personales dentro del repositorio. Los binarios reales van a
+# sent/, que está gitignored.
+artifacts:
+  - format: pdf
+    filename: "Jane-Doe-Staff-Backend-Engineer-Resume.pdf"
+    sha256: "3f5a9c1e7b2d4086af11c93e5d7042b8c6ea19f3d825b74016c9ae3f52d8071b"
+    bytes: 187423
+    pages: 2
+  - format: docx
+    filename: "Jane-Doe-Staff-Backend-Engineer-Resume.docx"
+    sha256: "b81c47e2fa03d95c17e6b2048dc3f1596ab27e40d51908cf3e7a4b260f9d5c18"
+    bytes: 41288
+  - format: txt
+    filename: "Jane-Doe-Staff-Backend-Engineer-Resume.txt"
+    sha256: "0a2e6d94c73f5182be40971d5c8a3e26f19b704382d6ce5f47b10ea9d3286c50"
+    bytes: 4917
+
+# Sin este bloque no hay reproducibilidad. La paginación de un PDF depende de la
+# versión exacta del browser: Chrome se autoactualiza y con él cambia dónde corta
+# la página 1. Anotar la versión es la diferencia entre poder regenerar el
+# archivo que se envió y tener que adivinar.
+provenance:
+  gitSha: "a1b2c3d4e5f60718293a4b5c6d7e8f9012345678"
+  inputHash: "7d1f4c9a2b8e35604f7a1c3d9e2b5847"
+  browser: { name: chromium, version: "151.0.7922.77" }
+  theme: "ats-classic@1.2.0"
+  generatedAt: "2026-07-15T09:38:12Z"

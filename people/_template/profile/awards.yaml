@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../../schemas/generated/awards.schema.json
+
+# Sección opcional.
+#
+# Un premio sin contexto de selectividad no dice nada: "primer puesto" puede ser
+# entre tres equipos o entre trescientos. El `summary` es donde ese número vive,
+# porque el título del premio no lo puede cargar.
+
+[]
+
+# - id: award.ejemplo
+#   title: "Nombre del premio o distinción"
+#   date: "2024-11"
+#   awarder: "Quién lo otorga"
+#   summary: "Otorgado a N de M candidatos, según qué criterio."
+#   tags: [tag-uno]
+#   priority: 50
+#   visibility: public

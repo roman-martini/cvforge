@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../schemas/generated/languages.schema.json
+
+# `fluency` usa el Marco Común Europeo (A1, A2, B1, B2, C1, C2) más `native`, y
+# NO texto libre. "Avanzado", "fluido" y "profesional" significan cosas distintas
+# para cada persona; B2 significa lo mismo en todos lados. El renderer lo traduce
+# a la convención del mercado destino cuando hace falta.
+#
+# El nombre del idioma sí es narrativo y se traduce en i18n/.
+
+- id: lang.es
+  language: "Español"
+  fluency: native
+  tags: [language]
+  priority: 90
+  visibility: public
+
+# - id: lang.en
+#   language: "Inglés"
+#   fluency: B2
+#   certification: "Nombre del examen y puntaje (año)"
+#   priority: 85

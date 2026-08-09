@@ -1,0 +1,32 @@
+# Perfil de seniority: intermedio (~3 a 8 años).
+# No declara sectionOrder a propósito: en este tramo la experiencia ya manda en todos los
+# mercados, y el orden correcto es el que impongan la región y la industria. Declararlo acá
+# pisaría la convención de au (Education antes que Experience también en perfiles con
+# recorrido) sin ninguna razón que lo justifique.
+
+id: mid
+label: Intermedio
+
+pageBudget:
+  min: 1
+  max: 2
+
+budget:
+  maxPages: 2
+  bulletsPerRole:
+    recent: 5
+    mid: 3
+    old: 2
+  maxWords: 1100
+
+notes: >-
+  Es el tramo donde el CV empieza a desbordar la página y donde el fit-loop hace su trabajo
+  real. El orden de sacrificio es siempre el mismo: primero densidad tipográfica, después
+  bullets de roles antiguos, después el colapso de experiencia previa a una línea, y recién
+  al final se descartan secciones.
+  Regla de contenido que importa más que el presupuesto: el bullet más relevante para la
+  vacante va primero dentro de cada rol, no el cronológicamente primero. El reclutador
+  escanea en pocos segundos y rara vez pasa del tercer bullet.
+  Dos bullets para roles antiguos no es desprecio por esa experiencia: es reconocer que a
+  los siete años lo que queda de un rol es el título, la empresa y un logro, y que el
+  espacio recuperado vale más en el rol actual.

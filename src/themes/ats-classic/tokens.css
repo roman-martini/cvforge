@@ -1,0 +1,191 @@
+/* ==========================================================================
+ * ats-classic — tokens
+ *
+ * Valores verificados empíricamente contra Chrome headless (dossier §6). No
+ * son preferencias estéticas: cada uno tiene una razón de extracción, de
+ * contraste o de paginación detrás.
+ *
+ * Este archivo se carga PRIMERO, tanto en el pipeline de PDF como en el de
+ * pantalla. Define variables y caras tipográficas; ninguna regla de layout.
+ * ========================================================================== */
+
+/* --------------------------------------------------------------------------
+ * Tipografía embebida
+ *
+ * Sólo instancias estáticas: Chromium NO embebe fuentes con tabla `fvar`, y
+ * un FontDescriptor sin /FontFile2 significa que el reclutador ve otra
+ * tipografía y otra paginación que las que se validaron acá.
+ *
+ * Las rutas son relativas a este archivo. El renderer de PDF las convierte a
+ * `data:` URI antes de inyectar el CSS, en UNA sola línea: un salto de línea
+ * dentro de un url() de data URI descarta el stylesheet ENTERO sin error y el
+ * PDF sale en Times New Roman 12pt.
+ *
+ * Los dos subsets (latin y latin-ext) comparten familia y peso y se separan
+ * por unicode-range. Chromium descarga y embebe únicamente el que el
+ * documento realmente usa: un CV en inglés no arrastra los glifos polacos.
+ * -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../../../assets/fonts/source-sans-3/source-sans-3-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../../../assets/fonts/source-sans-3/source-sans-3-latin-ext-400-normal.woff2")
+    format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308,
+    U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+    U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url("../../../assets/fonts/source-sans-3/source-sans-3-latin-600-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url("../../../assets/fonts/source-sans-3/source-sans-3-latin-ext-600-normal.woff2")
+    format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308,
+    U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+    U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url("../../../assets/fonts/source-sans-3/source-sans-3-latin-700-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url("../../../assets/fonts/source-sans-3/source-sans-3-latin-ext-700-normal.woff2")
+    format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308,
+    U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+    U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  /* Papel. A4 por defecto; el atributo data-paper del <html> conmuta a Letter.
+     MediaBox resultante: A4 594.96 x 841.92 pt, Letter 612 x 792 pt. */
+  --page-w: 210mm;
+  --page-h: 297mm;
+  /* 18mm de margen lateral deja una measure de ~105ch: ya está por encima del
+     rango cómodo, bajar de acá empeora la lectura aunque entre más texto. */
+  --page-margin-y: 14mm;
+  --page-margin-x: 18mm;
+
+  /* ats-classic es monofamilia a propósito. Declarar un stack sin su
+     @font-face correspondiente hace que Chromium embeba la fuente siguiente
+     en silencio, con otras métricas y otra paginación. */
+  --font-sans: 'Source Sans 3', Carlito, 'Liberation Sans', sans-serif;
+
+  /* Escala base 10.5pt, ratio ~1.2 (minor third). */
+  --fs-name: 21pt;
+  --fs-section: 11pt;
+  --fs-role: 10.5pt;
+  --fs-body: 10.5pt;
+  --fs-meta: 9pt;
+  --fs-micro: 8.5pt;
+
+  --fw-name: 700;
+  --fw-section: 600;
+  --fw-role: 700;
+  --fw-label: 600;
+  --fw-body: 400;
+
+  --lh-body: 1.32;
+  --lh-heading: 1.15;
+  --lh-name: 1;
+
+  /* Factor único del fit-loop: los espaciados se derivan de él con calc(), así
+     un escalón de densidad se define cambiando un solo valor. */
+  --density-scale: 1;
+  --space-section-before: calc(5mm * var(--density-scale));
+  --space-section-after: calc(2mm * var(--density-scale));
+  --space-entry: calc(3.5mm * var(--density-scale));
+  --space-bullet: calc(0.8mm * var(--density-scale));
+  --space-para: calc(1.6mm * var(--density-scale));
+  --space-hairline: calc(0.8mm * var(--density-scale));
+  --bullet-indent: 5mm;
+  --entry-gap-x: 4mm;
+
+  /* Techo duro 0.12em: la extracción de texto se rompe a partir de 0.15em. */
+  --tracking-heading: 0.04em;
+  --tracking-name: -0.01em;
+  --tracking-body: 0;
+
+  --ink: #16181d;
+  /* Para atenuar se baja el color, NUNCA la opacidad: opacity < 1 crea un
+     stacking context y reordena el content stream del PDF. */
+  --ink-muted: #4a5058;
+  --rule: #8a9199;
+  --accent: #1f3a5f;
+
+  /* 0.75pt = 1px a 96dpi. 0.5pt sufre snapping a 0.79pt y queda irregular. */
+  --rule-width: 0.75pt;
+}
+
+:root[data-paper='Letter'] {
+  --page-w: 215.9mm;
+  --page-h: 279.4mm;
+}
+
+/* --------------------------------------------------------------------------
+ * Escalones de densidad del fit-loop, del más holgado al más apretado.
+ * El cuerpo nunca baja de 10pt: por debajo de 9pt el CV deja de ser legible y
+ * por debajo de 6pt es directamente fraude.
+ * -------------------------------------------------------------------------- */
+
+:root[data-density='comfortable'] {
+  --density-scale: 1.1;
+}
+
+:root[data-density='normal'] {
+  --density-scale: 1;
+}
+
+:root[data-density='dense'] {
+  --density-scale: 0.85;
+  --fs-body: 10pt;
+}
+
+:root[data-density='ultra'] {
+  --density-scale: 0.72;
+  --fs-body: 10pt;
+  --lh-body: 1.24;
+}
+
+/* Perfiles conservadores (finanzas, legal, consultoría, gobierno): sin acento
+   cromático. La jerarquía sigue en pie porque la construyen tamaño, peso y
+   espacio; el color es la cuarta capa, no la primera. */
+:root[data-accent='none'] {
+  --accent: var(--ink);
+}

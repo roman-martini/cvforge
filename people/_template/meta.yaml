@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schemas/generated/person-meta.schema.json
+
+# Esqueleto que copia `cv new <slug>`. Reemplazá los placeholders y borrá los
+# comentarios que ya no te sirvan; los que explican una trampa de YAML conviene
+# dejarlos, porque la trampa sigue ahí.
+
+# Mismo nombre que la carpeta: minúsculas, dígitos y guiones.
+slug: nombre-apellido
+
+# Idioma en el que vas a redactar los campos narrativos de profile/.
+# Valores: es | en | de | fr | pt | it
+primaryLocale: es
+
+# Locales adicionales. Cada uno necesita su i18n/<locale>.yaml con la narrativa
+# traducida e indexada por id. No hay fallback: si pedís un CV en un locale que
+# no está acá, o le falta la traducción de un ítem incluido, el build falla.
+locales: []
+
+# SemVer del modelo de datos con el que se escribieron estos YAML. No lo toques
+# a mano: lo actualiza la migración cuando el schema cambia.
+modelVersion: "1.0.0"
+
+# Registro de que la persona sabe que sus datos viven acá y para qué. Si el
+# perfil es tuyo, completalo igual: dentro de un año el repo puede tener tres
+# personas más y esta línea es lo que distingue una de otra.
+consent:
+  grantedBy: "Nombre Apellido"
+  grantedAt: "2026-01-01"
+  purpose: "Generación de CVs para postulaciones propias"

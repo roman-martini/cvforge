@@ -1,0 +1,47 @@
+# Perfil de industria: diseño y producto visual.
+# El CV no es acá el entregable evaluado: el portfolio lo es. El documento existe para
+# llevar al reclutador a la URL del portfolio con el menor roce posible y para sostener la
+# trayectoria con datos verificables.
+# Es el único perfil con colorPolicy free, y aun así el color sigue sujeto a las reglas de
+# extracción: un acento cromático no puede apoyarse en opacity, filter ni mix-blend-mode
+# (ATS-003/005), porque desprenden el texto de su posición en el content stream.
+
+id: design
+label: Diseño y producto visual
+
+pageBudget:
+  min: 1
+  max: 2
+
+sectionOrder:
+  - contact
+  - summary
+  - projects
+  - work
+  - skills
+  - education
+  - awards
+  - certificates
+  - publications
+  - languages
+  - interests
+  - references
+
+colorPolicy: free
+
+# HTML en vez de DOCX: en este sector el CV se comparte tanto por link como por archivo, y
+# el DOCX es formato ajeno a la conversación.
+formats:
+  - pdf
+  - html
+
+notes: >-
+  La URL del portfolio va en el bloque de contacto, completa y como texto visible
+  (ATS-060): "romanmartini.design", nunca la palabra "Portfolio" hipervinculada. Un enlace
+  cuyo texto visible no es la URL sobrevive como texto en el PDF pero se pierde en toda
+  extracción a texto plano y en el copiar-pegar del reclutador.
+  Projects encabeza sobre Work porque en diseño el caso concreto pesa más que el empleador,
+  y porque el reclutador entra buscando qué hiciste, no dónde.
+  Libertad de color no es libertad de layout: siguen prohibidas las columnas (ATS-006), el
+  texto en imágenes, los iconos de fuente decorativa (ATS-055) y las barras de nivel de
+  habilidad, que no comunican nada evaluable y ocupan el espacio de un caso real.

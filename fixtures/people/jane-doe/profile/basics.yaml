@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../../../schemas/generated/basics.schema.json
+
+# `label` y `summary` son narrativos: están en el locale primario (es) y su
+# versión en inglés vive en i18n/en.yaml. El resto de este archivo son hechos
+# —nombre, mail, URLs— que no se traducen nunca.
+
+name: "Jane Doe"
+label: "Ingeniera Backend Senior"
+
+# 2-4 frases. La primera dice qué es y hace cuánto; la última es la que se
+# recuerda. Nada de "profesional proactivo orientado a resultados".
+summary: >-
+  Ingeniera backend con diez años construyendo plataformas de pagos de alto
+  volumen sobre Go, Kubernetes y PostgreSQL. Trabaja donde se cruzan latencia de
+  cola, costo de infraestructura y confiabilidad, y prefiere borrar un servicio
+  antes que agregarle una capa. Formó a seis ingenieros que hoy sostienen la
+  guardia sin ella.
+
+email: "jane.doe@example.com"
+
+# El teléfono va SIEMPRE entre comillas. Sin ellas YAML lo parsea como número,
+# el "+" se pierde y el reclutador recibe "5491155550000". Es un fallo silencioso:
+# el CV se renderiza igual de lindo.
+phone: "+54 9 11 5555 0000"
+
+url: "https://jane-doe.example"
+
+location:
+  city: "Buenos Aires"
+  region: "Ciudad Autónoma de Buenos Aires"
+  # Entre comillas obligatoriamente: es ISO-3166-1 alpha-2 y hay códigos que YAML
+  # resolvería como otro tipo. "NO" (Noruega) sin comillas es el booleano false.
+  countryCode: "AR"
+  # `address` y `postalCode` NO se declaran acá: son datos sensibles y viven en
+  # contact.private.yaml, que está gitignored. Ver contact.example.yaml al lado.
+
+profiles:
+  - id: profile.linkedin
+    network: "LinkedIn"
+    username: "jane-doe-example"
+    # El renderer imprime esta URL entera como texto visible, nunca la palabra
+    # "LinkedIn": el extractor necesita el string completo para poder seguirlo
+    # y el reclutador para copiarlo desde un PDF impreso (ATS-060).
+    url: "https://www.linkedin.com/in/jane-doe-example"
+  - id: profile.github
+    network: "GitHub"
+    username: "jane-doe-example"
+    url: "https://github.com/jane-doe-example"
+    # `public` es el default; se escribe acá sólo para mostrar dónde va el campo.
+    # Con `private` el ítem sigue en el CV pero desaparece de la proyección
+    # publicable (HTML, portfolio).
+    visibility: public
+
+# `photo`, `birthDate` y `nationalId` quedan sin declarar a propósito. No es
+# olvido: los perfiles regionales us/uk/ca/nl/au los prohíben y su sola presencia
+# rompe el build citando la norma (ATS-084). Si tu mercado los pide —concursos
+# públicos en AR, Lebenslauf alemán— agregalos y el perfil regional los habilita.

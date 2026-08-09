@@ -1,0 +1,90 @@
+# ============================================================================
+# ats-classic — descriptor del tema
+#
+# Es el contrato entre el tema y el resto del pipeline: el renderer de PDF lee
+# de acá qué plantilla instanciar y qué hojas de estilo inyectar, y el linter
+# lee `fonts` para verificar que el conjunto de fuentes efectivamente embebidas
+# en el PDF sea exactamente el declarado (ATS-032).
+#
+# `version` se registra en la provenance de cada postulación: sin ella, un
+# cambio del tema vuelve irreproducible un PDF ya enviado.
+# ============================================================================
+
+id: ats-classic
+version: 1.0.0
+name: ATS Classic
+description: >-
+  Una columna, HTML semántico, sin gráficos ni tablas. Pensado para que el
+  texto extraído del PDF sea idéntico en orden de content-stream y en orden
+  geométrico, que es la única propiedad que distingue un CV parseable de uno
+  que llega desordenado.
+
+# Módulo con la plantilla. Exporta renderDocument(vm, opts) y renderBody(vm).
+template: Template.ts
+
+stylesheets:
+  print:
+    - tokens.css
+    - print.css
+  screen:
+    - tokens.css
+    - print.css
+    - screen.css
+
+paper:
+  default: A4
+  supported: [A4, Letter]
+
+# Escalones que puede recorrer el fit-loop, del más holgado al más apretado.
+# Corresponden uno a uno con :root[data-density=...] de tokens.css.
+density:
+  default: normal
+  steps: [comfortable, normal, dense, ultra]
+
+# Familias que este tema puede llegar a embeber. Los subsets latin y latin-ext
+# comparten familia y peso: Chromium embebe sólo el que el documento usa, así
+# que el linter compara por FAMILIA, no por archivo.
+fonts:
+  - family: Source Sans 3
+    role: sans
+    license: OFL-1.1
+    licenseFile: assets/fonts/source-sans-3/LICENSE
+    dir: assets/fonts/source-sans-3
+    variable: false
+    # Nombres PostScript tal como aparecen en /BaseFont, sin el prefijo de
+    # subsetting de seis letras que antepone Chromium.
+    faces:
+      - { weight: 400, style: normal, postScriptName: SourceSans3-Regular }
+      - { weight: 600, style: normal, postScriptName: SourceSans3-Semibold }
+      - { weight: 700, style: normal, postScriptName: SourceSans3-Bold }
+
+# Sustitutos métricamente compatibles para el DOCX: el Word del reclutador sí
+# tiene licencia de la propietaria, el PDF usa la libre embebida, y la
+# paginación coincide. Commitear los woff2 propietarios sería ilegal.
+docxFontSubstitutes:
+  'Source Sans 3': Calibri
+
+palette:
+  ink: '#16181D'
+  inkMuted: '#4A5058'
+  rule: '#8A9199'
+  accent: '#1F3A5F'
+
+# El perfil conservador (finanzas, legal, consultoría, gobierno) fija el acento
+# en el color de tinta: se activa con data-accent="none" en el <html>.
+accentModes: [color, none]
+
+# Secciones que la plantilla sabe representar. `contact` no está: vive en el
+# encabezado del documento, no como sección numerada.
+supportedSections:
+  - summary
+  - skills
+  - work
+  - education
+  - certificates
+  - projects
+  - awards
+  - languages
+  - publications
+  - references
+  - interests

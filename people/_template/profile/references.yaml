@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../schemas/generated/references.schema.json
+
+# SOLO iniciales y rol. Nunca teléfono, mail ni nombre completo de un tercero.
+#
+# No es exceso de celo: los datos de contacto de otra persona tienen una base
+# legal distinta de los propios bajo RGPD y Ley 25.326. Esa persona aceptó que la
+# llames vos, no que su número viva en tu repositorio y viaje en cada clon.
+#
+# `visibility` es `private` por default acá, y la mayoría de los perfiles
+# regionales omite la sección entera del documento. En uk/au el perfil emite en
+# su lugar la línea "References available on request".
+
+[]
+
+# - id: ref.xy
+#   initials: "X. Y."          # máximo 6 caracteres; alcanza para que VOS sepas quién es
+#   role: "Cargo que ocupaba"
+#   company: "Empresa"
+#   relationship: "Cómo trabajaron juntos"
+#   tags: [manager]
+#   priority: 70
+#   visibility: private

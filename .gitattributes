@@ -1,0 +1,28 @@
+# CRÍTICO: este repo se desarrolla en Windows con core.autocrlf=true.
+# Sin normalización a LF, los golden tests (comparación byte a byte de la
+# salida renderizada) fallan con un diff del 100 % de las líneas.
+* text=auto eol=lf
+
+# Fuentes y binarios: nunca tocar.
+*.woff2 binary
+*.woff  binary
+*.ttf   binary
+*.otf   binary
+*.pdf   binary
+*.docx  binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.ico   binary
+
+# Los YAML de datos son el corazón del repo: diff legible siempre.
+*.yaml text eol=lf
+*.yml  text eol=lf
+*.json text eol=lf
+*.ts   text eol=lf
+*.tsx  text eol=lf
+*.css  text eol=lf
+*.md   text eol=lf
+
+# Golden files: cualquier normalización los invalidaría.
+tests/golden/** -text

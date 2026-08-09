@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../../../schemas/generated/eligibility.schema.json
+
+# Este bloque es la razón de ser del workspace tanto como los bullets.
+#
+# El auto-rechazo masivo y real del proceso no es el parseo del PDF: son las
+# preguntas eliminatorias del formulario ("¿tenés autorización para trabajar en
+# la UE sin patrocinio?"). Contestarlas distinto en dos postulaciones de la misma
+# empresa es una discrepancia detectable; contestarlas de memoria a las 23:40 es
+# la forma habitual de que pase.
+#
+# Todo lo que se responde en applications/<...>/questions.yaml se valida contra
+# este archivo (ATS-092). Acá vive la verdad; allá, la respuesta enviada.
+
+workAuthorization:
+  - countryCode: "AR"
+    status: citizen
+    sponsorshipRequired: false
+  - countryCode: "ES"
+    status: work_permit
+    sponsorshipRequired: false
+    # Fecha completa YYYY-MM-DD: un permiso vence un día concreto, no un mes.
+    expiresAt: "2028-04-30"
+  - countryCode: "US"
+    status: none
+    # El campo que decide si la postulación tiene sentido antes de escribir nada.
+    sponsorshipRequired: true
+
+residence:
+  city: "Buenos Aires"
+  countryCode: "AR"
+  timezone: "America/Argentina/Buenos_Aires"
+
+# Enum en minúsculas: remote | hybrid | onsite.
+workModes: [remote, hybrid]
+
+relocation:
+  willing: true
+  regions: ["UE", "LATAM"]
+
+noticePeriod:
+  value: 30
+  unit: days
+
+compensation:
+  # Exactamente tres letras: es un código ISO-4217.
+  currency: "USD"
+  min: 90000
+  max: 120000
+  basis: gross_annual
+  # Privado por default y conviene dejarlo así: sirve para que el sistema detecte
+  # una vacante fuera de rango antes de que escribas la carta, no para imprimirlo.
+  visibility: private
+
+availableFrom: "2026-09-15"

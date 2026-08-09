@@ -1,0 +1,5 @@
+# CV académico: sin límite de páginas. No se recorta nada, y en particular
+# nunca las publicaciones: son el objeto mismo de la evaluación.
+densitySteps: [comfortable, normal]
+dropSections: []
+failIfStillOverflows: false

@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../../../schemas/generated/references.schema.json
+
+# SOLO iniciales y rol. Nunca teléfono, mail ni nombre completo de un tercero.
+#
+# No es exceso de celo: los datos de contacto de otra persona tienen una base
+# legal distinta de los propios bajo RGPD y Ley 25.326. Esa persona aceptó que la
+# llames a vos, no que su teléfono viva en tu repositorio y viaje en cada clon.
+#
+# `visibility` es `private` por default en esta sección, y los perfiles
+# regionales us/ca/de/fr/es/nl/pl/ar la omiten por completo del documento. En
+# uk/au el perfil emite en su lugar la línea "References available on request".
+
+- id: ref.jm
+  # Máximo 6 caracteres. "J. M." alcanza para que vos sepas quién es.
+  initials: "J. M."
+  role: "Directora de Ingeniería"
+  company: "Acme Corporation Inc."
+  relationship: "Reporté a ella durante tres años"
+  tags: [manager, recent]
+  priority: 80
+  visibility: private
+
+- id: ref.rp
+  initials: "R. P."
+  role: "Líder técnico"
+  company: "Globex Corporation S.A."
+  relationship: "Par en el equipo de plataforma"
+  tags: [peer]
+  priority: 60
+  visibility: private

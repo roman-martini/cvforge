@@ -1,0 +1,116 @@
+# yaml-language-server: $schema=../../../../../schemas/generated/overlay.schema.json
+
+# El diff mínimo contra el arquetipo. Todo lo que no está acá se hereda de
+# targets/backend-senior-en.yaml: locale, región, industria, tema, orden de
+# secciones, formatos y plantilla de nombre de archivo.
+#
+# Lo que este archivo PUEDE hacer: elegir qué ítems entran (`include`), cuáles no
+# (`exclude`), en qué orden (`order`) y con qué variante de texto (`variant`).
+# Lo que NO puede: cambiar un hecho. No hay forma de tocar desde acá un
+# empleador, una fecha, un título de puesto ni un título académico. Esa
+# restricción es lo que hace que el fraude sea estructuralmente difícil y no
+# meramente desaconsejado; los únicos overrides posibles son de texto narrativo,
+# y quedan a la vista en el diff contra el perfil base.
+
+extends: backend-senior-en
+job: ./job.yaml
+locale: en
+
+basics:
+  # El puesto se llama "Staff" en esta empresa. No es un ascenso inventado: es
+  # cómo se nombra en el aviso el trabajo que esta persona ya viene haciendo,
+  # y su título actual en Acme es exactamente ese.
+  label: "Staff Backend Engineer"
+  # Resumen específico para esta vacante. Es un override explícito y diffeable
+  # contra basics.summary del perfil: nadie tiene que adivinar qué se cambió.
+  summary: >-
+    Backend engineer with ten years on payment systems, currently Staff at a
+    platform clearing 40 million transactions a month on Go, Kubernetes and
+    PostgreSQL. Owns authorization latency and the pager that comes with it.
+    Mentored six engineers who now run the rotation without her.
+
+sections:
+  skills:
+    include:
+      - skill.go
+      - skill.k8s
+      - skill.grpc
+      - skill.postgres
+      - skill.aws
+      # Terraform entró por el match-report: el arquetipo no lo lista, pero la
+      # vacante lo pide como `nice` (r9) y la persona lo tiene con prioridad 60.
+      # Esa sección del reporte —"excluido y sin embargo relevante"— es la que
+      # más veces cambia el resultado.
+      - skill.terraform
+      - skill.cicd
+      - skill.observability
+      - skill.sre
+    # El orden de las skills no es alfabético ni por nivel: es el orden en que
+    # los pide el aviso. Lo primero que se lee es lo primero que se busca.
+    order:
+      - skill.go
+      - skill.k8s
+      - skill.grpc
+      - skill.postgres
+      - skill.aws
+      - skill.terraform
+      - skill.observability
+      - skill.sre
+      - skill.cicd
+
+  work:
+    include: [work.acme-2023, work.globex-2019, work.initech-2017, work.vandelay-2016]
+    order: [work.acme-2023, work.globex-2019, work.initech-2017, work.vandelay-2016]
+    overrides:
+      work.acme-2023:
+        summary: "B2B payments platform clearing 40 million transactions a month across three regions."
+        bullets:
+          include: [work.acme-2023.b1, work.acme-2023.b7, work.acme-2023.b3, work.acme-2023.b5]
+          # b7 (recuperación ante caída regional) sube al segundo lugar: el aviso
+          # habla de "a pager that stays quiet" antes que de costos. El orden
+          # cronológico del pool no importa; importa el orden de lectura.
+          order: [work.acme-2023.b1, work.acme-2023.b7, work.acme-2023.b3, work.acme-2023.b5]
+          # `long` porque este rol es el que se lee; los cuatro bullets incluidos
+          # tienen variante larga escrita a mano. Si el fit-loop no cierra en dos
+          # páginas, el primer escalón que prueba es bajar a `default`.
+          variant: long
+      work.globex-2019:
+        bullets:
+          include: [work.globex-2019.b2, work.globex-2019.b1, work.globex-2019.b4]
+          order: [work.globex-2019.b2, work.globex-2019.b1, work.globex-2019.b4]
+          variant: default
+      work.initech-2017:
+        bullets:
+          include: [work.initech-2017.b1, work.initech-2017.b3]
+          variant: default
+      work.vandelay-2016:
+        # Un solo bullet: el rol es de hace diez años y está para sostener la
+        # continuidad de la línea de tiempo, no para argumentar nada.
+        bullets:
+          include: [work.vandelay-2016.b1]
+          variant: default
+
+  education:
+    include: [education.itex-2024, education.unex-2013]
+    order: [education.itex-2024, education.unex-2013]
+
+  certificates:
+    # La CKA es requisito duro de acceso al clúster (knockout k3); la de AWS
+    # respalda la experiencia en nube. La de seguridad se queda afuera: es de
+    # 2021 y no la pide nadie acá.
+    include: [cert.cka, cert.aws-saa]
+    order: [cert.cka, cert.aws-saa]
+
+  projects:
+    # Sólo flowledger: es una biblioteca de contabilidad en Go, o sea exactamente
+    # el dominio y el lenguaje del aviso. La guía de pagos y el taller son
+    # buenos, pero acá compiten por espacio contra un bullet de Acme y pierden.
+    include: [project.flowledger]
+
+budget:
+  maxPages: 2
+
+# `formats`, `fileNameTemplate`, `theme` y `sectionOrder` NO se declaran: los
+# hereda del target. Un overlay que repite el arquetipo entero deja de ser un
+# diff y vuelve a ser una copia del CV, que es el anti-patrón que este diseño
+# existe para evitar.

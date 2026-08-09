@@ -1,0 +1,50 @@
+# Perfil de industria: academia.
+# El único perfil sin techo real de páginas: un CV académico de un investigador con
+# recorrido son diez o quince páginas y eso es lo correcto. El máximo declarado (20) es el
+# tope duro del schema de Budget, no una convención del sector.
+# Las publicaciones se guardan en CSL-JSON y el estilo de cita es una decisión del
+# renderer, nunca un string ya formateado en los datos.
+
+id: academia
+label: Academia e investigación
+
+pageBudget:
+  min: 2
+  max: 20
+
+sectionOrder:
+  - contact
+  - summary
+  - education
+  - work
+  - publications
+  - awards
+  - projects
+  - certificates
+  - skills
+  - languages
+  - interests
+  - references
+
+# Mínimo cromático: el CV académico se lee impreso y se fotocopia en comités de selección.
+colorPolicy: none
+
+formats:
+  - pdf
+  - docx
+
+citationStyle: apa
+
+notes: >-
+  El orden declarado es el de research track: Education encabeza porque el doctorado y la
+  institución son la credencial primaria, y Publications va antes que cualquier otra cosa
+  después de la experiencia. En teaching track la docencia sube por encima de las
+  publicaciones; eso se resuelve con un target derivado que reordene, no con otro perfil de
+  industria.
+  El estilo de cita se conmuta por convocatoria: APA en psicología, ciencias sociales y
+  educación; Chicago en humanidades e historia; Vancouver en biomedicina; IEEE en
+  ingeniería y computación. Cambiar citationStyle en el target no toca un solo dato.
+  Las referencias sí se listan con nombre completo, institución y contacto en este sector
+  — es la excepción a la política regional de omitirlas — pero eso requiere consentimiento
+  previo de cada referente, y por eso el schema sólo guarda iniciales y rol: el nombre
+  completo se agrega en el momento del envío, fuera del repositorio.

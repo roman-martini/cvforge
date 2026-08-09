@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../../../schemas/generated/publications.schema.json
+
+# Formato CSL-JSON: la publicación se guarda ESTRUCTURADA, nunca como una cita ya
+# formateada. Así el estilo (APA, Chicago, Vancouver, IEEE) es una decisión del
+# perfil de industria en tiempo de render y no queda congelada en los datos. El
+# día que postules a algo que pide IEEE, no hay que reescribir nada.
+#
+# Los títulos de un paper no se traducen: son el identificador de la obra.
+# Por eso este archivo no tiene entradas en i18n/en.yaml.
+
+- id: pub.tail-latency-2024
+  type: "paper-conference"
+  title: "Reducing Tail Latency in Payment Authorization Pipelines"
+  author:
+    - { family: "Doe", given: "Jane" }
+    - { family: "Roe", given: "Richard" }
+  container-title: "Proceedings of the Example Conference on Distributed Systems"
+  issued:
+    # CSL-JSON: [[año, mes, día]]. El mes y el día son opcionales, en ese orden.
+    date-parts: [[2024, 9]]
+  DOI: "10.0000/example.2024.0042"
+  URL: "https://doi.example/10.0000/example.2024.0042"
+  tags: [performance, distributed-systems, fintech]
+  priority: 60
+  visibility: public
+
+- id: pub.ledger-invariants-2022
+  type: "article-journal"
+  title: "Invariants That Survive Partial Failures in Double-Entry Ledgers"
+  author:
+    - { family: "Doe", given: "Jane" }
+  container-title: "Example Journal of Financial Software"
+  issued:
+    date-parts: [[2022, 3, 14]]
+  DOI: "10.0000/example.2022.0117"
+  tags: [ledger, correctness, fintech]
+  priority: 50
+  visibility: public

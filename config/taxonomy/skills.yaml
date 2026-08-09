@@ -1,0 +1,564 @@
+# Taxonomía de habilidades: una capacidad, muchas formas de nombrarla.
+#
+# Existe por un motivo concreto: la mayoría de los ATS resuelve keywords por coincidencia
+# léxica, no semántica. "PMP certified" no matchea "Project Management Professional",
+# "K8s" no matchea "Kubernetes" y "CI/CD" no matchea "Continuous Integration". El matcher
+# de este workspace normaliza por esta tabla antes de comparar, y el renderer emite la
+# forma que usa la vacante — no la que prefiere el candidato.
+#
+# Convención de campos:
+#   canonical → la forma que se imprime por defecto en el CV
+#   expanded  → la forma larga, cuando el canónico es una sigla. Habilita emitir
+#               "Continuous Integration / Continuous Delivery (CI/CD)" una vez en el
+#               documento, que es lo que pide la regla de acrónimos del dossier §7.5
+#   aliases   → toda otra forma con la que la vacante puede nombrar lo mismo
+#   category  → agrupa la sección de habilidades del CV; no participa del matching
+#
+# Criterio para agregar una entrada: que exista una vacante real que la nombre distinto de
+# como la nombra el candidato. Una tabla de sinónimos exhaustiva no sirve de nada y se
+# vuelve imposible de mantener.
+
+skills:
+  # ------------------------------------------------------------------- Lenguajes
+  - canonical: JavaScript
+    aliases: [JS, ECMAScript, ES6, ES2015]
+    category: language
+  - canonical: TypeScript
+    aliases: [TS]
+    category: language
+  - canonical: Python
+    aliases: [Python 3, Python3, CPython]
+    category: language
+  - canonical: Java
+    aliases: [Java SE, Java EE, Core Java, JDK]
+    category: language
+  - canonical: Go
+    aliases: [Golang, Go lang]
+    category: language
+  - canonical: Rust
+    aliases: [Rust lang]
+    category: language
+  - canonical: C#
+    aliases: [C Sharp, CSharp, C-Sharp]
+    category: language
+  - canonical: C++
+    aliases: [CPP, C plus plus]
+    category: language
+  - canonical: C
+    aliases: [C language, ANSI C]
+    category: language
+  - canonical: Ruby
+    aliases: [Ruby lang]
+    category: language
+  - canonical: PHP
+    expanded: PHP Hypertext Preprocessor
+    aliases: [PHP 8, PHP8]
+    category: language
+  - canonical: Kotlin
+    aliases: [Kotlin JVM]
+    category: language
+  - canonical: Swift
+    aliases: [Swift lang, SwiftUI]
+    category: language
+  - canonical: Scala
+    aliases: []
+    category: language
+  - canonical: Elixir
+    aliases: [Erlang/OTP, BEAM]
+    category: language
+  - canonical: SQL
+    expanded: Structured Query Language
+    aliases: [ANSI SQL, T-SQL, PL/SQL, Transact-SQL]
+    category: language
+  - canonical: Bash
+    aliases: [Shell scripting, Shell, sh, Zsh, POSIX shell]
+    category: language
+  - canonical: R
+    aliases: [R language, R Studio, RStudio]
+    category: language
+  - canonical: PowerShell
+    aliases: [Windows PowerShell, PS]
+    category: language
+
+  # -------------------------------------------------------------------- Frontend
+  - canonical: React
+    aliases: [React.js, ReactJS, React JS]
+    category: frontend
+  - canonical: Next.js
+    aliases: [NextJS, Next js, Next]
+    category: frontend
+  - canonical: Vue.js
+    aliases: [Vue, VueJS, Vue 3]
+    category: frontend
+  - canonical: Angular
+    aliases: [AngularJS, Angular 2+, Angular.js]
+    category: frontend
+  - canonical: Svelte
+    aliases: [SvelteKit]
+    category: frontend
+  - canonical: Preact
+    aliases: []
+    category: frontend
+  - canonical: HTML
+    expanded: HyperText Markup Language
+    aliases: [HTML5, HTML 5, Semantic HTML]
+    category: frontend
+  - canonical: CSS
+    expanded: Cascading Style Sheets
+    aliases: [CSS3, CSS 3, Flexbox, CSS Grid]
+    category: frontend
+  - canonical: Sass
+    aliases: [SCSS]
+    category: frontend
+  - canonical: Tailwind CSS
+    aliases: [TailwindCSS, Tailwind]
+    category: frontend
+  - canonical: Webpack
+    aliases: [Module Bundler]
+    category: frontend
+  - canonical: Vite
+    aliases: [ViteJS]
+    category: frontend
+  - canonical: Web Accessibility
+    aliases: [a11y, WCAG, WCAG 2.2, Accessibility, ARIA]
+    category: frontend
+  - canonical: Progressive Web App
+    expanded: Progressive Web Application
+    aliases: [PWA, PWAs]
+    category: frontend
+
+  # --------------------------------------------------------------------- Backend
+  - canonical: Node.js
+    aliases: [NodeJS, Node, Node js]
+    category: backend
+  - canonical: Express.js
+    aliases: [Express, ExpressJS]
+    category: backend
+  - canonical: NestJS
+    aliases: [Nest.js, Nest]
+    category: backend
+  - canonical: Django
+    aliases: [Django REST Framework, DRF]
+    category: backend
+  - canonical: Flask
+    aliases: []
+    category: backend
+  - canonical: FastAPI
+    aliases: [Fast API]
+    category: backend
+  - canonical: Spring Boot
+    aliases: [Spring, SpringBoot, Spring Framework]
+    category: backend
+  - canonical: Ruby on Rails
+    aliases: [Rails, RoR]
+    category: backend
+  - canonical: Laravel
+    aliases: []
+    category: backend
+  - canonical: ASP.NET Core
+    aliases: [ASP.NET, .NET Core, dotnet, .NET 8]
+    category: backend
+  - canonical: GraphQL
+    aliases: [Graph QL, Apollo GraphQL]
+    category: backend
+  - canonical: REST
+    expanded: Representational State Transfer
+    aliases: [RESTful, REST API, RESTful API, REST APIs]
+    category: backend
+  - canonical: gRPC
+    expanded: gRPC Remote Procedure Call
+    aliases: [Protocol Buffers, protobuf]
+    category: backend
+  - canonical: WebSocket
+    aliases: [WebSockets, Socket.IO, WSS]
+    category: backend
+
+  # ------------------------------------------------------------------------ Datos
+  - canonical: PostgreSQL
+    aliases: [Postgres, PSQL]
+    category: data
+  - canonical: MySQL
+    aliases: [MariaDB, My SQL]
+    category: data
+  - canonical: MongoDB
+    aliases: [Mongo, Mongo DB]
+    category: data
+  - canonical: Redis
+    aliases: [Redis Cluster, ElastiCache]
+    category: data
+  - canonical: Elasticsearch
+    aliases: [Elastic Search, ELK, OpenSearch, Elastic Stack]
+    category: data
+  - canonical: Apache Kafka
+    aliases: [Kafka, Confluent Kafka]
+    category: data
+  - canonical: Apache Spark
+    aliases: [Spark, PySpark]
+    category: data
+  - canonical: Snowflake
+    aliases: [Snowflake Data Cloud]
+    category: data
+  - canonical: BigQuery
+    aliases: [Google BigQuery, Big Query]
+    category: data
+  - canonical: Databricks
+    aliases: [Databricks Lakehouse]
+    category: data
+  - canonical: dbt
+    expanded: data build tool
+    aliases: [dbt Core, dbt Cloud]
+    category: data
+  - canonical: Apache Airflow
+    aliases: [Airflow, MWAA, Cloud Composer]
+    category: data
+  - canonical: ETL
+    expanded: Extract, Transform, Load
+    aliases: [ELT, Data Pipelines, Data Engineering Pipelines]
+    category: data
+  - canonical: Data Warehouse
+    aliases: [Data Warehousing, DWH, Lakehouse, Data Lake]
+    category: data
+  - canonical: Data Modeling
+    aliases: [Dimensional Modeling, Star Schema, Data Modelling]
+    category: data
+  - canonical: Power BI
+    aliases: [PowerBI, Microsoft Power BI]
+    category: data
+  - canonical: Tableau
+    aliases: []
+    category: data
+
+  # ------------------------------------------------------------ Cloud e infraestructura
+  - canonical: AWS
+    expanded: Amazon Web Services
+    aliases: [Amazon Web Services, Amazon AWS]
+    category: cloud
+  - canonical: Microsoft Azure
+    aliases: [Azure, MS Azure]
+    category: cloud
+  - canonical: GCP
+    expanded: Google Cloud Platform
+    aliases: [Google Cloud, Google Cloud Platform]
+    category: cloud
+  - canonical: Kubernetes
+    aliases: [K8s, EKS, GKE, AKS, Kubernetes Orchestration]
+    category: cloud
+  - canonical: Docker
+    aliases: [Containers, Containerization, OCI containers, Podman]
+    category: cloud
+  - canonical: Terraform
+    aliases: [HashiCorp Terraform, OpenTofu]
+    category: cloud
+  - canonical: Ansible
+    aliases: [Red Hat Ansible, Ansible Playbooks]
+    category: cloud
+  - canonical: Helm
+    aliases: [Helm Charts]
+    category: cloud
+  - canonical: Linux
+    aliases: [GNU/Linux, Ubuntu, Debian, Red Hat Enterprise Linux, RHEL, CentOS]
+    category: cloud
+  - canonical: Nginx
+    aliases: [Reverse Proxy, Load Balancing]
+    category: cloud
+  - canonical: Serverless
+    aliases: [Serverless Architecture, FaaS, Function as a Service]
+    category: cloud
+  - canonical: AWS Lambda
+    aliases: [Lambda, Lambda Functions]
+    category: cloud
+  - canonical: Amazon S3
+    expanded: Amazon Simple Storage Service
+    aliases: [S3, AWS S3, Object Storage]
+    category: cloud
+  - canonical: Amazon EC2
+    expanded: Amazon Elastic Compute Cloud
+    aliases: [EC2, AWS EC2]
+    category: cloud
+  - canonical: CDN
+    expanded: Content Delivery Network
+    aliases: [CloudFront, Cloudflare, Content Distribution Network, Edge Network]
+    category: cloud
+  - canonical: IaC
+    expanded: Infrastructure as Code
+    aliases: [Infrastructure as Code, Infrastructure-as-Code]
+    category: cloud
+
+  # ---------------------------------------------------- DevOps y confiabilidad
+  - canonical: CI/CD
+    expanded: Continuous Integration / Continuous Delivery
+    aliases:
+      - Continuous Integration
+      - Continuous Delivery
+      - Continuous Deployment
+      - CICD
+      - CI CD
+      - Continuous Integration and Continuous Delivery
+      - build pipelines
+    category: devops
+  - canonical: GitHub Actions
+    aliases: [GH Actions, Actions workflows]
+    category: devops
+  - canonical: Jenkins
+    aliases: [Jenkins Pipeline, Jenkinsfile]
+    category: devops
+  - canonical: GitLab CI
+    aliases: [GitLab CI/CD, GitLab Pipelines]
+    category: devops
+  - canonical: Git
+    aliases: [Version Control, GitHub, GitLab, Bitbucket, Source Control]
+    category: devops
+  - canonical: SRE
+    expanded: Site Reliability Engineering
+    aliases: [Site Reliability Engineering, Site Reliability Engineer, Reliability Engineering]
+    category: devops
+  - canonical: Observability
+    aliases: [Monitoring, Telemetry, Instrumentation, APM, Application Performance Monitoring]
+    category: devops
+  - canonical: Prometheus
+    aliases: [PromQL]
+    category: devops
+  - canonical: Grafana
+    aliases: [Grafana Dashboards, Grafana Loki]
+    category: devops
+  - canonical: OpenTelemetry
+    aliases: [OTel, Open Telemetry, OTLP]
+    category: devops
+  - canonical: DevOps
+    aliases: [Dev Ops, DevSecOps, Platform Engineering]
+    category: devops
+  - canonical: Incident Response
+    aliases: [On-call, Oncall, Incident Management, Postmortems, Blameless Postmortem]
+    category: devops
+  - canonical: SLO
+    expanded: Service Level Objective
+    aliases: [SLA, SLI, Service Level Agreement, Service Level Indicator, Error Budget]
+    category: devops
+  - canonical: Datadog
+    aliases: [Data Dog]
+    category: devops
+  - canonical: Splunk
+    aliases: [Splunk Enterprise, SPL]
+    category: devops
+
+  # ------------------------------------------------------- Aprendizaje automático
+  - canonical: Machine Learning
+    aliases: [ML, Aprendizaje automático, Machine-Learning]
+    category: ml
+  - canonical: Deep Learning
+    aliases: [DL, Neural Networks, Redes neuronales]
+    category: ml
+  - canonical: NLP
+    expanded: Natural Language Processing
+    aliases: [Natural Language Processing, Procesamiento de lenguaje natural, Text Mining]
+    category: ml
+  - canonical: Computer Vision
+    aliases: [CV models, Image Recognition, Visión por computadora]
+    category: ml
+  - canonical: TensorFlow
+    aliases: [Tensor Flow, Keras, TF]
+    category: ml
+  - canonical: PyTorch
+    aliases: [Torch, Py Torch]
+    category: ml
+  - canonical: scikit-learn
+    aliases: [sklearn, Scikit Learn]
+    category: ml
+  - canonical: pandas
+    aliases: [Python pandas]
+    category: ml
+  - canonical: NumPy
+    aliases: [Numerical Python]
+    category: ml
+  - canonical: LLM
+    expanded: Large Language Model
+    aliases: [Large Language Models, GenAI, Generative AI, IA generativa, Foundation Models]
+    category: ml
+  - canonical: RAG
+    expanded: Retrieval-Augmented Generation
+    aliases: [Retrieval Augmented Generation, Vector Search, Semantic Search, Embeddings]
+    category: ml
+  - canonical: MLOps
+    expanded: Machine Learning Operations
+    aliases: [ML Ops, Machine Learning Operations, Model Deployment, LLMOps]
+    category: ml
+  - canonical: A/B Testing
+    aliases: [AB Testing, Split Testing, Experimentation, Experimentación]
+    category: ml
+
+  # ------------------------------------------------------------ Calidad y testing
+  - canonical: Unit Testing
+    aliases: [Unit Tests, Pruebas unitarias, Automated Testing]
+    category: quality
+  - canonical: TDD
+    expanded: Test-Driven Development
+    aliases: [Test Driven Development, Test-Driven Development, BDD, Behaviour-Driven Development]
+    category: quality
+  - canonical: End-to-End Testing
+    aliases: [E2E Testing, E2E, Integration Testing, Pruebas end to end]
+    category: quality
+  - canonical: Playwright
+    aliases: [Microsoft Playwright]
+    category: quality
+  - canonical: Cypress
+    aliases: [Cypress.io]
+    category: quality
+  - canonical: Jest
+    aliases: [JestJS]
+    category: quality
+  - canonical: Vitest
+    aliases: [Vite test]
+    category: quality
+  - canonical: Code Review
+    aliases: [Peer Review, Pull Request Review, Revisión de código]
+    category: quality
+
+  # ------------------------------------------------------------------ Arquitectura
+  - canonical: Microservices
+    aliases: [Microservicios, Microservice Architecture, Micro-services]
+    category: architecture
+  - canonical: Event-Driven Architecture
+    aliases: [EDA, Event Driven, Arquitectura orientada a eventos, Pub/Sub]
+    category: architecture
+  - canonical: DDD
+    expanded: Domain-Driven Design
+    aliases: [Domain Driven Design, Domain-Driven Design, Diseño guiado por el dominio]
+    category: architecture
+  - canonical: API Design
+    expanded: Application Programming Interface Design
+    aliases: [API Development, RESTful API Design, Diseño de APIs, OpenAPI, Swagger]
+    category: architecture
+  - canonical: System Design
+    aliases: [Software Architecture, Arquitectura de software, Solution Architecture]
+    category: architecture
+  - canonical: Distributed Systems
+    aliases: [Sistemas distribuidos, Distributed Computing]
+    category: architecture
+  - canonical: Message Queue
+    aliases: [RabbitMQ, SQS, Amazon SQS, Message Broker, Colas de mensajes]
+    category: architecture
+  - canonical: Caching
+    aliases: [Cache Strategy, Memcached, Cacheo, Cache Invalidation]
+    category: architecture
+  - canonical: Performance Optimization
+    aliases: [Performance Tuning, Optimización de rendimiento, Latency Optimization, Scalability]
+    category: architecture
+
+  # -------------------------------------------------------------------- Seguridad
+  - canonical: Application Security
+    aliases: [AppSec, Secure Coding, Seguridad de aplicaciones]
+    category: security
+  - canonical: OAuth 2.0
+    aliases: [OAuth, OAuth2, OAuth 2]
+    category: security
+  - canonical: OIDC
+    expanded: OpenID Connect
+    aliases: [OpenID Connect, SSO, Single Sign-On, SAML]
+    category: security
+  - canonical: JWT
+    expanded: JSON Web Token
+    aliases: [JSON Web Token, JSON Web Tokens, Bearer Token]
+    category: security
+  - canonical: TLS
+    expanded: Transport Layer Security
+    aliases: [SSL, HTTPS, mTLS, Mutual TLS]
+    category: security
+  - canonical: Penetration Testing
+    aliases: [Pentesting, Pen Testing, Ethical Hacking, Red Team]
+    category: security
+  - canonical: OWASP Top 10
+    expanded: Open Worldwide Application Security Project Top 10
+    aliases: [OWASP, OWASP Top Ten]
+    category: security
+  - canonical: Threat Modeling
+    aliases: [Modelado de amenazas, STRIDE, Risk Assessment]
+    category: security
+  - canonical: GDPR
+    expanded: General Data Protection Regulation
+    aliases: [RGPD, Data Privacy, Privacidad de datos, Protección de datos]
+    category: security
+
+  # ------------------------------------------------------------------- Movilidad
+  - canonical: iOS Development
+    aliases: [iOS, Desarrollo iOS, Xcode, UIKit]
+    category: mobile
+  - canonical: Android Development
+    aliases: [Android, Desarrollo Android, Jetpack Compose]
+    category: mobile
+  - canonical: React Native
+    aliases: [ReactNative, RN]
+    category: mobile
+  - canonical: Flutter
+    aliases: [Dart, Flutter SDK]
+    category: mobile
+
+  # ------------------------------------------------- Metodología, gestión y liderazgo
+  - canonical: Agile
+    aliases: [Agile Methodologies, Metodologías ágiles, Ágil, Agile Development]
+    category: methodology
+  - canonical: Scrum
+    aliases: [Scrum Master, Certified Scrum Master, CSM, Sprint Planning]
+    category: methodology
+  - canonical: Kanban
+    aliases: [Lean, Kanban Board, Flujo continuo]
+    category: methodology
+  - canonical: PMP
+    expanded: Project Management Professional
+    aliases:
+      - Project Management Professional
+      - PMP certified
+      - PMP certification
+      - PMI certified
+      - Certificación PMP
+    category: certification
+  - canonical: Project Management
+    aliases: [Gestión de proyectos, Program Management, Delivery Management, PMO]
+    category: methodology
+  - canonical: Product Management
+    aliases: [Gestión de producto, Product Owner, PO, Product Ownership]
+    category: methodology
+  - canonical: Stakeholder Management
+    aliases: [Gestión de interesados, Client Management, Relación con clientes]
+    category: methodology
+  - canonical: Technical Leadership
+    aliases: [Tech Lead, Liderazgo técnico, Engineering Leadership, Team Lead]
+    category: leadership
+  - canonical: Mentoring
+    aliases: [Coaching, Mentoría, Mentorship, Onboarding de equipo]
+    category: leadership
+  - canonical: Cross-Functional Collaboration
+    aliases: [Cross Functional, Colaboración interdisciplinaria, Cross-team collaboration]
+    category: leadership
+  - canonical: Roadmap Planning
+    aliases: [Roadmapping, Planificación de roadmap, Technical Roadmap]
+    category: methodology
+  - canonical: OKR
+    expanded: Objectives and Key Results
+    aliases: [Objectives and Key Results, OKRs, KPI, KPIs]
+    category: methodology
+  - canonical: Technical Writing
+    aliases: [Documentation, Documentación técnica, Redacción técnica, ADRs]
+    category: leadership
+  - canonical: Hiring
+    aliases: [Recruiting, Technical Interviewing, Selección técnica, Entrevistas técnicas]
+    category: leadership
+
+  # ----------------------------------------------------------------- Herramientas
+  - canonical: Jira
+    aliases: [Atlassian Jira]
+    category: tool
+  - canonical: Confluence
+    aliases: [Atlassian Confluence]
+    category: tool
+  - canonical: Figma
+    aliases: [Figma prototyping]
+    category: tool
+  - canonical: Postman
+    aliases: [Insomnia, API testing tools]
+    category: tool
+  - canonical: Notion
+    aliases: []
+    category: tool
+  - canonical: Excel
+    aliases: [Microsoft Excel, Advanced Excel, Google Sheets, Hojas de cálculo]
+    category: tool

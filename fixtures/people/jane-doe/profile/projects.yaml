@@ -1,0 +1,91 @@
+# yaml-language-server: $schema=../../../../schemas/generated/projects.schema.json
+
+# `highlights` usa exactamente la misma estructura que los bullets de work: mismo
+# formato XYZ, misma métrica opcional, misma procedencia. No hay una "versión
+# liviana" del bullet para proyectos — si el logro no aguanta el mismo formato,
+# probablemente no aguante estar en el CV.
+
+- id: project.flowledger
+  name: "flowledger"
+  description: "Biblioteca de código abierto para contabilidad por partida doble en Go."
+  url: "https://flowledger.example"
+  startDate: "2021-09"
+  # Sin endDate y sin `current`: los proyectos no tienen el campo `current` de
+  # work. Un proyecto vivo simplemente no declara fin.
+  roles: ["Autora", "Mantenedora"]
+  entity: "Proyecto personal"
+  type: "open-source"
+  keywords: [go, ledger, accounting, open-source]
+  tags: [go, open-source, fintech, domain]
+  priority: 85
+  visibility: public
+  highlights:
+    - id: project.flowledger.h1
+      outcome: "Sostiene una biblioteca de contabilidad por partida doble con 12.000 descargas mensuales"
+      metric:
+        value: "12.000 descargas/mes"
+        type: absolute
+        confidence: measured
+      method: "revisando aportes de la comunidad y manteniendo compatibilidad hacia atrás en cada versión menor"
+      tags: [go, open-source, maintenance]
+      priority: 80
+      provenance: { source: human }
+      verified: true
+    - id: project.flowledger.h2
+      # Sin métrica: el valor acá es el hábito, y contarlo con un número
+      # ("28 ADR escritos") diría menos, no más.
+      outcome: "Documentó cada decisión de diseño de la biblioteca en registros públicos que responden las dudas recurrentes"
+      method: "escribiendo un ADR por cambio de contrato antes de abrir la discusión"
+      tags: [documentation, open-source, communication]
+      priority: 60
+      provenance: { source: human }
+
+- id: project.guia-pagos
+  name: "Guía abierta de integración de medios de pago en LATAM"
+  description: "Documentación comparada de siete procesadores regionales, con ejemplos ejecutables."
+  url: "https://guia-pagos.example"
+  startDate: "2023-04"
+  endDate: "2024-02"
+  roles: ["Autora"]
+  entity: "Comunidad GoAR"
+  type: "documentación"
+  keywords: [payments, latam, documentation, fintech]
+  tags: [fintech, documentation, domain]
+  priority: 65
+  visibility: public
+  highlights:
+    - id: project.guia-pagos.h1
+      outcome: "Escribió una guía abierta de integración de medios de pago que cubre siete países de la región"
+      metric:
+        value: "7 países"
+        type: scope
+        confidence: self_reported
+      method: "contrastando la documentación de cada procesador contra pruebas reales en entorno de prueba"
+      tags: [fintech, documentation, payments]
+      priority: 65
+      provenance: { source: human }
+
+- id: project.taller-observabilidad
+  name: "Taller de observabilidad para equipos de backend"
+  description: "Taller práctico de instrumentación con OpenTelemetry, dictado en meetups y empresas."
+  startDate: "2022-05"
+  endDate: "2025-11"
+  roles: ["Instructora"]
+  entity: "Comunidad GoAR"
+  type: "docencia"
+  keywords: [opentelemetry, observability, teaching]
+  tags: [observability, teaching, leadership]
+  # Prioridad baja: entra sólo cuando la vacante valora docencia o difusión.
+  priority: 45
+  visibility: public
+  highlights:
+    - id: project.taller-observabilidad.h1
+      outcome: "Dictó un taller de observabilidad para 120 ingenieros de nueve empresas de la comunidad local"
+      metric:
+        value: "120 asistentes"
+        type: scope
+        confidence: self_reported
+      method: "construyendo un laboratorio reproducible con OpenTelemetry sobre contenedores locales"
+      tags: [teaching, observability, community]
+      priority: 45
+      provenance: { source: human }

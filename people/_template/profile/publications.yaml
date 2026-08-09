@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../../schemas/generated/publications.schema.json
+
+# Sección opcional; en la mayoría de los CVs de industria queda vacía y está bien.
+#
+# Formato CSL-JSON: la publicación se guarda ESTRUCTURADA, nunca como una cita ya
+# formateada. Así el estilo de cita (APA, Chicago, Vancouver, IEEE) es una
+# decisión del perfil de industria en tiempo de render, y el día que postules a
+# algo que pide otro estilo no hay que reescribir nada.
+
+[]
+
+# - id: pub.ejemplo-2025
+#   type: "article-journal"        # o paper-conference, chapter, thesis, report…
+#   title: "Título exacto de la publicación"
+#   author:
+#     - { family: "Apellido", given: "Nombre" }
+#   container-title: "Revista o actas donde salió"
+#   issued:
+#     date-parts: [[2025, 6]]      # [[año, mes, día]]; mes y día son opcionales
+#   DOI: "10.0000/ejemplo.2025.0001"
+#   URL: "https://doi.example/10.0000/ejemplo.2025.0001"
+#   tags: [tag-uno]
+#   priority: 50
+#   visibility: public

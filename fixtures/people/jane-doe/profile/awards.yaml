@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../../../schemas/generated/awards.schema.json
+
+# Un premio sin contexto de selectividad no dice nada: "Primer puesto" puede ser
+# entre tres equipos o entre trescientos. El `summary` es el lugar donde ese
+# número vive, porque el título del premio no lo puede cargar.
+
+- id: award.hackathon-2022
+  title: "Primer puesto — Hackathon interna de Globex"
+  date: "2022-11"
+  awarder: "Globex Corporation S.A."
+  summary: "Primer puesto entre 34 equipos, con un prototipo de detección de fraude que después llegó a producción."
+  tags: [fintech, recognition, teamwork]
+  priority: 55
+  visibility: public
+
+- id: award.beca-2015
+  title: "Beca de excelencia académica"
+  date: "2015-08"
+  awarder: "Universidad Nacional de Ejemplo"
+  summary: "Otorgada a 12 de 340 estudiantes de la cohorte según promedio y participación en investigación."
+  tags: [education, recognition]
+  # Prioridad baja: con diez años de experiencia, una beca de la carrera compite
+  # mal contra un bullet de trabajo. Entra sólo si sobra espacio.
+  priority: 25
+  visibility: public

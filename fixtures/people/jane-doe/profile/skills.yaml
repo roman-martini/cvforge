@@ -1,0 +1,135 @@
+# yaml-language-server: $schema=../../../../schemas/generated/skills.schema.json
+
+# `canonical` es la forma que se imprime por defecto. `aliases` existe porque
+# varios ATS no resuelven que "K8s" y "Kubernetes" son lo mismo: el matcher
+# reconoce cualquiera de las formas y el renderer emite LA QUE USA LA VACANTE.
+# Por eso conviene listar también la forma expandida y el acrónimo.
+#
+# `yearsOfExperience` se deriva de work/ cuando no se declara. Declararlo acá
+# sirve para los casos en que la experiencia no sale de un empleo (proyectos,
+# docencia) o en que el cálculo automático subestima.
+
+- id: skill.go
+  canonical: "Go"
+  aliases: ["Golang", "Go (Golang)"]
+  category: "Lenguajes"
+  level: expert
+  yearsOfExperience: 7
+  keywords: [goroutines, channels, pprof, "context"]
+  tags: [backend, core]
+  priority: 100
+  visibility: public
+
+- id: skill.python
+  canonical: "Python"
+  aliases: ["Python 3"]
+  category: "Lenguajes"
+  level: advanced
+  yearsOfExperience: 9
+  keywords: [asyncio, pytest, pandas]
+  tags: [backend, data]
+  priority: 80
+
+- id: skill.typescript
+  canonical: "TypeScript"
+  aliases: ["TS"]
+  category: "Lenguajes"
+  level: intermediate
+  yearsOfExperience: 4
+  keywords: [node, zod]
+  tags: [tooling]
+  priority: 55
+
+- id: skill.k8s
+  canonical: "Kubernetes"
+  aliases: ["K8s", "Kubernetes (K8s)"]
+  category: "Infraestructura y nube"
+  level: advanced
+  yearsOfExperience: 6
+  keywords: [helm, operators, hpa, "kustomize"]
+  tags: [infrastructure, core]
+  priority: 98
+
+- id: skill.aws
+  canonical: "Amazon Web Services (AWS)"
+  aliases: ["AWS", "Amazon Web Services"]
+  category: "Infraestructura y nube"
+  level: advanced
+  yearsOfExperience: 7
+  keywords: [eks, rds, s3, iam]
+  tags: [infrastructure, cloud]
+  priority: 85
+
+- id: skill.terraform
+  canonical: "Terraform"
+  aliases: ["HashiCorp Terraform", "Infraestructura como código (IaC)"]
+  category: "Infraestructura y nube"
+  level: intermediate
+  yearsOfExperience: 5
+  keywords: [modules, state, plan]
+  tags: [infrastructure, iac]
+  # Prioridad media a propósito: es real, pero no es de lo que esta persona vive.
+  # Sirve como caso de "excluido del target y sin embargo relevante para esta
+  # vacante", que es lo que el match-report señala y ninguna herramienta comercial
+  # hace.
+  priority: 60
+
+- id: skill.grpc
+  canonical: "gRPC"
+  aliases: ["gRPC/Protobuf", "Protocol Buffers"]
+  category: "Arquitectura e integración"
+  level: advanced
+  yearsOfExperience: 5
+  keywords: [protobuf, streaming, interceptors]
+  tags: [backend, api]
+  priority: 90
+
+- id: skill.postgres
+  canonical: "PostgreSQL"
+  aliases: ["Postgres", "PostgreSQL 16"]
+  category: "Datos"
+  level: expert
+  yearsOfExperience: 9
+  keywords: [particionado, índices, "explain analyze", replicación]
+  tags: [data, core]
+  priority: 95
+
+- id: skill.kafka
+  canonical: "Apache Kafka"
+  aliases: ["Kafka"]
+  category: "Datos"
+  level: intermediate
+  yearsOfExperience: 4
+  keywords: [particiones, consumer groups, "exactly-once"]
+  tags: [data, event-driven]
+  priority: 70
+
+- id: skill.cicd
+  canonical: "Integración y entrega continuas (CI/CD)"
+  aliases: ["CI/CD", "Continuous Integration/Continuous Delivery", "Entrega continua"]
+  category: "Prácticas"
+  level: advanced
+  yearsOfExperience: 8
+  keywords: ["github actions", "pruebas de contrato", "despliegue canario"]
+  tags: [delivery, practice]
+  priority: 78
+
+- id: skill.observability
+  canonical: "Observabilidad"
+  aliases: ["Observability", "OpenTelemetry", "Instrumentación"]
+  category: "Prácticas"
+  level: advanced
+  yearsOfExperience: 6
+  keywords: [opentelemetry, prometheus, trazas, slo]
+  tags: [sre, practice]
+  priority: 76
+
+- id: skill.sre
+  canonical: "Ingeniería de confiabilidad (SRE)"
+  aliases: ["SRE", "Site Reliability Engineering"]
+  category: "Prácticas"
+  level: advanced
+  yearsOfExperience: 6
+  keywords: [slo, presupuesto de error, guardia, postmortem]
+  tags: [sre, practice]
+  priority: 74

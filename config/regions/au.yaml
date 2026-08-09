@@ -1,0 +1,101 @@
+# Perfil regional: Australia.
+# Dos particularidades que no comparte con ningún otro perfil anglosajón:
+#   1. El documento se llama "Resumé" — con acento y sin "Curriculum Vitae", que en este
+#      mercado designa el documento académico y confunde al reclutador corporativo.
+#   2. Education va ANTES que Experience incluso en perfiles senior. Es convención de
+#      SEEK, el portal que concentra el mercado, y aplica a todo el espectro de seniority.
+# Además el presupuesto de páginas es el más holgado de los diez: 2 a 4.
+
+id: au
+label: Australia
+documentType: Resumé
+paper: A4
+locale: en-AU
+
+pageBudget:
+  min: 2
+  max: 4
+
+forbiddenFields:
+  - field: basics.photo
+    reason: >-
+      La guía de los principales portales de empleo es explícita en dejarla fuera: expone
+      edad, origen y género antes de que se lea una sola línea de experiencia.
+    source: >-
+      Australian Human Rights Commission — Know your rights: employment; SEEK Career
+      Advice — What to leave off your resume
+  - field: basics.birthDate
+    reason: La edad es motivo prohibido de discriminación en el empleo, sin umbral de edad.
+    source: Age Discrimination Act 2004 (Cth), ss. 18 y 22
+  - field: basics.maritalStatus
+    reason: >-
+      Estado civil, embarazo y responsabilidades familiares son motivos prohibidos
+      nominados en la legislación federal.
+    source: Sex Discrimination Act 1984 (Cth), ss. 6, 7 y 7AA; Fair Work Act 2009, s. 351
+  - field: basics.nationality
+    reason: >-
+      Raza, color y origen nacional o étnico son motivos prohibidos. Lo que corresponde
+      declarar es el derecho a trabajar, no la nacionalidad.
+    source: >-
+      Racial Discrimination Act 1975 (Cth), s. 15; Department of Home Affairs — VEVO
+      (verificación posterior a la oferta)
+  - field: basics.gender
+    reason: Motivo prohibido nominado, incluidas identidad de género y orientación sexual.
+    source: Sex Discrimination Act 1984 (Cth), ss. 5A-5C
+  - field: basics.nationalId
+    reason: >-
+      El Tax File Number se entrega al empleador después de la contratación y por canal
+      seguro. La ATO advierte explícitamente contra exhibirlo en documentos que circulan.
+    source: Australian Taxation Office — Protect your TFN; Privacy Act 1988 (Cth), TFN Rule 2015
+
+customaryFields:
+  - basics.location.city
+  - basics.location.region
+  - basics.profiles
+  - eligibility.workAuthorization
+  - references
+
+referencesPolicy: on-request-line
+
+datePattern: MMMM yyyy
+
+sectionLabels:
+  contact: Contact
+  summary: Career Summary
+  skills: Key Skills
+  work: Employment History
+  education: Education
+  certificates: Certifications
+  projects: Projects
+  awards: Awards
+  languages: Languages
+  publications: Publications
+  references: References
+  interests: Interests
+
+# Education antes que Employment History: convención de SEEK, aplica también a senior.
+sectionOrder:
+  - contact
+  - summary
+  - skills
+  - education
+  - work
+  - certificates
+  - projects
+  - awards
+  - publications
+  - languages
+  - interests
+  - references
+
+notes: >-
+  Nunca usar "Curriculum Vitae" como título ni como nombre de archivo en este mercado: acá
+  designa el documento académico extenso y señala que el candidato copió una plantilla
+  británica. El documento es "Resumé" y en la práctica ni siquiera lleva título: empieza
+  por el nombre.
+  Dos a cuatro páginas es rango normal, no exceso: el reclutador australiano espera el
+  detalle de responsabilidades por rol que en EE. UU. se considera relleno. Un resumé
+  australiano de una página se lee como candidatura apurada.
+  La elegibilidad laboral se declara de forma afirmativa junto al contacto cuando hay
+  visado vigente (por ejemplo "Full working rights - permanent resident"), porque el
+  estatus migratorio es la primera pregunta eliminatoria del formulario de SEEK.

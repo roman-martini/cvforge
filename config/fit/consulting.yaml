@@ -1,0 +1,8 @@
+# Consultoría: una página, estricto. BCG pide explícitamente "one-page, business
+# style"; el formato es parte de lo evaluado, así que el ajuste es agresivo.
+maxBulletsPerRole:
+  recent: 3
+  mid: 2
+  old: 1
+experienceCutoffYears: 8
+dropSections: [interests, awards, languages, publications, projects]

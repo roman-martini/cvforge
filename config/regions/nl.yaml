@@ -1,0 +1,98 @@
+# Perfil regional: Países Bajos.
+# Hereda la forma del CV británico (A4, documento llamado CV, estructura sobria) y se
+# separa en dos puntos: sin foto y sin línea de referencias.
+# `forbiddenFields` se redeclara completo porque los arrays reemplazan al mergear (ADR-007).
+
+id: nl
+extends: uk
+label: Países Bajos
+documentType: CV
+paper: A4
+locale: nl-NL
+
+pageBudget:
+  min: 1
+  max: 2
+
+forbiddenFields:
+  - field: basics.photo
+    reason: >-
+      La autoridad de protección de datos desaconseja explícitamente pedir foto en una
+      candidatura y la práctica del mercado la asimiló: un CV neerlandés con foto se lee
+      como importado de otro mercado.
+    source: >-
+      Autoriteit Persoonsgegevens — Sollicitatie en privacy; NVP Sollicitatiecode
+      (código de conducta de reclutamiento)
+  - field: basics.birthDate
+    reason: >-
+      La edad es motivo prohibido de distinción en el empleo bajo la ley específica de
+      igualdad de trato por edad.
+    source: Wet gelijke behandeling op grond van leeftijd bij de arbeid (WGBL), art. 3
+  - field: basics.maritalStatus
+    reason: >-
+      Estado civil y situación familiar son motivos prohibidos de distinción y no guardan
+      relación con el puesto.
+    source: Algemene wet gelijke behandeling (AWGB), art. 1
+  - field: basics.nationality
+    reason: >-
+      Nacionalidad y origen son motivos prohibidos. La verificación del derecho a trabajar
+      se hace con documentación al contratar, no leyendo el CV.
+    source: >-
+      Algemene wet gelijke behandeling, art. 1; Wet arbeid vreemdelingen (verificación
+      posterior a la oferta)
+  - field: basics.gender
+    reason: Motivo prohibido nominado en la ley general de igualdad de trato.
+    source: Algemene wet gelijke behandeling, art. 1
+  - field: basics.nationalId
+    reason: >-
+      El BSN sólo puede tratarse cuando una norma lo obliga expresamente, y una
+      candidatura no es uno de esos casos. Es la infracción más sancionada por la AP en
+      procesos de selección.
+    source: >-
+      Autoriteit Persoonsgegevens — Burgerservicenummer (BSN); UAVG art. 46
+
+customaryFields:
+  - basics.location.city
+  - basics.profiles
+  - languages
+
+referencesPolicy: omit
+
+# maart 2022
+datePattern: MMMM yyyy
+
+sectionLabels:
+  contact: Contactgegevens
+  summary: Profiel
+  skills: Vaardigheden
+  work: Werkervaring
+  education: Opleiding
+  certificates: Certificaten
+  projects: Projecten
+  awards: Onderscheidingen
+  languages: Talen
+  publications: Publicaties
+  references: Referenties
+  interests: Interesses
+
+sectionOrder:
+  - contact
+  - summary
+  - skills
+  - work
+  - education
+  - certificates
+  - projects
+  - awards
+  - publications
+  - languages
+  - interests
+  - references
+
+notes: >-
+  La AP fija un plazo de conservación de las candidaturas de cuatro semanas tras cerrar el
+  proceso, extensible a un año sólo con consentimiento escrito del candidato. Es dato del
+  empleador, no del CV, pero explica por qué acá no se estila la cláusula de consentimiento
+  al pie: el marco ya define el plazo.
+  Las referencias no se listan ni se anuncia que están disponibles; se piden verbalmente
+  en la última etapa. Es la diferencia práctica con el perfil uk del que hereda.

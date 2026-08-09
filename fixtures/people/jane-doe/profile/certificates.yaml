@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../../../schemas/generated/certificates.schema.json
+
+# `expiresAt` no es decorativo: alimenta las preguntas eliminatorias del
+# formulario ("¿tenés la certificación vigente al momento de ingresar?"). Una
+# certificación vencida declarada como vigente es una discrepancia detectable en
+# screening, y las discrepancias detectadas cuestan la oferta.
+#
+# Los nombres de certificación son nombres propios: NO se traducen. La única
+# excepción de este archivo es la última, que es un curso local con nombre en
+# español y su equivalente en inglés en i18n/en.yaml.
+
+- id: cert.cka
+  name: "Certified Kubernetes Administrator (CKA)"
+  issuer: "The Linux Foundation"
+  date: "2024-05"
+  expiresAt: "2027-05"
+  url: "https://training.linuxfoundation.org/certification/verify"
+  credentialId: "LF-EXAMPLE-000001"
+  tags: [kubernetes, infrastructure]
+  priority: 90
+  visibility: public
+
+- id: cert.aws-saa
+  name: "AWS Certified Solutions Architect – Associate"
+  issuer: "Amazon Web Services"
+  date: "2023-09"
+  # Vence dentro de poco a propósito: es el caso que `cv match` tiene que marcar
+  # cuando la vacante pregunta por certificación vigente a la fecha de ingreso.
+  expiresAt: "2026-09"
+  url: "https://aws.example/verification"
+  credentialId: "AWS-EXAMPLE-000002"
+  tags: [aws, cloud, infrastructure]
+  priority: 80
+  visibility: public
+
+- id: cert.seguridad-aplicaciones
+  name: "Fundamentos de Seguridad de Aplicaciones"
+  issuer: "Instituto Example de Ciberseguridad"
+  date: "2021-06"
+  # Sin `expiresAt`: no vence. La ausencia de la clave es la forma de decirlo;
+  # no existe `expiresAt: never` ni conviene inventarlo.
+  credentialId: "IEC-EXAMPLE-000003"
+  tags: [security, practice]
+  priority: 45
+  visibility: public

@@ -1,0 +1,31 @@
+# Plantilla de `contact.private.yaml`, que está gitignored. Este archivo sí se
+# versiona, con placeholders y nada más.
+#
+# Primer paso después de `cv new`:
+#
+#   cp contact.example.yaml contact.private.yaml
+#
+# y completá los valores reales ahí. El cargador aplica ese archivo encima de
+# profile/basics.yaml antes de validar, así que los campos sensibles llegan al CV
+# renderizado sin haber pasado nunca por git.
+#
+# Por qué esta separación: git no olvida. Una dirección postal o un documento que
+# entró en un commit sigue estando después de borrarlo del archivo, en cada clon,
+# en cada fork y en cada backup. Manteniéndolos fuera del árbol versionado, el
+# repositorio sigue siendo clonable y el pipeline reproducible sin exponer a nadie.
+#
+# Es un parche PLANO sobre `basics`: el cargador ubica `address` y `postalCode`
+# dentro de `basics.location` por vos.
+
+# ENTRE COMILLAS: sin ellas se parsea como número y pierde el "+".
+phone: "+54 9 11 0000 0000"
+
+address: "Calle y número, piso"
+
+# ENTRE COMILLAS: `01425` sin comillas se convierte en 1425.
+postalCode: "0000"
+
+# Documento de identidad. Sólo tiene sentido en perfiles ar/latam con opt-in
+# explícito y para concursos que lo exigen. En us/uk/ca/nl/au su presencia
+# rompe el build citando la norma. Descomentar únicamente si tu mercado lo pide.
+# nationalId: "00.000.000"

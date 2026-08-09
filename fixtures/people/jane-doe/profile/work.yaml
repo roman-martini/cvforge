@@ -1,0 +1,348 @@
+# yaml-language-server: $schema=../../../../schemas/generated/work.schema.json
+
+# El corazón del modelo. Esto NO es "el CV": es el pool de hechos del que cada
+# variante selecciona. Por eso Acme tiene siete bullets aunque ningún CV muestre
+# más de cinco por rol — el overlay elige cuáles entran y en qué orden.
+#
+# Anatomía de un bullet (fórmula XYZ, Google/Laszlo Bock):
+#   outcome  → X, el resultado. Va primero porque el reclutador escanea en 6-7 s
+#              y rara vez pasa del tercer bullet de cada rol.
+#   metric   → Y, la medida. OPCIONAL a propósito: exigirla en todos empuja a
+#              inventar números, que es exactamente lo que se cae en la entrevista.
+#   method   → Z, el método.
+# Objetivo de longitud: 15-30 palabras entre outcome y method (1-2 líneas).
+#
+# `tags` alimenta el matcher contra los requisitos de una vacante: son términos
+# libres, no una taxonomía cerrada. `priority` (0-100) desempata cuando el
+# presupuesto de páginas aprieta y hay que sacrificar algo.
+
+- id: work.acme-2023
+  company:
+    # Con sufijo legal: varios ATS parsean peor el nombre sin él (ATS-086).
+    name: "Acme Corporation Inc."
+    url: "https://acme.example"
+    industry: "Fintech"
+  location:
+    city: "Buenos Aires"
+    countryCode: "AR"
+    # Enum en minúsculas: remote | hybrid | onsite. Ojo, NO es el mismo enum que
+    # `remote` de job.yaml, que viene del job-schema oficial y usa Full|Hybrid|None.
+    remote: hybrid
+  positions:
+    # Dos posiciones en la misma empresa: así se modela una promoción sin
+    # duplicar el empleador ni inflar la antigüedad.
+    - id: work.acme-2023.staff
+      # Sin abreviaturas. "Ing. Sr. de SW" no matchea ninguna búsqueda booleana.
+      title: "Ingeniera de Software Staff"
+      startDate: "2025-03"
+      # `current: true` en vez de `endDate:` vacío. En YAML una clave sin valor
+      # produce `null`, y `endDate: null` falla la validación del schema oficial
+      # de JSON Resume. Con current, el compilador OMITE la clave entera.
+      current: true
+      seniority: staff
+    - id: work.acme-2023.senior
+      title: "Ingeniera Backend Senior"
+      startDate: "2023-02"
+      endDate: "2025-02"
+      seniority: senior
+  summary: "Plataforma de pagos B2B con 40 millones de transacciones por mes y operación en tres regiones."
+  tags: [backend, go, kubernetes, postgresql, grpc, fintech, sre, leadership]
+  priority: 100
+  visibility: public
+  bullets:
+    - id: work.acme-2023.b1
+      outcome: "Redujo la latencia p99 de la API de autorización de pagos de 480 ms a 190 ms"
+      metric:
+        value: "-60%"
+        type: delta_pct
+        confidence: measured
+      method: "migrando el servicio de REST a gRPC e introduciendo connection pooling"
+      tags: [go, grpc, performance, latency]
+      priority: 95
+      # Las variantes existen para que el fit-loop recorte sin perder el hecho.
+      # Nunca son un hecho distinto: son el mismo hecho con otro largo.
+      variants:
+        short: "Latencia p99 de autorización de 480 ms a 190 ms migrando de REST a gRPC."
+        long: >-
+          Redujo la latencia p99 de la API de autorización de pagos de 480 ms a 190 ms
+          migrando el servicio de REST a gRPC, introduciendo connection pooling y moviendo
+          la validación de tarjeta a un caché local con invalidación por evento.
+      provenance: { source: human }
+      # `verified: true` significa que el número se contrastó contra una fuente
+      # concreta (acá, el dashboard de latencia del trimestre), no que suene bien.
+      verified: true
+
+    - id: work.acme-2023.b2
+      outcome: "Sostuvo el procesamiento de 40 millones de transacciones mensuales sin incidentes de severidad 1 durante seis trimestres"
+      metric:
+        value: "40M tx/mes"
+        type: scale
+        confidence: measured
+      method: "rediseñando el particionado de PostgreSQL y aislando los picos de cierre por comercio"
+      tags: [postgresql, scale, reliability, fintech]
+      priority: 90
+      provenance: { source: human }
+      verified: true
+
+    - id: work.acme-2023.b3
+      outcome: "Recortó USD 84.000 anuales de gasto en Kubernetes sin degradar los objetivos de nivel de servicio (SLO)"
+      metric:
+        value: "USD 84.000/año"
+        type: absolute
+        confidence: measured
+      method: "ajustando requests y limits con datos reales de perfilado"
+      tags: [kubernetes, cost-optimization, sre, finops]
+      priority: 88
+      variants:
+        short: "Recortó USD 84.000 anuales de gasto en Kubernetes ajustando requests y limits."
+        long: >-
+          Recortó USD 84.000 anuales de gasto en Kubernetes sin degradar los objetivos de
+          nivel de servicio (SLO), ajustando requests y limits con datos reales de perfilado
+          y habilitando autoescalado por carga en lugar de por horario fijo.
+      provenance: { source: human }
+      verified: true
+
+    - id: work.acme-2023.b4
+      outcome: "Mentoreó a seis ingenieros que hoy sostienen la guardia de forma autónoma"
+      metric:
+        value: "6 ingenieros"
+        type: scope
+        # `self_reported`: es verdad y es verificable en una entrevista, pero no
+        # sale de ningún dashboard. Decirlo acá evita presentarlo como si saliera.
+        confidence: self_reported
+      method: "documentando runbooks por servicio y conduciendo revisiones de incidentes sin buscar culpables"
+      tags: [leadership, mentoring, sre, on-call]
+      priority: 75
+      provenance: { source: human }
+
+    - id: work.acme-2023.b5
+      outcome: "Llevó los despliegues a producción de uno semanal a treinta y cinco por semana"
+      metric:
+        value: "35 despliegues/semana"
+        type: frequency
+        confidence: measured
+      method: "construyendo un pipeline de integración y entrega continuas (CI/CD) con pruebas de contrato automatizadas"
+      tags: [ci-cd, testing, delivery, go]
+      priority: 82
+      variants:
+        short: "Llevó los despliegues de uno semanal a treinta y cinco con un pipeline de CI/CD."
+        long: >-
+          Llevó los despliegues a producción de uno semanal a treinta y cinco por semana
+          construyendo un pipeline de integración y entrega continuas (CI/CD) con pruebas
+          de contrato automatizadas y reversión por tasa de error en los primeros diez minutos.
+      provenance: { source: human }
+
+    - id: work.acme-2023.b6
+      # Este bullet no tiene métrica y está bien así. Es específico, verificable y
+      # se sostiene en una entrevista. Un bullet claro y verdadero sin número le
+      # gana a uno con un número forzado: con 2-4 anclas cuantificadas en todo el
+      # CV alcanza, y esta persona ya tiene ocho.
+      outcome: "Rediseñó el modelo de conciliación contable para que el cierre mensual dejara de requerir intervención manual"
+      method: "acordando con Finanzas un contrato de datos único entre el ledger y el ERP"
+      tags: [domain, fintech, data-modeling, collaboration]
+      priority: 70
+      provenance: { source: human }
+
+    - id: work.acme-2023.b7
+      outcome: "Bajó el tiempo de recuperación ante la caída de una región de cuarenta minutos a menos de cinco"
+      metric:
+        value: "de 40 min a menos de 5 min"
+        type: duration
+        confidence: measured
+      method: "automatizando el failover del clúster y ensayándolo un viernes por mes"
+      tags: [sre, reliability, kubernetes, multi-region]
+      priority: 85
+      variants:
+        short: "Bajó el tiempo de recuperación regional de 40 a menos de 5 minutos."
+        long: >-
+          Bajó el tiempo de recuperación ante la caída de una región de cuarenta minutos a
+          menos de cinco automatizando el failover del clúster, ensayándolo un viernes por
+          mes y dejando el resultado de cada ensayo publicado para el equipo.
+      provenance:
+        # El borrador salió de expandir el método de b2, donde el failover estaba
+        # escondido dentro de otro logro. Se aprobó recién después de contrastar
+        # los minutos contra el informe de incidentes: un borrador sin aprobar
+        # (`llm_draft`) que llegue a un CV renderizado rompe el build (ATS-090).
+        source: llm_approved
+        derivedFrom: work.acme-2023.b2
+        approvedBy: "Jane Doe"
+        approvedAt: "2026-06-02"
+      verified: true
+
+- id: work.globex-2019
+  company:
+    name: "Globex Corporation S.A."
+    url: "https://globex.example"
+    industry: "Comercio electrónico"
+  location:
+    city: "Buenos Aires"
+    countryCode: "AR"
+    remote: onsite
+  positions:
+    - id: work.globex-2019.platform
+      title: "Ingeniera de Plataforma"
+      startDate: "2019-06"
+      endDate: "2023-01"
+      seniority: mid
+  summary: "Plataforma de vendedores de un marketplace regional con 2.000 comercios activos."
+  tags: [backend, kubernetes, postgresql, python, observability, e-commerce]
+  priority: 90
+  visibility: public
+  bullets:
+    - id: work.globex-2019.b1
+      outcome: "Bajó el tiempo medio de resolución de tickets críticos de catorce horas a tres"
+      metric:
+        value: "de 14 h a 3 h"
+        type: duration
+        confidence: measured
+      method: "implementando triage por niveles y alertas accionables sobre síntomas visibles del usuario"
+      tags: [observability, on-call, process, sre]
+      priority: 85
+      provenance: { source: human }
+      verified: true
+
+    - id: work.globex-2019.b2
+      outcome: "Migró veintitrés servicios de máquinas virtuales a Kubernetes sin ventanas de mantenimiento visibles"
+      metric:
+        value: "23 servicios"
+        type: scope
+        confidence: measured
+      method: "desplegando en paralelo con espejado de tráfico y reversión automática por tasa de error"
+      tags: [kubernetes, migration, infrastructure, terraform]
+      priority: 88
+      provenance: { source: human }
+      verified: true
+
+    - id: work.globex-2019.b3
+      outcome: "Subió el Net Promoter Score (NPS) del portal de vendedores de 22 a 41"
+      metric:
+        value: "NPS de 22 a 41"
+        # `proxy_qualitative`: la métrica no mide el trabajo directamente, mide
+        # algo que se mueve con él. Sirve, pero conviene saber que es un proxy.
+        type: proxy_qualitative
+        confidence: measured
+      method: "priorizando las tres fricciones más citadas en las entrevistas con vendedores"
+      tags: [product, user-research, e-commerce, collaboration]
+      priority: 65
+      provenance: { source: human }
+
+    - id: work.globex-2019.b4
+      outcome: "Recortó un 35% el costo de almacenamiento del catálogo de productos"
+      metric:
+        value: "-35%"
+        type: delta_pct
+        # `estimated`: el ahorro se calculó proyectando la factura, no se leyó de
+        # una línea de facturación. La diferencia importa si alguien pregunta.
+        confidence: estimated
+      method: "normalizando el esquema en PostgreSQL y archivando en frío las versiones históricas"
+      tags: [postgresql, cost-optimization, data-modeling]
+      priority: 60
+      provenance: { source: human }
+
+- id: work.initech-2017
+  company:
+    name: "Initech LLC"
+    url: "https://initech.example"
+    industry: "Software de facturación"
+  location:
+    city: "Córdoba"
+    countryCode: "AR"
+    remote: onsite
+  positions:
+    - id: work.initech-2017.dev
+      title: "Desarrolladora de Software"
+      startDate: "2017-08"
+      endDate: "2019-05"
+      seniority: junior
+  tags: [python, billing, automation]
+  priority: 60
+  visibility: public
+  bullets:
+    - id: work.initech-2017.b1
+      outcome: "Automatizó la carga nocturna de tres millones de registros de facturación que antes se ejecutaba a mano"
+      metric:
+        value: "3M registros/noche"
+        type: scale
+        confidence: estimated
+      method: "escribiendo un pipeline idempotente en Python con reintentos y verificación de integridad"
+      tags: [python, automation, data-pipeline]
+      priority: 70
+      provenance: { source: human }
+
+    - id: work.initech-2017.b2
+      outcome: "Eliminó la duplicación de facturas al cerrar una condición de carrera en la numeración"
+      metric:
+        value: "0 duplicados en 12 meses"
+        type: absolute
+        confidence: measured
+      method: "introduciendo bloqueo optimista y una prueba de regresión que reproduce el fallo"
+      tags: [concurrency, testing, billing, postgresql]
+      priority: 68
+      provenance: { source: human }
+      verified: true
+
+    - id: work.initech-2017.b3
+      outcome: "Seleccionada entre veinte ingenieros para liderar la migración del motor de facturación a un modelo por eventos"
+      metric:
+        value: "1 de 20"
+        # `selectivity`: mide cuán difícil era estar donde estuviste. Es la
+        # métrica que más se desaprovecha en CVs de gente joven.
+        type: selectivity
+        confidence: self_reported
+      method: "por el historial de entregas y la calidad de las revisiones de código"
+      tags: [leadership, event-driven, billing]
+      priority: 62
+      provenance: { source: human }
+
+- id: work.vandelay-2016
+  company:
+    name: "Vandelay Industries S.R.L."
+    url: "https://vandelay.example"
+    industry: "Servicios de importación"
+  location:
+    city: "Rosario"
+    countryCode: "AR"
+    remote: onsite
+  positions:
+    - id: work.vandelay-2016.junior
+      title: "Desarrolladora Backend Junior"
+      startDate: "2016-03"
+      endDate: "2017-07"
+      seniority: entry
+  tags: [python, web, first-job]
+  # Prioridad baja: es el primer trabajo y hace diez años. Cuando el presupuesto
+  # de páginas aprieta, es el primero que el fit-loop colapsa a una línea.
+  priority: 30
+  visibility: public
+  bullets:
+    - id: work.vandelay-2016.b1
+      outcome: "Redujo a la mitad el tiempo de alta de un cliente nuevo en el portal de autogestión"
+      metric:
+        value: "-50%"
+        type: delta_pct
+        confidence: estimated
+      method: "reemplazando el formulario en cuatro pasos por uno único con validación en línea"
+      tags: [web, ux, python]
+      priority: 45
+      provenance: { source: human }
+
+    - id: work.vandelay-2016.b2
+      # Segundo bullet sin métrica del perfil, y el más honesto de los dos: nadie
+      # medía nada antes de esto. Inventarle un "+40% de cobertura" sería justo
+      # el número forzado que la entrevista desarma en una pregunta.
+      outcome: "Escribió la primera batería de pruebas automatizadas del equipo y la dejó corriendo en cada commit"
+      method: "acordando con el equipo un umbral de cobertura que no bloqueara las entregas"
+      tags: [testing, ci-cd, culture]
+      priority: 40
+      provenance: { source: human }
+
+    - id: work.vandelay-2016.b3
+      outcome: "Automatizó el reporte semanal de facturación que tres personas armaban a mano cada lunes"
+      metric:
+        value: "12 h/semana liberadas"
+        type: duration
+        confidence: estimated
+      method: "generándolo desde la base con una tarea programada y envío por correo"
+      tags: [automation, python, reporting]
+      priority: 35
+      provenance: { source: human }

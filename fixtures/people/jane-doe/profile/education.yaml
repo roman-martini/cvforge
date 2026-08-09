@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../../../schemas/generated/education.schema.json
+
+# `area` y `studyType` son narrativos y se traducen: "Especialización" no es
+# "Specialization" en todos los mercados, y el equivalente correcto depende del
+# país destino. La institución, las fechas y el promedio nunca se traducen.
+
+- id: education.unex-2013
+  institution: "Universidad Nacional de Ejemplo"
+  url: "https://unex.example"
+  area: "Ingeniería en Sistemas de Información"
+  studyType: "Título de grado"
+  startDate: "2013-03"
+  endDate: "2017-12"
+  # String entre comillas obligatoriamente: `8.7` sin comillas se parsea como
+  # número y se imprime "8.7"; peor, un `4.0` se imprime "4".
+  score: "8.7 / 10"
+  courses:
+    - "Sistemas Operativos"
+    - "Bases de Datos Distribuidas"
+    - "Teoría de la Computación"
+    - "Ingeniería de Software"
+  tags: [education, systems, degree]
+  priority: 70
+  visibility: public
+
+- id: education.itex-2024
+  institution: "Instituto Tecnológico de Ejemplo"
+  url: "https://itex.example"
+  area: "Sistemas Distribuidos"
+  studyType: "Especialización"
+  startDate: "2024-03"
+  # Mismo criterio que en work: `current: true` en lugar de dejar `endDate:` sin
+  # valor. Un `endDate` nulo o vacío es el caso del 100% de la gente que sigue
+  # cursando, y es también el que rompe la validación del schema oficial.
+  current: true
+  courses:
+    - "Consenso y replicación"
+    - "Sistemas de eventos y colas"
+  tags: [education, distributed-systems, in-progress]
+  priority: 60
+  visibility: public

@@ -1,0 +1,147 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:cv-workspace:schema:target",
+  "title": "Arquetipo de postulación (targets/*.yaml)",
+  "description": "Capa reutilizable: región, industria, idioma, orden de secciones y presupuesto. Acá vive el 80 % del tailoring.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "es",
+        "en",
+        "de",
+        "fr",
+        "pt",
+        "it"
+      ]
+    },
+    "region": {
+      "type": "string",
+      "minLength": 1
+    },
+    "industry": {
+      "default": "tech",
+      "type": "string",
+      "minLength": 1
+    },
+    "seniority": {
+      "type": "string",
+      "minLength": 1
+    },
+    "theme": {
+      "default": "ats-classic",
+      "type": "string",
+      "minLength": 1
+    },
+    "titleTarget": {
+      "type": "string"
+    },
+    "keywords": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sectionOrder": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "contact",
+          "summary",
+          "skills",
+          "work",
+          "education",
+          "certificates",
+          "projects",
+          "awards",
+          "languages",
+          "publications",
+          "references",
+          "interests"
+        ]
+      }
+    },
+    "budget": {
+      "type": "object",
+      "properties": {
+        "maxPages": {
+          "default": 2,
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "bulletsPerRole": {
+          "default": {
+            "recent": 5,
+            "mid": 3,
+            "old": 2
+          },
+          "type": "object",
+          "properties": {
+            "recent": {
+              "default": 5,
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "mid": {
+              "default": 3,
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "old": {
+              "default": 2,
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "additionalProperties": false
+        },
+        "maxWords": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 5000
+        }
+      },
+      "additionalProperties": false
+    },
+    "fileNameTemplate": {
+      "default": "{First}-{Last}-{Role}.{ext}",
+      "type": "string"
+    },
+    "formats": {
+      "default": [
+        "pdf",
+        "docx",
+        "txt"
+      ],
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "pdf",
+          "docx",
+          "txt",
+          "md",
+          "html",
+          "jsonresume"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "locale",
+    "region"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../../schemas/generated/skills.schema.json
+
+# `canonical` es la forma que se imprime por defecto. `aliases` no es adorno:
+# varios ATS no resuelven que "K8s" y "Kubernetes" o que "PMP certified" y
+# "Project Management Professional" son lo mismo. El matcher reconoce cualquiera
+# de las formas y el renderer emite LA QUE USA LA VACANTE.
+#
+# Regla práctica: para todo término que tenga acrónimo, listá el acrónimo, la
+# forma expandida y la combinación "Expandida (ACRÓNIMO)".
+#
+# `yearsOfExperience` se deriva de work/ cuando no lo declarás. Declaralo sólo
+# cuando la experiencia no venga de un empleo o el cálculo automático se quede
+# corto.
+
+- id: skill.ejemplo
+  canonical: "Nombre canónico de la habilidad"
+  aliases: ["Sinónimo", "ACRÓNIMO", "Forma expandida (ACRÓNIMO)"]
+  # La categoría agrupa las skills en la línea impresa. Es narrativa: se traduce.
+  category: "Categoría"
+  # beginner | intermediate | advanced | expert
+  level: advanced
+  yearsOfExperience: 5
+  keywords: [palabra-clave, otra-palabra-clave]
+  tags: [tag-uno]
+  # Prioridad alta = entra siempre; prioridad media = entra si la vacante la pide.
+  # Justamente las de prioridad media son las que el match-report señala como
+  # "excluida y sin embargo relevante", que suele ser el hallazgo más útil.
+  priority: 80
+  visibility: public

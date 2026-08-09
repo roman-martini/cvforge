@@ -1,0 +1,103 @@
+# yaml-language-server: $schema=../../../schemas/generated/work.schema.json
+
+# Esto no es "el CV": es el POOL de hechos del que después cada variante elige.
+# Escribí acá todo lo que sea verdad y esté bien redactado, aunque no entre en
+# dos páginas. Lo que entra en cada CV lo decide el overlay, no este archivo.
+#
+# Cada bullet sigue la fórmula XYZ ("logró X, medido por Y, haciendo Z"):
+#   outcome  → X, el resultado. Va PRIMERO: el reclutador escanea en 6-7 segundos
+#              y rara vez pasa del tercer bullet de cada rol.
+#   metric   → Y, la medida. OPCIONAL. Exigirla en todos los bullets empuja a
+#              inventar números, y el número inventado es justo lo que se cae en
+#              la entrevista. Con 2-4 anclas cuantificadas en todo el CV alcanza.
+#   method   → Z, el método.
+# Longitud objetivo: 15 a 30 palabras entre outcome y method (1-2 líneas).
+# Empezá siempre con un verbo de acción, sin pronombres y sin artículo inicial.
+#
+# `tags`     → términos libres que el matcher compara contra los requisitos de
+#              una vacante. Poné los que usarías vos para buscar este logro.
+# `priority` → 0-100. Desempata cuando el presupuesto de páginas aprieta: lo de
+#              prioridad más baja es lo primero que el fit-loop sacrifica.
+
+- id: work.empresa-2024
+  company:
+    # Con el sufijo legal (S.A., S.R.L., Inc., GmbH, Ltd): varios ATS parsean
+    # peor el nombre sin él.
+    name: "Empresa S.A."
+    url: "https://empresa.example"
+    industry: "Industria de la empresa"
+  location:
+    city: "Ciudad"
+    countryCode: "AR"
+    # Enum en minúsculas: remote | hybrid | onsite.
+    remote: hybrid
+  positions:
+    # Una entrada por cargo. Dos posiciones en la misma empresa es como se
+    # modela una promoción sin duplicar el empleador ni inflar la antigüedad.
+    - id: work.empresa-2024.senior
+      # Sin abreviaturas: "Ingeniera de Software Senior", nunca "Ing. Sr. de SW".
+      # Las abreviaturas no matchean ninguna búsqueda booleana del reclutador.
+      title: "Cargo actual"
+      startDate: "2024-06"
+      # `current: true` en lugar de dejar `endDate:` sin valor. En YAML una clave
+      # sin valor produce `null`, y `endDate: null` falla la validación del
+      # schema oficial de JSON Resume — que es el caso del 100% de la gente que
+      # tiene trabajo. Con `current`, el compilador omite la clave entera.
+      current: true
+      seniority: senior
+    - id: work.empresa-2024.ssr
+      title: "Cargo anterior en la misma empresa"
+      startDate: "2022-03"
+      endDate: "2024-05"
+      seniority: mid
+  summary: "Una línea de contexto: qué producto, a qué escala. Es opcional pero ubica al que lee."
+  tags: [tag-uno, tag-dos]
+  priority: 100
+  visibility: public
+  bullets:
+    - id: work.empresa-2024.b1
+      outcome: "Verbo en pasado + el resultado concreto, con el número adentro de la frase"
+      metric:
+        value: "40%"
+        # delta_pct | absolute | scope | frequency | scale | selectivity |
+        # duration | proxy_qualitative
+        type: delta_pct
+        # measured      → sale de un dashboard o un informe que podés mostrar
+        # estimated     → lo calculaste vos con supuestos razonables
+        # self_reported → es verdad y lo sostenés, pero no hay fuente externa
+        confidence: measured
+      method: "cómo lo lograste, empezando con gerundio"
+      tags: [tag-uno]
+      priority: 90
+      # Variantes de longitud para que el fit-loop recorte sin perder el hecho.
+      # Nunca son un hecho distinto: son el mismo hecho con otro largo.
+      variants:
+        short: "La versión de una línea, para cuando no entra."
+        long: "La versión con el detalle técnico, para cuando el rol es el que se lee."
+      provenance: { source: human }
+      # `true` significa que el número se contrastó contra una fuente concreta,
+      # no que suene razonable.
+      verified: false
+
+    - id: work.empresa-2024.b2
+      # Un bullet sin métrica. No es un bullet de segunda: un logro claro,
+      # específico y verdadero sin número le gana a uno con un número forzado.
+      outcome: "Un logro que no se puede medir con un número pero sí se puede verificar"
+      method: "cómo lo hiciste"
+      tags: [tag-dos]
+      priority: 70
+      provenance: { source: human }
+
+    # Si un borrador lo escribió un modelo, marcalo. El build FALLA si un bullet
+    # con `source: llm_draft` llega a un CV renderizado: el modo de falla más
+    # probable de un generador automático es inflar el verbo al reformular
+    # ("colaboré en" → "lideré"), y eso es exactamente lo que se desarma en la
+    # entrevista. Pasa a `llm_approved` recién cuando lo leíste y lo verificaste.
+    # - id: work.empresa-2024.b3
+    #   outcome: "..."
+    #   method: "..."
+    #   provenance:
+    #     source: llm_approved
+    #     derivedFrom: work.empresa-2024.b1
+    #     approvedBy: "Nombre Apellido"
+    #     approvedAt: "2026-01-01"

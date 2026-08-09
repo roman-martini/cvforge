@@ -1,0 +1,47 @@
+# Perfil de industria: finanzas / banca de inversión.
+# Una página estricta hasta nivel Associate. Desde Vice President en adelante se admite
+# multipágina, con la "Transaction Page" — el listado de operaciones cerradas — como
+# documento separado y no como sección del CV.
+# Cero gráficos, cero color, cero elementos decorativos: el formato es tan convencional
+# que cualquier desvío se lee como desconocimiento del sector.
+
+id: finance
+label: Finanzas / Banca de inversión
+
+pageBudget:
+  min: 1
+  max: 1
+
+sectionOrder:
+  - contact
+  - summary
+  - work
+  - education
+  - skills
+  - certificates
+  - awards
+  - languages
+  - projects
+  - publications
+  - interests
+  - references
+
+colorPolicy: none
+
+formats:
+  - pdf
+  - docx
+
+notes: >-
+  Orden de perfil con experiencia. El formato de campus — Header, Education, Work &
+  Leadership Experience, Skills / Activities & Interests — lo aplican los perfiles de
+  seniority student y entry, y en ese formato Education encabeza con GPA, SAT/GMAT y
+  honores explícitos. Es de las pocas industrias donde omitir la nota promedio se
+  interpreta como que es baja.
+  La sección Interests no es relleno en banca: se usa como material de conversación en la
+  entrevista y se espera concreta ("marathon running, competitive chess"), nunca genérica.
+  El bloque de operaciones (Selected Transaction Experience) se modela como entradas de
+  projects con la entidad, el tamaño y el rol, y se emite en documento aparte a partir de
+  VP. Meterlo en un CV de una página fuerza recortes en experiencia que valen más.
+  Precisión de cifras: montos con moneda y unidad explícitas (USD 1.2bn, EUR 340m). Un
+  número sin unidad en un CV de finanzas es un error de oficio.

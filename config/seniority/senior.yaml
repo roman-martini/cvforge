@@ -1,0 +1,33 @@
+# Perfil de seniority: senior / staff (~8 a 15 años).
+# Sin sectionOrder propio, por la misma razón que mid: manda la convención regional.
+# Dos páginas completas dejan de ser exceso y pasan a ser lo esperado en la mayoría de los
+# mercados; el mínimo sube a 2 para que una página se reporte como CV que quedó corto.
+
+id: senior
+label: Senior / Staff
+
+pageBudget:
+  min: 2
+  max: 2
+
+budget:
+  maxPages: 2
+  bulletsPerRole:
+    recent: 6
+    mid: 4
+    old: 2
+  maxWords: 1400
+
+notes: >-
+  Seis bullets en el rol actual es el máximo del sistema y sólo se justifica cuando el rol
+  cubre dominios distintos entre sí. Seis viñetas que dicen variantes de lo mismo son
+  peores que tres bien elegidas.
+  A partir de acá el CV compite con pares que también tienen quince años: lo que diferencia
+  no es la cantidad de responsabilidades sino el alcance verificable — tamaño de sistema,
+  de equipo, de presupuesto, de usuarios — y el liderazgo técnico ejercido sin autoridad
+  formal.
+  Los roles anteriores al corte de antigüedad colapsan en una línea de experiencia previa
+  con empresa, título y años. Borrarlos abre un hueco temporal que el reclutador lee como
+  omisión deliberada; detallarlos consume la página que necesita el rol actual.
+  Presupuesto de páginas: en consultoría y finanzas la industria pisa esto y vuelve a una
+  página estricta. Es correcto y es el orden de composición esperado.

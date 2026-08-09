@@ -1,0 +1,93 @@
+# Perfil regional: Reino Unido.
+# El documento se llama "Curriculum Vitae" aunque tenga la extensión de un resume
+# norteamericano: en este mercado "resume" no es la palabra que se usa.
+# A diferencia de us, la línea de referencias a pedido es convención vigente y no ruido.
+
+id: uk
+label: Reino Unido
+documentType: Curriculum Vitae
+paper: A4
+locale: en-GB
+
+pageBudget:
+  min: 2
+  max: 2
+
+forbiddenFields:
+  - field: basics.photo
+    reason: >-
+      La guía oficial de empleo del gobierno es explícita en no incluir foto. Además
+      expone de golpe cuatro características protegidas por la Equality Act.
+    source: >-
+      National Careers Service (gov.uk) — How to write a CV; Equality Act 2010, s. 4
+      (protected characteristics)
+  - field: basics.birthDate
+    reason: >-
+      La edad es característica protegida sin umbral mínimo ni máximo desde que la
+      Equality Act absorbió las Employment Equality (Age) Regulations 2006.
+    source: Equality Act 2010, s. 5; Employment Equality (Age) Regulations 2006 (derogadas y absorbidas)
+  - field: basics.maritalStatus
+    reason: >-
+      Matrimonio y unión civil son característica protegida nominada; declararlos no
+      aporta nada y abre una vía de descarte.
+    source: Equality Act 2010, s. 8 (marriage and civil partnership)
+  - field: basics.nationality
+    reason: >-
+      Raza incluye color, nacionalidad y origen étnico o nacional. El empleador verifica
+      el derecho a trabajar con documentación, después de la oferta, no leyendo el CV.
+    source: >-
+      Equality Act 2010, s. 9; Home Office — Right to work checks: employer's guide
+  - field: basics.gender
+    reason: Sexo y reasignación de género son características protegidas nominadas.
+    source: Equality Act 2010, ss. 7 y 11
+  - field: basics.nationalId
+    reason: >-
+      El National Insurance Number se entrega al empleador una vez contratado, para
+      nómina. En un CV es sólo superficie de fraude.
+    source: HM Revenue and Customs — National Insurance number guidance
+
+customaryFields:
+  - basics.location.city
+  - basics.profiles
+  - references
+
+referencesPolicy: on-request-line
+
+datePattern: MMMM yyyy
+
+sectionLabels:
+  contact: Contact
+  summary: Personal Profile
+  skills: Skills
+  work: Work Experience
+  education: Education
+  certificates: Certifications
+  projects: Projects
+  awards: Awards
+  languages: Languages
+  publications: Publications
+  references: References
+  interests: Interests
+
+sectionOrder:
+  - contact
+  - summary
+  - skills
+  - work
+  - education
+  - certificates
+  - projects
+  - awards
+  - publications
+  - languages
+  - interests
+  - references
+
+notes: >-
+  Dos páginas A4 completas son la norma, no el techo tolerado: un CV británico de una sola
+  página se lee como perfil sin recorrido salvo en estudiantes y recién graduados, que
+  bajan el presupuesto desde el eje de seniority.
+  La línea "References available on request" sigue siendo convención aceptada acá — es el
+  único mercado de los diez donde no se descarta por decorativa — pero los datos de
+  contacto de los referentes no van nunca en el documento: esa persona no consintió que su
+  teléfono circule por bolsas de trabajo.

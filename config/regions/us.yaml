@@ -1,0 +1,102 @@
+# Perfil regional: Estados Unidos.
+# Es el perfil más restrictivo en campos personales: la asimetría legal norteamericana
+# hace que el reclutador no pueda desprobar haber visto un dato protegido, así que la
+# práctica del mercado es que ese dato no llegue nunca al documento.
+
+id: us
+label: Estados Unidos
+documentType: Resume
+paper: Letter
+locale: en-US
+
+pageBudget:
+  min: 1
+  max: 2
+
+forbiddenFields:
+  - field: basics.photo
+    reason: >-
+      Una foto revela raza, color de piel, edad, género y origen nacional de un vistazo.
+      La práctica del mercado es pedirla recién después de la oferta aceptada, para el
+      legajo; incluirla de motu propio da al empleador un motivo para descartar la
+      candidatura sin siquiera leerla.
+    source: >-
+      U.S. Equal Employment Opportunity Commission (EEOC) — Title VII of the Civil Rights
+      Act of 1964, 42 U.S.C. 2000e-2
+  - field: basics.birthDate
+    reason: >-
+      La edad es característica protegida a partir de los 40 años; la fecha de nacimiento
+      la expone de forma directa y no aporta ninguna información laboral.
+    source: >-
+      U.S. EEOC — Age Discrimination in Employment Act of 1967 (ADEA), 29 U.S.C. 621
+  - field: basics.maritalStatus
+    reason: >-
+      El estado civil es un proxy directo de sexo, embarazo y responsabilidades
+      familiares. No se pregunta ni antes ni después de la oferta.
+    source: >-
+      U.S. EEOC — Title VII (sex discrimination) y Pregnancy Discrimination Act of 1978
+  - field: basics.nationality
+    reason: >-
+      El empleador puede preguntar si estás autorizado a trabajar en el país, jamás cuál
+      es tu nacionalidad ni tu origen. Declararla convierte una pregunta legítima sobre
+      autorización en un dato de origen nacional.
+    source: >-
+      Immigration and Nationality Act, 8 U.S.C. 1324b (disposición antidiscriminatoria
+      de IRCA) — administrada por el DOJ Immigrant and Employee Rights Section
+  - field: basics.gender
+    reason: >-
+      Característica protegida, incluidas identidad de género y orientación sexual desde
+      Bostock v. Clayton County (2020). Nunca es información de candidatura.
+    source: U.S. EEOC — Title VII; Bostock v. Clayton County, 590 U.S. 644 (2020)
+  - field: basics.nationalId
+    reason: >-
+      El Social Security Number en un CV es el vector más directo de robo de identidad:
+      el documento circula por bolsas de trabajo, buzones compartidos y ATS de terceros.
+    source: >-
+      U.S. Social Security Administration — Identity Theft and Your Social Security
+      Number (Publication No. 05-10064); FTC Identity Theft guidance
+
+customaryFields:
+  - basics.location.city
+  - basics.location.region
+  - basics.profiles
+
+referencesPolicy: omit
+
+# Un único patrón para todo el documento (ATS-061). Renderiza "March 2022".
+datePattern: MMMM yyyy
+
+sectionLabels:
+  contact: Contact
+  summary: Summary
+  skills: Skills
+  work: Experience
+  education: Education
+  certificates: Certifications
+  projects: Projects
+  awards: Awards
+  languages: Languages
+  publications: Publications
+  references: References
+  interests: Interests
+
+sectionOrder:
+  - contact
+  - summary
+  - skills
+  - work
+  - education
+  - certificates
+  - projects
+  - awards
+  - publications
+  - languages
+  - interests
+  - references
+
+notes: >-
+  Una página es el default real por debajo de 10 años de experiencia; dos páginas se
+  aceptan sin fricción de ahí en adelante y en perfiles muy técnicos. El presupuesto
+  declara 1-2 y son los perfiles de seniority los que aprietan el máximo a 1.
+  Las referencias no se listan ni se anuncia que están disponibles: se dan por
+  descontadas y la línea consume espacio útil.

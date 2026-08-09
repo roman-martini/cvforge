@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../../schemas/generated/projects.schema.json
+
+# Sección opcional. Un array vacío es válido: significa "no tengo, y lo sé".
+#
+# `highlights` usa exactamente la misma estructura que los bullets de work.yaml:
+# mismo formato XYZ, misma métrica opcional, misma procedencia. Si un logro de un
+# proyecto no aguanta ese formato, probablemente tampoco aguante estar en el CV.
+
+[]
+
+# - id: project.ejemplo
+#   name: "Nombre del proyecto"
+#   description: "Una línea de qué es y para quién."
+#   url: "https://proyecto.example"
+#   startDate: "2024-01"
+#   endDate: "2024-11"          # sin endDate = sigue vivo (proyectos no usan `current`)
+#   roles: ["Autora"]
+#   entity: "Proyecto personal"  # o la organización bajo la que se hizo
+#   type: "open-source"          # open-source | docencia | investigación | freelance…
+#   keywords: [palabra-clave]
+#   tags: [tag-uno]
+#   priority: 60
+#   visibility: public
+#   highlights:
+#     - id: project.ejemplo.h1
+#       outcome: "Verbo + resultado concreto"
+#       metric: { value: "1.000 usuarios", type: absolute, confidence: estimated }
+#       method: "cómo lo lograste"
+#       tags: [tag-uno]
+#       priority: 60
+#       provenance: { source: human }
