@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=../../schemas/generated/person-meta.schema.json
+
+slug: roman-martini
+
+primaryLocale: es
+
+locales: []
+
+modelVersion: "1.0.0"
+
+consent:
+  grantedBy: "Roman Martini"
+  grantedAt: "2026-09-03"
+  purpose: "Generación de CVs para postulaciones propias"

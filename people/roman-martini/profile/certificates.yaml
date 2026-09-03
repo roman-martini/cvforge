@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=../../../schemas/generated/certificates.schema.json
+
+# VACÍO A PROPÓSITO. La única certificación con evidencia es la Claude
+# Certified Developer: Foundations (CCDV-F, Anthropic) y está EN PREPARACIÓN
+# (claude-cert/: fase 0 de ~55 h, examen apuntado a ene-2027). Una
+# certificación no obtenida no se lista como certificado: cuando apruebes el
+# examen, cargala acá con date, url de verificación y credentialId.
+
+[]

@@ -1,0 +1,5 @@
+# yaml-language-server: $schema=../../../schemas/generated/awards.schema.json
+#
+# Premios y distinciones, con fecha y entidad que los otorgó.
+
+[]

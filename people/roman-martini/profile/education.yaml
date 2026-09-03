@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=../../../schemas/generated/education.schema.json
+
+# VACÍO A PROPÓSITO: en los repos no hay evidencia de educación formal
+# (institución, título, fechas) y esos hechos no se inventan. Completalo vos.
+#
+# Candidatas encontradas que podrían ir acá como formación no formal, si
+# querés modelarlas así (hoy están anotadas en work.yaml como contexto):
+# - Programa de upskilling de AyiGroup "Desarrollo de Software con IA"
+#   (Spec Engine, Sentinel, Inception Loop) — en curso desde 2026-06.
+# - Academia de DevOps 2025 (AyiGroup) — 4 de 11 clases al 2026-08-27.
+
+[]

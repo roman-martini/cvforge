@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=../../../schemas/generated/references.schema.json
+#
+# Sólo iniciales y rol. Los datos de contacto de un tercero tienen otra base
+# legal que los propios: esa persona no consintió vivir en tu repositorio.
+
+[]

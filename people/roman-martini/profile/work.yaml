@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../../schemas/generated/work.schema.json
+
+# VACÍO A PROPÓSITO, no por olvido. Los repos del workspace prueban QUE
+# trabajás y EN QUÉ, pero no las fechas, los títulos ni la antigüedad — y esos
+# hechos no se inventan (docs/ETHICS.md). Lo que la exploración sí dejó
+# verificado, para cuando lo completes:
+#
+# 1. AyiGroup — relación de dependencia.
+#    Sistema de gestión portuaria multi-módulo: auth, comunicaciones, giros,
+#    buques, patentes, ferroviario, servicios a la nave, reservas, reportes e
+#    integraciones con sistemas externos.
+#    Fuente: dev-vault/inbox/memory/perfil-roman.md, capacitaciones-ayi/.
+#    Además: programa formal de upskilling de la empresa en desarrollo con IA
+#    (Spec-Driven Development, OpenSpec) y Academia de DevOps — en curso, va a
+#    education/ o como bullet, no como certificado.
+#
+# 2. AVAIN — facturación como monotributista.
+#    Dominio salud: medicamentos, teleconsultas, certificados y exámenes por
+#    QR, monitoreo. Evidencia técnica fuerte: API de notificaciones WhatsApp
+#    multi-tenant (NestJS 11 hexagonal, Meta Cloud API, SQL Server, JWT
+#    multi-tenant, 21 archivos de test por capa + e2e, OpenSpec, migraciones y
+#    seeds idempotentes) en dev-vault/inbox/meta-api/. Al redactarla, describila
+#    en abstracto: es producto propietario del cliente.
+#
+# Falta (solo lo sabés vos): fechas de inicio, títulos exactos, seniority por
+# etapa, y todo empleo anterior a estos dos.
+
+[]

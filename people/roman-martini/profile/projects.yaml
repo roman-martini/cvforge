@@ -1,0 +1,307 @@
+# yaml-language-server: $schema=../../../schemas/generated/projects.schema.json
+
+# Borrador armado desde la evidencia de los repos del workspace (2026-09-03).
+# TODOS los highlights están en `source: llm_draft` a propósito: el build FALLA
+# si uno llega a un CV renderizado sin que lo hayas leído y pasado a
+# `llm_approved`. Las cifras salen de contar en los repos (commits, archivos,
+# endpoints); están citadas con su fuente en el comentario de cada proyecto.
+#
+# Fechas: startDate = mes del primer commit del repo. Si el trabajo empezó
+# antes de versionarse, corregilas.
+
+# Evidencia: design-system/ — 193 commits (2026-05→08), 23 ADRs, CI en
+# .github/workflows/pr.yml, umbrales en packages/components/vitest.config.ts,
+# auditoría en docs/design/a11y/2026-07-11-audit.md. Cautela verificada:
+# publicable pero NO publicado en npm todavía (pausado a propósito).
+- id: project.design-system
+  name: "design-system"
+  description: >-
+    Design system Angular open-source: monorepo pnpm con design tokens (Style
+    Dictionary) y 21 familias de componentes standalone, multi-brand, con
+    objetivo de accesibilidad WCAG 2.2 AA.
+  url: "https://github.com/roman-martini/design-system"
+  startDate: "2026-05"
+  roles: ["Autor", "Mantenedor"]
+  entity: "Proyecto personal"
+  type: "open-source"
+  keywords: [angular, "design tokens", "style dictionary", storybook, wcag]
+  tags: [frontend, design-system, open-source, a11y]
+  priority: 90
+  visibility: public
+  highlights:
+    - id: project.design-system.h1
+      outcome: "Construyó un design system Angular multi-brand con 21 familias de componentes standalone con signals y detección de cambios zoneless"
+      metric:
+        value: "21 familias de componentes"
+        type: scope
+        confidence: measured
+      method: "generando los tokens con Style Dictionary en una matriz de marca por esquema y publicando tokens y componentes en lockstep desde un monorepo pnpm"
+      tags: [angular, design-system, tokens]
+      priority: 90
+      provenance: { source: llm_draft }
+    - id: project.design-system.h2
+      outcome: "Montó un pipeline de CI con 13 verificaciones bloqueantes y endurecimiento de cadena de suministro"
+      metric:
+        value: "13 gates"
+        type: scope
+        confidence: measured
+      method: "pinneando las actions por SHA con verificación de checksum, y combinando umbrales de cobertura que fallan el build con presupuesto de bundle y control de su margen"
+      tags: [ci-cd, supply-chain, testing]
+      priority: 85
+      provenance: { source: llm_draft }
+    - id: project.design-system.h3
+      outcome: "Corrigió la capa de tokens en lugar de parchar componentes tras una auditoría de contraste WCAG 2.2 AA instrumentada por script"
+      method: "calculando el contraste de 19 pares de tokens en los 4 esquemas de color y rastreando cada hallazgo a su causa raíz"
+      tags: [a11y, wcag, tokens]
+      priority: 75
+      provenance: { source: llm_draft }
+    - id: project.design-system.h4
+      outcome: "Documentó la gobernanza del proyecto en 23 ADRs inmutables y 53 propuestas de cambio formales archivadas"
+      metric:
+        value: "23 ADRs"
+        type: scope
+        confidence: measured
+      method: "escribiendo la decisión en formato MADR antes de cada cambio de contrato, con OpenSpec como proceso de cambio"
+      tags: [architecture, adr, governance]
+      priority: 65
+      provenance: { source: llm_draft }
+
+# Evidencia: claude-plugins/ (hub público), agent-studio v3.2.0 (129 commits
+# desde 2026-05), agent-architect v0.3.36 (24k líneas md), agent-configs
+# v0.9.3, agent-product v0.6.3. Cifras de ADRs/specs en cada repo.
+- id: project.claude-plugins
+  name: "Ecosistema de plugins de Claude Code (marketplace roman-dev)"
+  description: >-
+    Cinco plugins propios para construir, auditar y operar agentes de IA de
+    desarrollo — diseño de agentes, arquitectura, configuración de repos,
+    documentación de producto y refinamiento de HUs — distribuidos por un
+    marketplace público propio.
+  url: "https://github.com/roman-martini/claude-plugins"
+  startDate: "2026-05"
+  roles: ["Autor", "Mantenedor"]
+  entity: "Proyecto personal"
+  type: "open-source"
+  keywords: ["claude code", plugins, agentes, mcp, openspec]
+  tags: [ai, tooling, open-source]
+  priority: 88
+  visibility: public
+  highlights:
+    - id: project.claude-plugins.h1
+      outcome: "Publicó un marketplace propio de plugins de Claude Code con cinco plugins de meta-herramientas para el ciclo de desarrollo asistido por IA"
+      metric:
+        value: "5 plugins"
+        type: scope
+        confidence: measured
+      method: "codificando el criterio de diseño — agente contra skill, selección de modelo por reversibilidad de la decisión — en 19 ADRs y 7 especificaciones formales"
+      tags: [ai, plugins, architecture]
+      priority: 90
+      provenance: { source: llm_draft }
+    - id: project.claude-plugins.h2
+      outcome: "Verificó herramientas sin suite de tests posible mediante bancos de fixtures con defectos plantados y corridas desatendidas"
+      method: "plantando 9 defectos conocidos como control positivo del auditor, analizando trazas JSONL de corridas headless y documentando el catálogo de falsos verdes"
+      tags: [testing, fixtures, ai]
+      priority: 80
+      provenance: { source: llm_draft }
+    - id: project.claude-plugins.h3
+      outcome: "Construyó una base de conocimiento de arquitectura de 45 documentos taxonomizados que alimenta 7 agentes arquitectos especialistas"
+      metric:
+        value: "45 documentos"
+        type: scope
+        confidence: measured
+      method: "destilando la investigación en kits de arranque portables con ADRs preescritos y checklist verificable"
+      tags: [architecture, knowledge, ai]
+      priority: 70
+      provenance: { source: llm_draft }
+
+# Evidencia: agent-agp/ (plugin hu v0.2.0). El repo es la formalización de
+# comandos personales previos sin versionar; startDate = mes del repo.
+# "AGP" es el nombre del proyecto tal como aparece en el repo; no se atribuye
+# a ningún empleador acá porque el repo no lo hace.
+- id: project.plugin-hu
+  name: "Plugin hu — refinamiento de historias de usuario (proyecto AGP)"
+  description: >-
+    Ciclo completo de refinamiento de historias de usuario para un equipo real:
+    del ticket de Jira al change de OpenSpec, con análisis de impacto
+    cross-repo y subtareas estimadas por disciplina.
+  startDate: "2026-08"
+  roles: ["Autor"]
+  entity: "Equipo del proyecto AGP"
+  type: "herramienta de equipo"
+  keywords: [jira, mcp, openspec, refinamiento, estimación]
+  tags: [ai, tooling, process, backend]
+  priority: 80
+  visibility: public
+  highlights:
+    - id: project.plugin-hu.h1
+      outcome: "Automatizó el ciclo de refinamiento de historias de usuario de un equipo real, del ticket de Jira a las subtareas estimadas por disciplina"
+      method: "encadenando siete comandos con análisis de impacto entre repositorios e ida y vuelta con el analista funcional por comentarios de Jira"
+      tags: [process, jira, automation]
+      priority: 85
+      provenance: { source: llm_draft }
+    - id: project.plugin-hu.h2
+      outcome: "Integró Jira y la base de datos de desarrollo en AWS vía MCP bajo la regla de cero afirmaciones sin evidencia"
+      method: "exigiendo cita de archivo y línea o resultado de query en cada hallazgo, y marcando las inferencias como tales"
+      tags: [mcp, jira, evidence]
+      priority: 75
+      provenance: { source: llm_draft }
+
+# Evidencia: agency-forma/ — 64 commits (2026-05→08), 13 modelos Prisma con 12
+# migraciones, 11 controllers / 39 endpoints, guards por rol en Angular.
+# Cautelas verificadas: agencia PROPIA (no un empleador), sin clientes
+# pagadores verificables en el repo, y con solo 4 archivos de test y sin CI.
+# Nada de eso se afirma en contrario acá.
+- id: project.forma-platform
+  name: "Forma Studio — plataforma de gestión del estudio"
+  description: >-
+    Plataforma full-stack que automatiza el ciclo comercial de un estudio
+    digital propio — briefing, estimado, propuesta, build y entrega — con
+    portal de administración y portal de cliente.
+  startDate: "2026-05"
+  roles: ["Fundador", "Desarrollador"]
+  entity: "Forma Studio (estudio propio)"
+  type: "producto propio"
+  keywords: [angular, nestjs, prisma, postgresql, rbac]
+  tags: [fullstack, backend, frontend, product]
+  priority: 75
+  visibility: public
+  highlights:
+    - id: project.forma-platform.h1
+      outcome: "Construyó en solitario una plataforma full-stack con RBAC punta a punta, 39 endpoints REST y 13 entidades de dominio"
+      metric:
+        value: "39 endpoints"
+        type: scope
+        confidence: measured
+      method: "modelando el dominio en Prisma sobre PostgreSQL con 12 migraciones versionadas, y protegiendo el router Angular con guards por rol contra la tabla de permisos"
+      tags: [nestjs, angular, prisma, rbac]
+      priority: 85
+      provenance: { source: llm_draft }
+    - id: project.forma-platform.h2
+      outcome: "Operó el ciclo comercial completo del estudio con artefactos versionados antes de escribir código"
+      method: "trabajando en ciclos de dos semanas con roadmap priorizado por RICE, historias con criterios de aceptación binarios y flujos con roles declarados"
+      tags: [product, process]
+      priority: 65
+      provenance: { source: llm_draft }
+
+# Evidencia: este repo (cvforge), descrito en workspace/repos.json.
+- id: project.cvforge
+  name: "cvforge"
+  description: >-
+    Generador de CVs multi-persona: los datos viven una sola vez en YAML
+    versionado y cada formato — PDF, DOCX, TXT, HTML, JSON Resume — es una
+    proyección; un linter compara el texto extraído del PDF contra el TXT en
+    dos órdenes de extracción para cazar fallos silenciosos.
+  startDate: "2026-08"
+  roles: ["Autor"]
+  entity: "Proyecto personal"
+  type: "herramienta propia"
+  keywords: [typescript, zod, yaml, ats, pdf]
+  tags: [tooling, typescript, backend]
+  priority: 60
+  visibility: public
+  highlights:
+    - id: project.cvforge.h1
+      outcome: "Diseñó un generador de CVs donde adaptar a una vacante es seleccionar hechos por id, nunca reescribirlos"
+      method: "separando la selección de hechos del formateo con un schema Zod como única fuente de verdad, y haciendo fallar el build ante cualquier texto de IA no aprobado por el dueño del CV"
+      tags: [typescript, zod, ethics, architecture]
+      priority: 70
+      provenance: { source: llm_draft }
+
+# Evidencia: workspace/scripts/*.ps1 y workspace/README.md.
+- id: project.workspace-bootstrap
+  name: "Workspace multi-máquina reproducible"
+  description: >-
+    Bootstrap idempotente en PowerShell 5.1 que levanta el entorno de
+    desarrollo completo desde cero, incluso en máquinas corporativas sin
+    permisos de administrador.
+  startDate: "2026-08"
+  roles: ["Autor"]
+  entity: "Proyecto personal"
+  type: "herramienta propia"
+  keywords: [powershell, git, automatización, devex]
+  tags: [devops, tooling, windows]
+  priority: 35
+  visibility: public
+  highlights:
+    - id: project.workspace-bootstrap.h1
+      outcome: "Automatizó el alta reproducible de su entorno en tres máquinas con identidades git personal y corporativa conviviendo sin interferirse"
+      metric:
+        value: "3 máquinas"
+        type: scope
+        confidence: measured
+      method: "resolviendo credential helpers multivaluados con includeIf por gitdir, e instalación en alcance de usuario cuando el instalador no puede elevarse"
+      tags: [git, powershell, devex]
+      priority: 45
+      provenance: { source: llm_draft }
+
+# Evidencia: Projects/romanmartinidev/portafolio (3 commits, 2026-05). Cautela
+# verificada: el núcleo hexagonal del roadmap NO está implementado (Fase 0
+# explícita); lo citable es el toolchain de calidad, el CI/CD y las 13 landings
+# implementadas en contexts-implementaciones/web/. Las marcas son ficticias.
+- id: project.portafolio
+  name: "Portafolio profesional (romanmartini.dev)"
+  description: >-
+    Portafolio Angular con SSR/SSG y arquitectura hexagonal planificada por
+    fases, más 13 landings implementadas en JavaScript vanilla modular como
+    ejercicio de sistema de diseño, con criterios de accesibilidad y SEO por
+    página.
+  startDate: "2026-05"
+  roles: ["Autor"]
+  entity: "Proyecto personal"
+  type: "portafolio"
+  keywords: [angular, ssr, ssg, "lighthouse ci", playwright, "cloudflare pages"]
+  tags: [frontend, portfolio, a11y]
+  priority: 45
+  visibility: public
+  highlights:
+    - id: project.portafolio.h1
+      outcome: "Montó el toolchain de calidad completo antes de la primera feature: CI con Playwright, Lighthouse CI con umbral 95 y deploy SSG a Cloudflare Pages"
+      method: "encadenando lint, tests, build y e2e en GitHub Actions, con el reporte de Playwright subido como artefacto en cada fallo"
+      tags: [ci-cd, lighthouse, testing]
+      priority: 50
+      provenance: { source: llm_draft }
+    - id: project.portafolio.h2
+      outcome: "Implementó 13 landings en JavaScript vanilla modular con criterios de accesibilidad y SEO declarados por página"
+      metric:
+        value: "13 landings"
+        type: scope
+        confidence: measured
+      method: "extrayendo lightbox, filtros, validación y scroll-reveal como módulos reutilizables, con WCAG AA, reduced-motion, Schema.org y Open Graph"
+      tags: [javascript, a11y, seo]
+      priority: 45
+      provenance: { source: llm_draft }
+
+# Evidencia: Projects/romanmartinidev/ng-page (1 commit, 2026-08). Es una demo
+# con marcas ficticias: el bloque EXPERIENCE/METRICS de su portfolio.data.ts
+# es contenido de relleno y NO debe citarse jamás como historia laboral.
+- id: project.ng-page
+  name: "ng-page — landings multi-tema en Angular"
+  description: >-
+    Tres landings independientes sobre una misma app Angular 21 zoneless, con
+    sistema de temas PrimeNG intercambiable en vivo e identidad visual por
+    marca aplicada por override de design tokens.
+  startDate: "2026-08"
+  roles: ["Autor"]
+  entity: "Proyecto personal"
+  type: "demo técnica"
+  keywords: [angular, primeng, theming, "design tokens", zoneless]
+  tags: [frontend, angular, theming]
+  priority: 40
+  visibility: public
+  highlights:
+    - id: project.ng-page.h1
+      outcome: "Diagnosticó y documentó un bug de doble singleton en la resolución de dependencias por el que el cambio de tema se persistía sin aplicarse nunca"
+      method: "rastreando las dos copias de la librería de theming que npm instalaba en paralelo, fijando la versión compatible y dejando el comando de verificación en el README"
+      tags: [debugging, npm, primeng]
+      priority: 45
+      provenance: { source: llm_draft }
+    - id: project.ng-page.h2
+      outcome: "Aplicó identidad visual por marca sobrescribiendo design tokens en el contenedor raíz en lugar de estilar componente por componente"
+      method: "cargando los presets de tema con import() dinámico y cuidando accesibilidad: skip links, foco visible y prefers-reduced-motion"
+      tags: [theming, a11y, angular]
+      priority: 40
+      provenance: { source: llm_draft }
+
+# PENDIENTE DE CONFIRMAR: en portafolio/contexts/projects.md figuran "AVAIN
+# Sistemas" y "JUAN SEIA Eventos" como `done`, pero sin archivo de contexto ni
+# implementación en el repo. Si son trabajos reales para clientes, van acá (o
+# en work.yaml) con su propia evidencia; si no, ignorá esta nota.

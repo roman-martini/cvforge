@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../schemas/generated/target.schema.json
+#
+# El arquetipo es la capa reutilizable: "backend senior en inglés para mercado
+# US". Se escribe una vez y se reusa en N vacantes. Sin esta capa, cada
+# postulación rehace el trabajo desde cero y el sistema deja de escalar justo
+# cuando empieza a servir.
+
+id: general
+locale: es
+region: ar
+industry: tech
+seniority: senior
+theme: ats-classic
+titleTarget: "Cargo objetivo"
+keywords: []
+sectionOrder: [contact, summary, skills, work, education, certificates, projects]
+budget:
+  maxPages: 2
+  bulletsPerRole: { recent: 5, mid: 3, old: 2 }
+fileNameTemplate: "{First}-{Last}-{Role}.{ext}"
+formats: [pdf, docx, txt]

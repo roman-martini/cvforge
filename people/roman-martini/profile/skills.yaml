@@ -1,0 +1,164 @@
+# yaml-language-server: $schema=../../../schemas/generated/skills.schema.json
+
+# Borrador derivado de la evidencia de los repos (2026-09-03). Los `level` son
+# una estimación conservadora desde lo que muestran los repos: ajustalos vos,
+# que sos el único que sabe dónde termina cada uno. `yearsOfExperience` se omite
+# a propósito — no hay evidencia de fechas en los repos; se derivará de work/
+# cuando lo completes.
+
+- id: skill.typescript
+  canonical: "TypeScript"
+  aliases: ["TS"]
+  category: "Lenguajes"
+  level: advanced
+  keywords: [zod, strict, esm, "node 24"]
+  tags: [backend, frontend, core]
+  priority: 100
+  visibility: public
+
+- id: skill.nestjs
+  canonical: "NestJS"
+  aliases: ["Nest"]
+  category: "Frameworks y plataformas"
+  level: advanced
+  # Evidencia: forma-platform (NestJS 11 + Prisma) y meta-api (hexagonal,
+  # multi-tenant, SQL Server, tests por capa).
+  keywords: [prisma, passport-jwt, "class-validator", hexagonal]
+  tags: [backend, core]
+  priority: 95
+  visibility: public
+
+- id: skill.angular
+  canonical: "Angular"
+  category: "Frameworks y plataformas"
+  level: advanced
+  # Evidencia: design-system (Angular 21, standalone, signals, zoneless, APF),
+  # forma-platform (rutas lazy, guards por rol), portafolio (SSR/SSG) y
+  # ng-page (theming PrimeNG).
+  keywords: [signals, standalone, zoneless, ssr, ssg, primeng, "ng-packagr"]
+  tags: [frontend, core]
+  priority: 95
+  visibility: public
+
+- id: skill.nodejs
+  canonical: "Node.js"
+  aliases: ["Node"]
+  category: "Frameworks y plataformas"
+  level: advanced
+  keywords: [esm, pnpm, vitest]
+  tags: [backend]
+  priority: 80
+  visibility: public
+
+- id: skill.lit
+  canonical: "Lit"
+  aliases: ["Web Components"]
+  category: "Frameworks y plataformas"
+  # Declarado en su stack de referencia; la evidencia en los repos es un kit de
+  # arranque en estado draft, no una app entregada. Nivel conservador.
+  level: intermediate
+  keywords: ["web components", "custom elements"]
+  tags: [frontend]
+  priority: 55
+  visibility: public
+
+- id: skill.postgres
+  canonical: "PostgreSQL"
+  aliases: ["Postgres"]
+  category: "Datos"
+  level: advanced
+  keywords: [prisma, migraciones]
+  tags: [data]
+  priority: 75
+  visibility: public
+
+- id: skill.sqlserver
+  canonical: "SQL Server"
+  aliases: ["Microsoft SQL Server", "MSSQL"]
+  category: "Datos"
+  level: intermediate
+  keywords: [mssql, "migraciones sql", seeds]
+  tags: [data]
+  priority: 55
+  visibility: public
+
+- id: skill.design-systems
+  canonical: "Design systems"
+  aliases: ["Design tokens"]
+  category: "Prácticas"
+  level: advanced
+  keywords: ["style dictionary", storybook, "wcag 2.2", tokens, multi-brand]
+  tags: [frontend, practice]
+  priority: 85
+  visibility: public
+
+- id: skill.testing
+  canonical: "Testing"
+  aliases: ["Pruebas automatizadas"]
+  category: "Prácticas"
+  level: advanced
+  # Evidencia: Vitest/Jest/Playwright/axe-core con umbrales de cobertura que
+  # fallan el build (design-system, meta-api) y bancos de fixtures con defectos
+  # plantados para verificar herramientas no testeables (agent-product/configs).
+  keywords: [vitest, jest, playwright, "axe-core", cobertura, fixtures]
+  tags: [practice]
+  priority: 80
+  visibility: public
+
+- id: skill.cicd
+  canonical: "Integración y entrega continuas (CI/CD)"
+  aliases: ["CI/CD"]
+  category: "Prácticas"
+  level: advanced
+  # Evidencia: pipeline de 13 gates con actions pinneadas por SHA y
+  # verificación de checksum en design-system; Lighthouse CI y deploy a
+  # Cloudflare Pages en portafolio.
+  keywords: ["github actions", "supply-chain", changesets, "lighthouse ci", "cloudflare pages"]
+  tags: [delivery, practice]
+  priority: 78
+  visibility: public
+
+- id: skill.architecture
+  canonical: "Arquitectura de software"
+  category: "Prácticas"
+  level: advanced
+  # Evidencia: 45 documentos de investigación taxonomizados, 40+ ADRs en
+  # formato MADR entre repos, kits de arranque hexagonal/DDD, OpenSpec.
+  keywords: [adr, madr, hexagonal, ddd, openspec, "spec-driven development"]
+  tags: [architecture, practice]
+  priority: 82
+  visibility: public
+
+- id: skill.ai-tooling
+  canonical: "Ingeniería de agentes de IA"
+  aliases: ["Tooling de IA para desarrollo", "Claude Code"]
+  category: "IA aplicada al desarrollo"
+  level: advanced
+  # El diferencial: 5 plugins publicados, marketplace propio, hooks de mínimo
+  # privilegio, integraciones MCP (Jira, base de datos), criterio codificado.
+  keywords: ["claude code", plugins, mcp, hooks, "context engineering", agentes]
+  tags: [ai, core]
+  priority: 90
+  visibility: public
+
+- id: skill.powershell
+  canonical: "PowerShell"
+  category: "Lenguajes"
+  level: advanced
+  # Evidencia: bootstrap idempotente multi-máquina compatible 5.1, P/Invoke,
+  # manejo de entornos corporativos sin admin.
+  keywords: ["windows powershell 5.1", "p/invoke", idempotencia]
+  tags: [tooling, devops]
+  priority: 50
+  visibility: public
+
+- id: skill.devops
+  canonical: "DevOps"
+  category: "Prácticas"
+  # Autodeclarado como "conocimientos", con Academia de DevOps en curso.
+  # Nivel conservador a propósito.
+  level: intermediate
+  keywords: [docker, "docker compose", vercel, iac]
+  tags: [devops, practice]
+  priority: 60
+  visibility: public

@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../../schemas/generated/eligibility.schema.json
+
+# Borrador con lo inferible de los repos; todo lo marcado "confirmá" es
+# decisión tuya, no evidencia.
+
+workAuthorization:
+  - countryCode: "AR"
+    # Inferido de residencia y condición de monotributista; confirmá.
+    status: citizen
+    sponsorshipRequired: false
+
+residence:
+  city: "Villa María"
+  countryCode: "AR"
+  timezone: "America/Argentina/Cordoba"
+
+# Confirmá: hoy trabajás en dos contextos (dependencia + facturación), pero
+# los repos no dicen qué modalidad buscás.
+workModes: [remote, hybrid]
+
+relocation:
+  willing: false
+  regions: []
+
+# Confirmá el preaviso real: tenés relación de dependencia vigente.
+noticePeriod:
+  value: 30
+  unit: days
+
+# Completalo vos y dejalo private: sirve para descartar vacantes fuera de
+# rango sin improvisar.
+compensation:
+  currency: "USD"
+  min: 0
+  max: 0
+  basis: gross_annual
+  visibility: private
+
+# Sin evidencia de fecha: ajustala cuando armes la primera postulación.
+availableFrom: "2026-10-01"

@@ -1,0 +1,16 @@
+# Datos de contacto sensibles.
+#
+# contact.private.yaml está en .gitignore; contact.example.yaml se commitea con
+# placeholders para que el pipeline sea reproducible por un tercero sin exponer
+# a nadie. Git no olvida: nunca muevas datos reales al archivo de ejemplo.
+#
+# Es un parche PLANO sobre basics: el cargador ubica address y postalCode
+# dentro de basics.location por vos.
+
+# ENTRE COMILLAS: sin ellas se parsea como número y pierde el "+".
+phone: "+54 9 11 5555 5555"
+
+address: "Calle Ejemplo 123"
+
+# ENTRE COMILLAS: 01425 sin comillas se convierte en 1425.
+postalCode: "1425"

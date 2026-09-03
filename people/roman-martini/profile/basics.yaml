@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../../schemas/generated/basics.schema.json
+
+# Borrador armado desde la evidencia de los repos del workspace (2026-09-03).
+# Fuente principal del posicionamiento: la autodescripción de
+# dev-vault/inbox/memory/perfil-roman.md (y su copia en product-explore).
+# Revisá label y summary antes de renderizar nada.
+
+name: "Roman Martini"
+
+label: "Desarrollador Full-Stack — TypeScript, NestJS, Angular"
+
+summary: >-
+  Desarrollador backend y frontend con base en TypeScript, NestJS, Angular y Lit,
+  y amplitud en DevOps, arquitectura y sistemas. Su experiencia está en productos
+  de negocio multi-módulo — muchos roles, estados que avanzan e integraciones con
+  sistemas de terceros — en dominios de gestión portuaria y salud. Construye y
+  publica tooling de IA para desarrollo: cinco plugins de Claude Code
+  distribuidos por un marketplace propio.
+
+# Alternativa con dominio propio: "hola@romanmartini.dev" (aparece en ng-page).
+# Elegí cuál va al CV.
+email: "roman.martini.dev@gmail.com"
+
+# Dominio propio confirmado (romanmartini.dev), pero el sitio no está publicado
+# todavía (el portafolio está en Fase 0). Activalo cuando haya algo que mostrar.
+# url: "https://romanmartini.dev"
+
+# phone: sin evidencia en los repos — completalo vos, ENTRE COMILLAS SIEMPRE.
+
+location:
+  # Sale de un repo privado (asesor-financiero). Confirmá que quieras publicarla.
+  city: "Villa María"
+  region: "Córdoba"
+  countryCode: "AR"
+
+profiles:
+  - id: profile.github
+    network: "GitHub"
+    username: "roman-martini"
+    url: "https://github.com/roman-martini"
+  - id: profile.npm
+    network: "npm"
+    username: "romanmartinidev"
+    url: "https://www.npmjs.com/org/romanmartinidev"
+  # LinkedIn: sin evidencia en los repos. Agregá tu URL real si tenés.
+  # - id: profile.linkedin
+  #   network: "LinkedIn"
+  #   username: "tu-usuario"
+  #   url: "https://www.linkedin.com/in/tu-usuario"

@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=../../../schemas/generated/publications.schema.json
+#
+# CSL-JSON: la cita se guarda estructurada, nunca ya formateada, para que el
+# estilo (APA, Chicago, Vancouver, IEEE) lo decida el renderer.
+
+[]

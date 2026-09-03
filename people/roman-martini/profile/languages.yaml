@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../../../schemas/generated/languages.schema.json
+
+- id: lang.es
+  language: "Español"
+  fluency: native
+  tags: [language]
+  priority: 90
+  visibility: public
+
+# Inglés: los repos muestran lectura y escritura técnica fluida, pero un nivel
+# CEFR (B1/B2/C1) no se estima desde commits — declaralo vos, y si tenés un
+# examen rendido, sumá `certification`.
+# - id: lang.en
+#   language: "Inglés"
+#   fluency: B2
+#   priority: 85
