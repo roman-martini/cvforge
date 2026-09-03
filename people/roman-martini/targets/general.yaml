@@ -11,7 +11,10 @@ region: ar
 industry: tech
 seniority: senior
 theme: ats-classic
-titleTarget: "Cargo objetivo"
+# Sin titleTarget, el título del CV sale de basics.label (el placeholder del
+# esqueleto estaba pisándolo con "Cargo objetivo"). Definilo acá recién cuando
+# este arquetipo apunte a un puesto concreto.
+# titleTarget: "Puesto concreto"
 keywords: []
 sectionOrder: [contact, summary, skills, work, education, certificates, projects]
 budget:
