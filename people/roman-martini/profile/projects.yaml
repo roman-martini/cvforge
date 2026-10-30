@@ -301,7 +301,6 @@
       priority: 40
       provenance: { source: llm_draft }
 
-# PENDIENTE DE CONFIRMAR: en portafolio/contexts/projects.md figuran "AVAIN
-# Sistemas" y "JUAN SEIA Eventos" como `done`, pero sin archivo de contexto ni
-# implementación en el repo. Si son trabajos reales para clientes, van acá (o
-# en work.yaml) con su propia evidencia; si no, ignorá esta nota.
+# AVAIN Sistemas: confirmado como trabajo real (relevado el 2026-10-30) y cargado
+# en work.yaml, no acá. Sigue PENDIENTE DE CONFIRMAR "JUAN SEIA Eventos", que
+# figura como `done` en portafolio/contexts/projects.md sin evidencia en el repo.

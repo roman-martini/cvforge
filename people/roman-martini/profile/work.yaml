@@ -1,11 +1,9 @@
 # yaml-language-server: $schema=../../../schemas/generated/work.schema.json
 
-# VACÍO A PROPÓSITO, no por olvido. Los repos del workspace prueban QUE
-# trabajás y EN QUÉ, pero no las fechas, los títulos ni la antigüedad — y esos
-# hechos no se inventan (docs/ETHICS.md). Lo que la exploración sí dejó
-# verificado, para cuando lo completes:
+# Los repos prueban QUE trabajás y EN QUÉ, pero no los títulos ni la fecha de
+# contrato, y esos hechos no se inventan (docs/ETHICS.md).
 #
-# 1. AyiGroup — relación de dependencia.
+# Pendiente — AyiGroup (relación de dependencia), sin entrada todavía.
 #    Sistema de gestión portuaria multi-módulo: auth, comunicaciones, giros,
 #    buques, patentes, ferroviario, servicios a la nave, reservas, reportes e
 #    integraciones con sistemas externos.
@@ -14,15 +12,245 @@
 #    (Spec-Driven Development, OpenSpec) y Academia de DevOps — en curso, va a
 #    education/ o como bullet, no como certificado.
 #
-# 2. AVAIN — facturación como monotributista.
-#    Dominio salud: medicamentos, teleconsultas, certificados y exámenes por
-#    QR, monitoreo. Evidencia técnica fuerte: API de notificaciones WhatsApp
-#    multi-tenant (NestJS 11 hexagonal, Meta Cloud API, SQL Server, JWT
-#    multi-tenant, 21 archivos de test por capa + e2e, OpenSpec, migraciones y
-#    seeds idempotentes) en dev-vault/inbox/meta-api/. Al redactarla, describila
-#    en abstracto: es producto propietario del cliente.
-#
-# Falta (solo lo sabés vos): fechas de inicio, títulos exactos, seniority por
-# etapa, y todo empleo anterior a estos dos.
+# Falta (solo lo sabés vos): títulos exactos, seniority por etapa, fecha de
+# ingreso a AyiGroup y todo empleo anterior a estos dos.
 
-[]
+# ── AVAIN Sistemas ─────────────────────────────────────────────────────────
+# Relación según el perfil previo: facturación como monotributista (el git
+# usa email corporativo; confirmá cómo querés presentarlo).
+# Relevado el 2026-10-30 en la máquina corporativa (C:\Proyectos\repos\avain).
+# Identidad git: roman.martini@avainsistemas.com.ar (3 variantes de nombre).
+# Descripto en abstracto a propósito: es producto propietario de la empresa.
+# Sin clientes, tenants, endpoints, tablas ni URLs internas.
+#
+# POSICIÓN — completala vos antes de renderizar:
+#   - title: "PENDIENTE" es un placeholder visible, no un dato.
+#   - startDate: 2024-07 es el PRIMER COMMIT (sandbox personal en el Azure
+#     DevOps de la empresa), no la fecha de contrato. El primer commit en un
+#     producto es de 2024-10. Corregila con la fecha real.
+#   - current: último commit el 2026-10-22.
+#   - industry: inferida del dominio (videoconsulta, exámenes y certificados
+#     médicos verificables por QR, catálogo farmacéutico). Confirmala.
+#
+# Participación (git log --all --author, commits incluidos los merges):
+#   20 repos con commits tuyos, ~1.976 commits; autor casi exclusivo en 18.
+#   Repos con otro desarrollador: qrcertificados-api (el dominio es suyo; lo
+#   tuyo es infraestructura, fixes y merges) y medicamentos-front (el scaffold
+#   y la auth son suyos).
+#   | repo                 | tuyos/total | período         |
+#   | teleconsultas-front  | 272/275     | 2025-04→2026-10 |
+#   | RomanMartini (sandbox)| 284/285    | 2024-07→2026-08 |
+#   | meta-api             | 204/206     | 2026-07→2026-10 |
+#   | angular-ui-kit       | 193/194     | 2026-01→2026-08 |
+#   | teleconsultas-api    | 183/184     | 2025-03→2026-10 |
+#   | infra-pipeline       | 111/112     | 2025-08→2026-09 |
+#   | monitoreo-front      | 107/107     | 2025-06→2026-08 |
+#   | monitoreo-api        |  93/94      | 2024-12→2026-09 |
+#   | qrexamenes-api       |  92/93      | 2025-11→2026-08 |
+#   | medicamentos-api     |  82/83      | 2025-06→2026-08 |
+#   | auth-api             |  72/73      | 2024-12→2026-09 |
+#   | archivos-api         |  63/71      | 2024-12→2026-10 |
+#   | qr-front             |  45/47      | 2025-11→2026-10 |
+#   | medicamentos-front   |  38/40      | 2025-07→2025-12 |
+#   | meta-front           |  37/37      | 2026-10→2026-10 |
+#   | design-system (CSS)  |  25/26      | 2025-07→2025-08 |
+#   | mock-metricas-service|  24/26      | 2024-10→2025-05 |
+#   | qrcertificados-api   |  18/25      | 2026-08→2026-10 |
+#   | documentacion-api    |  16/16      | 2025-12→2026-04 |
+#   | sysoweb-angular      |  15/15      | 2026-02→2026-05 |
+#
+# Stack verificado: NestJS 10/11/12, Angular 18→21 (standalone, signals,
+# zoneless en meta-front), TypeScript 5.5→6.0, Node 24, SQL Server con mssql
+# sin ORM, Jest/Vitest/Karma, WebRTC nativo, Firebase (señalización y auth),
+# MediaPipe, ECharts, Azure (App Service con slots, API Management, Static Web
+# Apps, Entra ID, Key Vault, Blob Storage), Azure DevOps (Repos, Pipelines,
+# Artifacts), VB.NET/ASP.NET WebForms sobre .NET Framework 3.5.
+#
+# Cautelas que limitan lo que se puede afirmar:
+#   - Casi no hay CI dentro de los repos: los pipelines se movieron al repo
+#     central el 2025-12-26. No afirmar que los tests corran en CI.
+#   - Tests desparejos: meta-api 146 archivos, meta-front 82, teleconsultas-front
+#     33, ui-kit 19 y monitoreo-api 19; el resto, entre 0 y 8. No hay umbrales
+#     de cobertura. No afirmar TDD ni cobertura.
+#   - meta-api: todo lo posterior al 2026-08-25 (hexagonal, Nest 12, 146 tests)
+#     está en `dev`, no en qa/master; el piloto usa una cuenta del equipo, no
+#     clientes. "En producción" NO se afirma para esa API.
+#   - meta-front no tiene remoto: no consta que esté integrado ni desplegado.
+#   - Muchos ADRs están escritos a posteriori (fechados en bloque 2026-05/07).
+#   - El ritmo 2026-05→10 coincide con trabajo asistido por Claude Code
+#     (.claude/ versionado, trailers Co-Authored-By): presentarlo como práctica,
+#     no como volumen individual.
+- id: work.avain
+  company:
+    name: "AVAIN Sistemas S.R.L."
+    industry: "Software para salud"
+  positions:
+    - id: work.avain.p1
+      title: "PENDIENTE"
+      startDate: "2024-07"
+      current: true
+  tags: [fullstack, backend, frontend, health]
+  priority: 90
+  visibility: public
+  bullets:
+    - id: work.avain.b1
+      # Fuente: teleconsultas-api + teleconsultas-front. ADR-003 (token en dos fases),
+      # ADRs de perfect negotiation y consentimiento. CHANGELOG: front v2.1.0 y API
+      # v1.1.0 desplegadas a prod el 2026-10-21 (mensaje de commit).
+      outcome: "Llevó a producción una plataforma de videoconsulta médica WebRTC, API y cliente web, embebible en el sistema clínico,"
+      method: "usando perfect negotiation y un token de sala en dos fases"
+      tags: [webrtc, nestjs, angular, health]
+      priority: 95
+      provenance: { source: llm_draft }
+    - id: work.avain.b2
+      # Fuente: teleconsultas-front docs/testing/webrtc-sender-optimization.md
+      # (serie 1: ~$0.49 → ~$0.09) y ADR-009. UNA muestra por escenario contra un
+      # baseline de otro día: por eso dice "en pruebas controladas". No afirmes
+      # ahorro en facturación real sin confirmarlo.
+      outcome: "Redujo un ~81 % el costo de relay TURN por videoconsulta en pruebas controladas,"
+      metric:
+        value: "~81 % menos costo por llamada de 20 min"
+        type: delta_pct
+        confidence: measured
+      method: "limitando bitrate y resolución en el sender WebRTC"
+      tags: [webrtc, performance, cost]
+      priority: 90
+      provenance: { source: llm_draft }
+    - id: work.avain.b3
+      # Fuente: meta-api, primer commit 2026-07-13; docs/product/estado.md ("piloto
+      # fuera del sandbox", con cuenta del equipo, no clientes). Cutover Twilio →
+      # Meta: 2026-07-23→27, change archivado del cutover.
+      outcome: "Construyó una API multi-tenant de WhatsApp sobre Meta Cloud API y la llevó a piloto en ~14 semanas,"
+      metric:
+        value: "~14 semanas"
+        type: duration
+        confidence: measured
+      method: "migrando de Twilio a Meta en 5 días tras un puerto hexagonal"
+      tags: [nestjs, hexagonal, multi-tenant, sql-server]
+      priority: 92
+      provenance: { source: llm_draft }
+    - id: work.avain.b4
+      # Fuente: git ls-tree master (20 archivos de test) vs HEAD (146: 102 unit,
+      # 35 integración, 9 e2e). Commits 2026-09-23→28. Cautela: está en `dev`, no
+      # mergeado a qa/master.
+      outcome: "Migró la API de mensajería a hexagonal y llevó su red de tests de 20 a 146 archivos,"
+      metric:
+        value: "de 20 a 146 archivos de test"
+        type: scope
+        confidence: measured
+      method: "fijando el contrato HTTP con tests e2e antes de mover cada módulo"
+      tags: [nestjs, testing, refactoring]
+      priority: 80
+      provenance: { source: llm_draft }
+    - id: work.avain.b5
+      # Fuente: angular-ui-kit — 193/194 commits, 28 *.component.ts en ngx-ui,
+      # 14 versiones en los CHANGELOG, release coordinado v0.2.0 (2026-07-10).
+      # Adopción: monitoreo-front (origin/master, reemplazó su UI el 2026-06-25),
+      # sysoweb-angular y meta-front (este último sin remoto). Publicación en Azure
+      # Artifacts según .npmrc y scripts: el feed no se verificó.
+      outcome: "Diseñó el UI kit Angular corporativo, 4 librerías y 28 componentes, adoptado por las aplicaciones internas en reemplazo de su UI propia,"
+      metric:
+        value: "4 librerías, 28 componentes"
+        type: scope
+        confidence: measured
+      method: "con design tokens multi-tema y accesibilidad WAI-ARIA"
+      tags: [angular, design-system, a11y]
+      priority: 88
+      provenance: { source: llm_draft }
+    - id: work.avain.b6
+      # Fuente: infra-pipeline — changes archivados 2026-08-18 (despliegue
+      # automático) y 2026-08-20 (tenant como pieza); 13 directorios en triggers/.
+      # Cautela: el primer commit ("Inicial limpio") ya traía la estructura; por
+      # eso dice "manteniendo" y no "diseñó".
+      outcome: "Restableció el despliegue automático de 6 APIs en 2 ambientes y eliminó una clase de error entre tenants de nube ya ocurrida en producción,"
+      metric:
+        value: "6 APIs"
+        type: scope
+        confidence: measured
+      method: "modelando el tenant como pieza indivisible"
+      tags: [ci-cd, azure, azure-devops]
+      priority: 82
+      provenance: { source: llm_draft }
+    - id: work.avain.b7
+      # Fuente: package.json de auth, archivos, medicamentos, meta, monitoreo,
+      # qrexamenes, teleconsultas y monitoreo -api (7; prácticamente sólo tus
+      # commits). Greenfield tuyo en auth, archivos, medicamentos, qrexamenes y meta.
+      # qrcertificados-api queda fuera de la cuenta: el dominio es de otro
+      # desarrollador. Topología: auth-api emite el JWT y las demás lo verifican.
+      outcome: "Desarrolló 7 APIs NestJS del ecosistema de microservicios, con identidad central por JWT y servicio de archivos compartido,"
+      metric:
+        value: "7 APIs NestJS"
+        type: scope
+        confidence: measured
+      method: "expuestas por Azure API Management desde su contrato OpenAPI"
+      tags: [nestjs, microservices, azure, sql-server]
+      priority: 85
+      provenance: { source: llm_draft }
+    - id: work.avain.b8
+      # Fuente: auth-api, commits 2026-01-12 (múltiples versiones del secreto) y
+      # 2026-02 (orquestador con dos flujos), ARCHITECTURE.md. "Sin cortar a los
+      # clientes" es INFERENCIA y por eso no está en el texto.
+      outcome: "Diseñó la migración de la autenticación entre servicios con dos flujos conviviendo y fallback controlado,"
+      method: "registrando la versión de cada token y validando múltiples versiones del secreto"
+      tags: [security, auth, nestjs]
+      priority: 75
+      provenance: { source: llm_draft }
+    - id: work.avain.b9
+      # Fuente: monitoreo-api docs/product/intake (timeout) + fix 2026-08-31;
+      # mismo fix en teleconsultas-api (09-09), auth-api y qrcertificados-api
+      # (09-14) y archivos-api (10-22, con 3 tests). Cautela: el incidente de
+      # timeout original sigue sin causa confirmada.
+      outcome: "Eliminó una race condition del pool de conexiones SQL en 5 servicios,"
+      metric:
+        value: "5 servicios"
+        type: scope
+        confidence: measured
+      method: "midiendo antes de corregir y descartando como falso positivo el endpoint sospechado"
+      tags: [debugging, sql-server, performance]
+      priority: 72
+      provenance: { source: llm_draft }
+    - id: work.avain.b10
+      # Fuente: conteo de openspec/changes/archive (ui-kit 74, meta-api 63,
+      # meta-front 38, teleconsultas-front 8, monitoreo-api 4, infra 3,
+      # teleconsultas-api 3, monitoreo-front 3, archivos-api 1 = 197) y de
+      # docs/architecture/adr (meta-api 15, teleconsultas-front 13, ui-kit 9,
+      # teleconsultas-api 7, qrexamenes-api 4, monitoreo-api 1 = 49). Algunos ADRs
+      # se escribieron a posteriori; los ADR-001→007 de meta-api vienen de un kit
+      # cuya autoría no consta.
+      outcome: "Adoptó desarrollo guiado por especificaciones, con 197 cambios especificados y 49 ADRs,"
+      metric:
+        value: "197 cambios especificados, 49 ADRs"
+        type: scope
+        confidence: measured
+      method: "usando OpenSpec y agentes de Claude Code"
+      tags: [process, architecture, ai]
+      priority: 70
+      provenance: { source: llm_draft }
+    - id: work.avain.b11
+      # Fuente: teleconsultas-front, commits 2026-03-27→04-30.
+      outcome: "Implementó desenfoque de fondo en el navegador para la videoconsulta, sin CDNs externos,"
+      method: "combinando segmentación de MediaPipe con un compositor WebGL"
+      tags: [webrtc, ml, webgl]
+      priority: 55
+      provenance: { source: llm_draft }
+    - id: work.avain.b12
+      # Fuente: mock-metricas-service (el nombre engaña: no es un mock) — .vbproj
+      # con TargetFrameworkVersion v3.5, Angular ^18.2; 24/26 commits, 2024-10→2025-05.
+      outcome: "Integró un front Angular en un sistema legado ASP.NET WebForms en VB.NET para monitorear interfaces de integración"
+      method: "sobre .NET Framework 3.5 con WebMethods"
+      tags: [angular, legacy, dotnet]
+      priority: 45
+      provenance: { source: llm_draft }
+    - id: work.avain.b13
+      # Fuente: medicamentos-api — 13 controllers, 44 decoradores de ruta, 15 casos
+      # de uso; commit del MERGE 2025-07-24; endpoint batch con tag v1.0.0. Cautela:
+      # el repo registra como riesgo abierto un commit con SQL inline (RISK-001).
+      outcome: "Construyó la API del catálogo farmacéutico, con 44 rutas, historial de precios sin duplicados y consulta por lote,"
+      metric:
+        value: "44 rutas, 15 casos de uso"
+        type: scope
+        confidence: measured
+      method: "usando MERGE y OPENJSON en SQL Server"
+      tags: [nestjs, sql-server]
+      priority: 50
+      provenance: { source: llm_draft }

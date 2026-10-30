@@ -22,7 +22,8 @@
   category: "Frameworks y plataformas"
   level: advanced
   # Evidencia: forma-platform (NestJS 11 + Prisma) y meta-api (hexagonal,
-  # multi-tenant, SQL Server, tests por capa).
+  # multi-tenant, SQL Server, tests por capa). AVAIN: 8 APIs NestJS (10 a 12),
+  # migración hexagonal de meta-api con 146 archivos de test.
   keywords: [prisma, passport-jwt, "class-validator", hexagonal]
   tags: [backend, core]
   priority: 95
@@ -34,7 +35,8 @@
   level: advanced
   # Evidencia: design-system (Angular 21, standalone, signals, zoneless, APF),
   # forma-platform (rutas lazy, guards por rol), portafolio (SSR/SSG) y
-  # ng-page (theming PrimeNG).
+  # ng-page (theming PrimeNG). AVAIN: UI kit corporativo de 4 librerías,
+  # 7 front-ends de 18 a 21, micro-frontends por iframe y postMessage.
   keywords: [signals, standalone, zoneless, ssr, ssg, primeng, "ng-packagr"]
   tags: [frontend, core]
   priority: 95
@@ -77,9 +79,40 @@
   aliases: ["Microsoft SQL Server", "MSSQL"]
   category: "Datos"
   level: intermediate
+  # Evidencia AVAIN (2026-10-30): 8 APIs sobre SQL Server con mssql sin ORM;
+  # MERGE sobre tabla temporal, OPENJSON para lotes, UPDLOCK/HOLDLOCK en unit of
+  # work, paginación keyset, migraciones versionadas forward-only, TDE. Con esto
+  # "intermediate" parece corto: subilo vos si coincidís.
   keywords: [mssql, "migraciones sql", seeds]
   tags: [data]
   priority: 55
+  visibility: public
+
+- id: skill.webrtc
+  canonical: "WebRTC"
+  category: "Frameworks y plataformas"
+  # Evidencia AVAIN (2026-10-30): videoconsulta en producción con WebRTC nativo
+  # desde 2025-01 (prototipo) hasta 2026-10 — perfect negotiation, reinicio ICE,
+  # STUN/TURN, estadísticas por SSRC, optimización del sender, blur con
+  # MediaPipe + WebGL; 13 ADRs en teleconsultas-front. Nivel estimado: ajustalo.
+  level: advanced
+  keywords: ["perfect negotiation", "stun/turn", ice, firebase, mediapipe]
+  tags: [frontend, realtime]
+  priority: 80
+  visibility: public
+
+- id: skill.azure
+  canonical: "Microsoft Azure"
+  aliases: ["Azure"]
+  category: "Frameworks y plataformas"
+  # Evidencia AVAIN (2026-10-30): despliegue en App Service con slots, API
+  # Management, Static Web Apps, Entra ID (client credentials, JWKS), Key Vault,
+  # Blob Storage con SAS, dos tenants. Sin IaC: los recursos ya existían.
+  # Nivel conservador por eso.
+  level: intermediate
+  keywords: ["app service", "api management", "static web apps", "entra id", "key vault", "blob storage", "azure devops"]
+  tags: [cloud, devops]
+  priority: 70
   visibility: public
 
 - id: skill.design-systems
@@ -112,8 +145,9 @@
   level: advanced
   # Evidencia: pipeline de 13 gates con actions pinneadas por SHA y
   # verificación de checksum en design-system; Lighthouse CI y deploy a
-  # Cloudflare Pages en portafolio.
-  keywords: ["github actions", "supply-chain", changesets, "lighthouse ci", "cloudflare pages"]
+  # Cloudflare Pages en portafolio. AVAIN: repositorio central de plantillas de
+  # Azure DevOps Pipelines para 13 productos (infra-pipeline, 111/112 commits).
+  keywords: ["github actions", "supply-chain", changesets, "lighthouse ci", "cloudflare pages", "azure devops pipelines"]
   tags: [delivery, practice]
   priority: 78
   visibility: public
